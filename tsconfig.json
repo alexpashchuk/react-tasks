@@ -20,7 +20,7 @@
         "noFallthroughCasesInSwitch": true,
         "baseUrl": "./src"
     },
-    "include": ["./src/**/*", "styled.d.ts"],
-    "exclude": ["node_modules", "dist"],
+    "include": ["./src/**/*"],
+    "exclude": ["node_modules", "dist","svg.d.ts"],
     "references": [{ "path": "./tsconfig.node.json" }]
 }

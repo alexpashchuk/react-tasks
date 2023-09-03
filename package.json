@@ -7,14 +7,16 @@
         "dev": "vite",
         "build": "tsc && vite build",
         "preview": "vite preview",
-        "format": "prettier ./ --write",
+        "format": "prettier ./ --write  --ignore-unknown",
         "lint": "eslint src",
         "lint:fix": "eslint src --fix",
         "prepare": "husky install"
     },
     "dependencies": {
+        "clsx": "^2.0.0",
         "react": "^18.2.0",
-        "react-dom": "^18.2.0"
+        "react-dom": "^18.2.0",
+        "react-router-dom": "^6.15.0"
     },
     "devDependencies": {
         "@types/react": "^18.2.15",
@@ -38,12 +40,11 @@
         "lint-staged": "^13.2.3",
         "prettier": "^3.0.1",
         "typescript": "^5.0.2",
-        "vite": "^4.4.5"
+        "vite": "^4.4.5",
+        "vite-plugin-svgr": "^3.2.0"
     },
     "lint-staged": {
-        "**/*.{js,jsx,ts,tsx}": [
-            "npm run format",
-            "npm run lint:fix"
-        ]
+        "src/**/*.{ts,tsx}": "eslint --cache --fix",
+        "src/**/*.{ts,tsx,css}": "prettier --write"
     }
 }

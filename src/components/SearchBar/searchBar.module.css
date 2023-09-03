@@ -1,0 +1,62 @@
+.wrapper {
+    display: flex;
+    margin: 1rem auto;
+    align-items: center;
+    max-width: 25rem;
+    position: relative;
+}
+
+.input {
+    width: 100%;
+    font-size: 100%;
+    padding: 1rem;
+    outline: none;
+    border: 2px solid var(--color-accent);
+    border-right: none;
+    background-color: transparent;
+    border-radius: 5px 0 0 5px;
+    transition: all 0.3s ease-in-out;
+    min-height: 56px;
+}
+
+.label {
+    font-size: 100%;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 1rem;
+    pointer-events: none;
+    transition: all 0.3s ease;
+    color: var(--color-gray-m);
+    border-radius: 1rem;
+}
+
+.input:focus ~ .label,
+.input:valid ~ .label {
+    transform: translateY(-50%) scale(0.9);
+    top: 0;
+    margin-left: 1.3em;
+    padding: 0.2em;
+    background-color: var(--color-light);
+    color: var(--color-dark);
+}
+
+.input:focus,
+.input:valid {
+    border-color: var(--color-hover);
+}
+
+.button {
+    padding: 1rem;
+    border-radius: 0 5px 5px 0;
+}
+
+.input::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+    background: url('../../assets/images/close.svg') no-repeat 50% 50%;
+    filter: opacity(0.5);
+    height: 1rem;
+    width: 1rem;
+    padding-right: 7px;
+    cursor: pointer;
+}
