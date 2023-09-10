@@ -6,8 +6,6 @@
         "jest": true
     },
     "extends": [
-//        "airbnb-base",
-//        "airbnb-typescript/base",
         "plugin:react/recommended",
         "eslint:recommended",
         "plugin:@typescript-eslint/recommended",
