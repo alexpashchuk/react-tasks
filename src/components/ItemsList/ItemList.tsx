@@ -1,5 +1,9 @@
 import { Component } from 'react';
-import { API } from '../../constants/constants.ts';
+
+import Item, { Person } from '../Item/Item.tsx';
+import Spinner from '../Spinner/Spinner.tsx';
+
+import classes from './itemList.module.css';
 
 type ItemListProps = {
     searchTerm: string;
@@ -10,54 +14,54 @@ interface ItemListState {
     next: string;
     previous?: null | string;
     results: Person[];
-}
-
-interface Person {
-    name: string;
-    height: string;
-    mass: string;
-    hair_color: string;
-    skin_color: string;
-    eye_color: string;
-    birth_year: string;
-    gender: string;
-    species: string[];
-    url: string;
+    isLoading: boolean;
 }
 
 export default class ItemList extends Component<ItemListProps, ItemListState> {
-    state = {
+    state: ItemListState = {
         count: 0,
         next: '',
         previous: '',
         results: [],
+        isLoading: false,
     };
 
     async componentDidMount() {
-        const response = await fetch(API);
+        this.setState({ isLoading: true });
+        const response = await fetch(this.props.searchTerm);
         const data = await response.json();
-        this.setState({ ...data });
+        this.setState({ ...data, isLoading: false });
     }
 
     async componentDidUpdate(prevProps: ItemListProps) {
         if (prevProps.searchTerm !== this.props.searchTerm) {
+            this.setState({ isLoading: true });
             const response = await fetch(this.props.searchTerm);
             const data = await response.json();
-            this.setState({ ...data });
+            this.setState({ ...data, isLoading: false });
         }
     }
 
     render() {
-        const { results } = this.state;
+        const { results, isLoading } = this.state;
+        if (isLoading) {
+            return <Spinner />;
+        }
+
         return (
-            <div>
-                <h1>Lists</h1>
-                <ul>
-                    {results.map(({ name }) => (
-                        <li key={name}>{name}</li>
-                    ))}
-                </ul>
-            </div>
+            <>
+                {results.length > 0 ? (
+                    <div className={classes.wrapper}>
+                        {results.map((person) => (
+                            <Item key={person.name} data={person} />
+                        ))}
+                    </div>
+                ) : (
+                    <div>
+                        <p className={classes.notFound}>Not Found 🙄</p>
+                    </div>
+                )}
+            </>
         );
     }
 }

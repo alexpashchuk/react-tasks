@@ -1,0 +1,22 @@
+.card {
+    width: 100%;
+    max-width: 22.5rem;
+    height: auto;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    border-radius: 5px;
+    border: 2px solid var(--color-accent);
+    overflow: hidden;
+    cursor: pointer;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    transition: all 0.3s;
+}
+
+.card:hover {
+    scale: 1.01;
+    border: 2px solid var(--color-hover);
+}
