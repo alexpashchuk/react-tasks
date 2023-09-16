@@ -1,14 +1,16 @@
 {
     "compilerOptions": {
-        "target": "ES2020",
+//        "types": ["node", "jest", "@testing-library/jest-dom"],
+        "target": "ESNext",
+        "baseUrl": "./src",
+        "lib": ["DOM", "DOM.Iterable", "ESNext"],
         "useDefineForClassFields": true,
-        "lib": ["ES2020", "DOM", "DOM.Iterable"],
         "allowJs": false,
         "module": "ESNext",
+        "moduleResolution": "Node",
         "skipLibCheck": true,
         "allowSyntheticDefaultImports": true,
         "esModuleInterop": true,
-        "moduleResolution": "Node",
         "allowImportingTsExtensions": true,
         "resolveJsonModule": true,
         "isolatedModules": true,
@@ -18,9 +20,8 @@
         "noUnusedLocals": true,
         "noUnusedParameters": true,
         "noFallthroughCasesInSwitch": true,
-        "baseUrl": "./src"
     },
-    "include": ["./src/**/*", "vite.config.ts"],
-    "exclude": ["node_modules", "dist","svg.d.ts"],
+    "include": ["./src/**/*", "vite.config.ts" , "vitest.config.ts", "./src/test/setupTests.ts", ".eslintrc"],
+    "exclude": ["node_modules", "dist", "svg.d.ts"],
     "references": [{ "path": "./tsconfig.node.json" }]
 }

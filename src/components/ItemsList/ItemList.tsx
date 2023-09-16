@@ -51,13 +51,13 @@ export default class ItemList extends Component<ItemListProps, ItemListState> {
         return (
             <>
                 {results.length > 0 ? (
-                    <div className={classes.wrapper}>
+                    <div data-testid="item" className={classes.wrapper}>
                         {results.map((person) => (
                             <Item key={person.name} data={person} />
                         ))}
                     </div>
                 ) : (
-                    <div>
+                    <div data-testid="item">
                         <p className={classes.notFound}>Not Found 🙄</p>
                     </div>
                 )}
