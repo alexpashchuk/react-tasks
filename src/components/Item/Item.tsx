@@ -1,10 +1,10 @@
-import { Component } from 'react';
-
 import classes from './item.module.css';
-interface ItemProps {
+
+type ItemProps = {
     data: Person;
-}
-export interface Person {
+};
+
+export type Person = {
     name: string;
     height: string;
     mass: string;
@@ -15,20 +15,21 @@ export interface Person {
     gender: string;
     species: string[];
     url: string;
-}
+};
 
-export default class Item extends Component<ItemProps> {
-    render() {
-        const { name, height, mass, birth_year, gender } = this.props.data;
+const Item = (props: ItemProps) => {
+    const { data } = props;
+    const { name, height, mass, birth_year, gender } = data;
 
-        return (
-            <div className={classes.card}>
-                <h3>Character: {name}</h3>
-                <p>Height:{height}</p>
-                <p>Mass:{mass}</p>
-                <p>Birth Year:{birth_year}</p>
-                <p>Gender:{gender}</p>
-            </div>
-        );
-    }
-}
+    return (
+        <div className={classes.card}>
+            <h3>Character: {name}</h3>
+            <p>Height:{height}</p>
+            <p>Mass:{mass}</p>
+            <p>Birth Year:{birth_year}</p>
+            <p>Gender:{gender}</p>
+        </div>
+    );
+};
+
+export default Item;
