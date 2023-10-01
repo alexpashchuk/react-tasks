@@ -136,16 +136,14 @@ button::-moz-focus-inner {
 }
 
 .link,
-button {
+.button {
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 14px;
     font-weight: 700;
     color: var(--color-dark);
-    padding: 5px 15px;
     text-transform: uppercase;
-    border-radius: 5px;
     transition: all 0.3s;
     background: var(--color-accent);
     border: var(--color-accent);
@@ -156,13 +154,13 @@ button {
 }
 
 .link:hover,
-button:hover {
+.button:hover {
     background: var(--color-hover);
     color: var(--color-light);
 }
 
 .link:active,
-button:active:not(:disabled) {
+.button:active:not(:disabled) {
     scale: 0.98;
 }
 

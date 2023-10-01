@@ -5,13 +5,14 @@ import { Character } from '~types/types.ts';
 export const useListCharacters = (props: { searchTerm: string; page: number }) => {
     const { searchTerm, page } = props;
 
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoadingData, setIsLoadingData] = useState(false);
+    const [isLoadingImage, setIsLoadingImage] = useState(false);
     const [error, setError] = useState(false);
     const [characters, setCharacters] = useState<Character[]>([]);
     const [totalPages, setTotalPages] = useState(1);
 
     useEffect(() => {
-        setIsLoading(true);
+        setIsLoadingData(true);
         (async () => {
             try {
                 const url = `${API}?page=${page}&name=${searchTerm.trim().toLowerCase()}`;
@@ -29,14 +30,16 @@ export const useListCharacters = (props: { searchTerm: string; page: number }) =
                 setTotalPages(1);
                 setCharacters([]);
             } finally {
-                setIsLoading(false);
+                setIsLoadingData(false);
             }
         })();
     }, [page, searchTerm]);
 
     return {
-        isLoading,
+        isLoading: isLoadingData,
         error,
         characters,
+        setIsLoadingImage,
+        isLoadingImage,
     };
 };

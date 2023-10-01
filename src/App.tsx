@@ -11,7 +11,7 @@ const App = () => {
                 <Routes>
                     <Route path="/" element={<Navigate replace to="characters" />} />
                     <Route path="characters" element={<CharactersRoot />}>
-                        <Route path=":id" element={<CharacterDetail />} />
+                        <Route path="details/:id" element={<CharacterDetail />} />
                     </Route>
                     <Route path="404" element={<NotFoundPage />} />
                     <Route path="*" element={<Navigate to="404" />} />

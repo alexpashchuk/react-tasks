@@ -1,14 +1,17 @@
 import { useEffect, useState } from 'react';
 import { API } from '~constants/constants.ts';
 import { Character } from '~types/types.ts';
+import { useParams } from 'react-router-dom';
 
-export const useCharacterDetail = (id: string) => {
-    const [isLoading, setIsLoading] = useState(false);
+export const useCharacterDetail = () => {
+    const [isLoadingData, setIsLoadingData] = useState(false);
+    const [isLoadingImage, setIsLoadingImage] = useState(false);
     const [error, setError] = useState(false);
     const [character, setCharacter] = useState<Character>();
+    const { id } = useParams();
 
     useEffect(() => {
-        setIsLoading(true);
+        setIsLoadingData(true);
         (async () => {
             try {
                 const url = `${API}/${id}`;
@@ -18,14 +21,16 @@ export const useCharacterDetail = (id: string) => {
             } catch {
                 setError(true);
             } finally {
-                setIsLoading(false);
+                setIsLoadingData(false);
             }
         })();
     }, [id]);
 
     return {
-        isLoading,
+        isLoading: isLoadingData || !isLoadingImage,
         error,
         character,
+        setIsLoadingImage,
+        isLoadingImage,
     };
 };

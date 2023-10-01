@@ -1,21 +1,20 @@
-import { Link, useParams } from 'react-router-dom';
-import Spinner from '../Spinner/Spinner.tsx';
-import classes from './CharacterDetail.module.css';
-import { useCharacterDetail } from '~hooks/useCharacterDetail.tsx';
+import { useOutletContext } from 'react-router-dom';
 import clsx from 'clsx';
 
+import { useCharacterDetail } from '~hooks/useCharacterDetail.tsx';
+import { OutletContext } from '~components/CharactersRoot/CharactersRoot.tsx';
+import placeholder from '~assets/images/placeholder.jpg';
+
+import Spinner from '../Spinner/Spinner.tsx';
+import classes from './CharacterDetail.module.css';
+
 const CharacterDetail = () => {
-    const params = useParams();
-    const { isLoading, error, character } = useCharacterDetail(String(params?.id));
+    const { isLoading, error, character, setIsLoadingImage, isLoadingImage } = useCharacterDetail();
     const { name, image, gender, status, type, origin, species, location: lastLocation } = character || {};
 
-    if (isLoading) {
-        return (
-            <div className={classes.spinner}>
-                <Spinner />
-            </div>
-        );
-    }
+    const { onToggle } = useOutletContext<OutletContext>();
+
+    const statusClass = status === 'Dead' ? classes.dead : status === 'Alive' ? classes.alive : classes.unknown;
 
     if (error) {
         return (
@@ -24,11 +23,20 @@ const CharacterDetail = () => {
             </div>
         );
     }
-    const statusClass = status === 'Dead' ? classes.dead : status === 'Alive' ? classes.alive : classes.unknown;
 
     return (
         <div className={classes.detail}>
-            <img src={image} alt={`Image ${name}`} />
+            {isLoading && <Spinner />}
+            <img
+                src={image || placeholder}
+                alt={`Character ${name}`}
+                className={classes.image}
+                draggable={false}
+                onLoad={() => {
+                    setIsLoadingImage(true);
+                }}
+                style={!isLoadingImage ? { opacity: 0 } : { opacity: 1 }}
+            />
             <div className={classes.info}>
                 <h2 className={classes.name}>{name}</h2>
                 <p className={clsx(classes.status, statusClass)}>{status}</p>
@@ -54,9 +62,9 @@ const CharacterDetail = () => {
                         {type}
                     </div>
                 )}
-                <Link className={clsx('link', classes.close)} to={'/characters'}>
+                <button className={clsx('button', classes.closeBtn)} onClick={() => onToggle('/characters')}>
                     Close
-                </Link>
+                </button>
             </div>
         </div>
     );

@@ -1,15 +1,18 @@
+import { useListCharacters } from '~hooks/useListCharacters.tsx';
+
 import CardCharacter from '../CardCharacter/CardCharacter.tsx';
 import Spinner from '../Spinner/Spinner.tsx';
 import classes from './itemList.module.css';
-import { useListCharacters } from '~hooks/useListCharacters.tsx';
 
 type ListCharactersProps = {
     searchTerm: string;
     page: number;
+    onToggle: (to: string) => void;
 };
 
 const ListCharacters = (props: ListCharactersProps) => {
-    const { isLoading, error, characters } = useListCharacters(props);
+    const { onToggle } = props;
+    const { isLoading, error, characters, setIsLoadingImage, isLoadingImage } = useListCharacters(props);
 
     if (isLoading) {
         return <Spinner />;
@@ -28,7 +31,13 @@ const ListCharacters = (props: ListCharactersProps) => {
             {characters && characters.length > 0 ? (
                 <div data-testid="item" className={classes.wrapper}>
                     {characters.map((character) => (
-                        <CardCharacter key={character.id} character={character} />
+                        <CardCharacter
+                            key={character.id}
+                            character={character}
+                            setIsLoadingImage={setIsLoadingImage}
+                            isLoadingImage={isLoadingImage}
+                            onToggle={onToggle}
+                        />
                     ))}
                 </div>
             ) : (

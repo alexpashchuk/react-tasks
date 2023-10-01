@@ -1,9 +1,11 @@
 import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
+import clsx from 'clsx';
 
 import LogoSearch from '~assets/images/search.svg';
 import { SEARCH_VALUE_STORAGE_KEY } from '~constants/constants.ts';
+
 import classes from './searchBar.module.css';
-import { useSearchParams } from 'react-router-dom';
 
 type SearchBarProps = {
     handleInput: (input: string) => void;
@@ -29,12 +31,7 @@ const SearchBar = (props: SearchBarProps) => {
 
     useEffect(() => {
         localStorage.setItem(SEARCH_VALUE_STORAGE_KEY, searchValue);
-        if (!searchValue.length) {
-            searchParams.delete('name');
-            setSearchParams(searchParams);
-            handleInput(searchValue);
-        }
-    }, [handleInput, searchParams, searchValue, setSearchParams]);
+    }, [searchValue]);
 
     return (
         <form className={classes.wrapper} onSubmit={(e) => handleFormSubmit(e)}>
@@ -49,7 +46,7 @@ const SearchBar = (props: SearchBarProps) => {
                 }}
             />
             <label className={classes.label}>Search</label>
-            <button className={classes.button} type="submit">
+            <button className={clsx('button', classes.searchBtn)} type="submit">
                 <LogoSearch className={classes.logo} />
             </button>
         </form>
