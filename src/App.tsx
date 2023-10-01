@@ -1,19 +1,22 @@
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
-import Layout from './components/Layout/Layout.tsx';
-import MainPage from './components/Main/MainPage.tsx';
-
-import NotFoundPage from './components/NotFound/NotFoundPage.tsx';
+import CharacterDetail from '~components/CharacterDetail/CharacterDetail.tsx';
+import CharactersRoot from '~components/CharactersRoot/CharactersRoot.tsx';
+import NotFoundPage from '~components/NotFound/NotFoundPage.tsx';
+import { MainLayout } from '~components/MainLayout/MainLayout.tsx';
 
 const App = () => {
     return (
         <BrowserRouter>
-            <Routes>
-                <Route path="/" element={<Layout />}>
-                    <Route index element={<MainPage />} />
+            <MainLayout>
+                <Routes>
+                    <Route path="/" element={<Navigate replace to="characters" />} />
+                    <Route path="characters" element={<CharactersRoot />}>
+                        <Route path=":id" element={<CharacterDetail />} />
+                    </Route>
                     <Route path="404" element={<NotFoundPage />} />
                     <Route path="*" element={<Navigate to="404" />} />
-                </Route>
-            </Routes>
+                </Routes>
+            </MainLayout>
         </BrowserRouter>
     );
 };

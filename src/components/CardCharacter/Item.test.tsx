@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
-import Item, { Person } from './Item.tsx';
+import CardCharacter, { Person } from './CardCharacter.tsx';
 
 const mockData: Person = {
     name: 'Darth Vade',
@@ -17,7 +17,7 @@ const mockData: Person = {
 
 describe('Item tests', () => {
     it('renders Item', () => {
-        render(<Item data={mockData} />);
+        render(<CardCharacter data={mockData} />);
         expect(screen.getByRole('heading')).toHaveTextContent(mockData.name);
     });
 });

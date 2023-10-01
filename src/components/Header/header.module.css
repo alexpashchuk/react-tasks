@@ -3,22 +3,21 @@
 }
 
 .link {
-    font-size: 2rem;
-    transition: color 0.2s ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s;
 }
 
 .link:hover {
-    color: var(--color-hover-text);
+    color: var(--color-hover);
 }
 
-.navWrapper {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
+.link:active {
+    scale: 0.95;
 }
 
 .nav {
     display: flex;
-    gap: 1rem;
+    align-items: center;
 }

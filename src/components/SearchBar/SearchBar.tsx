@@ -1,24 +1,20 @@
 import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 
-import LogoSearch from '../../assets/images/search.svg';
-// import CloseIcon from '../../assets/images/close.svg';
-import { SEARCH_VALUE_STORAGE_KEY } from '../../constants/constants.ts';
-
+import LogoSearch from '~assets/images/search.svg';
+import { SEARCH_VALUE_STORAGE_KEY } from '~constants/constants.ts';
 import classes from './searchBar.module.css';
-import { SetURLSearchParams } from 'react-router-dom';
-// import { useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 
 type SearchBarProps = {
-    // handleInput: (input: string) => void;
-    query: string;
-    searchParams: URLSearchParams;
-    setSearchParams: SetURLSearchParams;
+    handleInput: (input: string) => void;
+    searchTerm: string;
 };
 
 const SearchBar = (props: SearchBarProps) => {
-    const { query, searchParams, setSearchParams } = props;
+    const { handleInput, searchTerm } = props;
 
-    const [searchValue, setSearchValue] = useState<string>(query);
+    const [searchValue, setSearchValue] = useState(searchTerm);
+    const [searchParams, setSearchParams] = useSearchParams();
 
     const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
@@ -27,16 +23,18 @@ const SearchBar = (props: SearchBarProps) => {
 
     const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        setSearchParams({ search: searchValue });
+        setSearchParams({ name: searchValue });
+        handleInput(searchValue);
     };
 
     useEffect(() => {
         localStorage.setItem(SEARCH_VALUE_STORAGE_KEY, searchValue);
         if (!searchValue.length) {
-            searchParams.delete('search');
+            searchParams.delete('name');
             setSearchParams(searchParams);
+            handleInput(searchValue);
         }
-    }, [searchParams, searchValue, setSearchParams]);
+    }, [handleInput, searchParams, searchValue, setSearchParams]);
 
     return (
         <form className={classes.wrapper} onSubmit={(e) => handleFormSubmit(e)}>
@@ -54,9 +52,6 @@ const SearchBar = (props: SearchBarProps) => {
             <button className={classes.button} type="submit">
                 <LogoSearch className={classes.logo} />
             </button>
-            {/*<button onClick={this.resetInputField} type="reset" className={classes.reset}>*/}
-            {/*    <CloseIcon className={classes.logo} />*/}
-            {/*</button>*/}
         </form>
     );
 };

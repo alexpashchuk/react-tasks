@@ -29,7 +29,7 @@
 
 .backHome:hover {
     background: var(--color-hover);
-    color: var(--color-hover-text);
+    color: var(--color-light);
 }
 
 .backHome:active {

@@ -1,8 +1,7 @@
 {
     "compilerOptions": {
-//        "types": ["node", "jest", "@testing-library/jest-dom"],
+        //        "types": ["node", "jest", "@testing-library/jest-dom"],
         "target": "ESNext",
-        "baseUrl": "./src",
         "lib": ["DOM", "DOM.Iterable", "ESNext"],
         "useDefineForClassFields": true,
         "allowJs": false,
@@ -17,11 +16,27 @@
         "noEmit": true,
         "jsx": "react-jsx",
         "strict": true,
-        "noUnusedLocals": true,
-        "noUnusedParameters": true,
+        "noUnusedLocals": false,
+        "noUnusedParameters": false,
         "noFallthroughCasesInSwitch": true,
+        "baseUrl": ".",
+        "paths": {
+            "~assets/*": ["src/assets/*"],
+            "~components/*": ["src/components/*"],
+            "~constants/*": ["src/constants/*"],
+            "~utils/*": ["src/utils/*"],
+            "~hooks/*": ["src/hooks/*"],
+            "~types/*": ["src/types/*"]
+        }
     },
-    "include": ["./src/**/*", "vite.config.ts" , "vitest.config.ts", "./src/test/setupTests.ts", ".eslintrc"],
-    "exclude": ["node_modules", "dist", "svg.d.ts"],
+    "include": [
+        "./src/**/*",
+        "vite.config.ts",
+        "vitest.config.ts",
+        "./src/test/setupTests.ts",
+        ".eslintrc",
+        "svg.d.ts"
+    ],
+    "exclude": ["node_modules", "dist"],
     "references": [{ "path": "./tsconfig.node.json" }]
 }

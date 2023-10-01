@@ -1,22 +1,17 @@
 import { Component } from 'react';
 // import { NavLink } from 'react-router-dom';
 import classes from './header.module.css';
+import { Link } from 'react-router-dom';
 
 export default class Header extends Component {
     render() {
         return (
             <header className={classes.header}>
                 <div className="container">
-                    <div className={classes.navWrapper}>
-                        <h1>Header</h1>
-                        {/*<nav className={classes.nav}>*/}
-                        {/*    <NavLink className={classes.link} to="." end>*/}
-                        {/*        Home*/}
-                        {/*    </NavLink>*/}
-                        {/*    <NavLink className={classes.link} to="about">*/}
-                        {/*        About Us*/}
-                        {/*    </NavLink>*/}
-                        {/*</nav>*/}
+                    <div className={classes.nav}>
+                        <Link className={classes.link} to="characters">
+                            <h1>The Rick and Morty</h1>
+                        </Link>
                     </div>
                 </div>
             </header>
