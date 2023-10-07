@@ -27,7 +27,9 @@ const CardCharacter = (props: ItemProps) => {
                 }}
                 style={!isLoadingImage ? { opacity: 0 } : { opacity: 1 }}
             />
-            <h3 className={classes.name}>{name}</h3>
+            <h3 title={name} className={classes.name}>
+                {name}
+            </h3>
         </button>
     );
 };

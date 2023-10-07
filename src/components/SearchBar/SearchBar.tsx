@@ -1,5 +1,4 @@
 import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
 import clsx from 'clsx';
 
 import LogoSearch from '~assets/images/search.svg';
@@ -14,10 +13,7 @@ type SearchBarProps = {
 
 const SearchBar = (props: SearchBarProps) => {
     const { handleInput, searchTerm } = props;
-
     const [searchValue, setSearchValue] = useState(searchTerm);
-    const [searchParams, setSearchParams] = useSearchParams();
-
     const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
         setSearchValue(value);
@@ -25,7 +21,6 @@ const SearchBar = (props: SearchBarProps) => {
 
     const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        setSearchParams({ name: searchValue });
         handleInput(searchValue);
     };
 

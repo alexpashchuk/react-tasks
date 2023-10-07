@@ -1,15 +1,30 @@
 import { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
+
 import { API } from '~constants/constants.ts';
 import { Character } from '~types/types.ts';
 
-export const useListCharacters = (props: { searchTerm: string; page: number }) => {
-    const { searchTerm, page } = props;
+type Params = {
+    search?: string;
+    page?: string;
+};
 
+export const useListCharacters = (props: { searchTerm: string }) => {
+    const { searchTerm } = props;
+    const [_, setSearchParams] = useSearchParams();
     const [isLoadingData, setIsLoadingData] = useState(false);
     const [isLoadingImage, setIsLoadingImage] = useState(false);
     const [error, setError] = useState(false);
     const [characters, setCharacters] = useState<Character[]>([]);
+    const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
+
+    useEffect(() => {
+        const params: Params = {};
+        if (searchTerm) params.search = searchTerm;
+        if (page) params.page = page.toString();
+        setSearchParams(params);
+    }, [page, searchTerm, setSearchParams]);
 
     useEffect(() => {
         setIsLoadingData(true);
@@ -35,11 +50,18 @@ export const useListCharacters = (props: { searchTerm: string; page: number }) =
         })();
     }, [page, searchTerm]);
 
+    const handlePageChange = (page: number): void => {
+        setPage((prevPage: number) => prevPage + page);
+    };
+
     return {
         isLoading: isLoadingData,
         error,
         characters,
         setIsLoadingImage,
         isLoadingImage,
+        totalPages,
+        page,
+        handlePageChange,
     };
 };
