@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react';
-import { Outlet, useNavigate, useParams } from 'react-router-dom';
+import { Outlet, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 
 import SearchBar from '../SearchBar/SearchBar.tsx';
 import ListCharacters from '../ListCharacters/ListCharacters.tsx';
@@ -11,6 +11,7 @@ export type OutletContext = {
 };
 
 const CharactersRoot = () => {
+    const [searchParams, setSearchParams] = useSearchParams();
     const [searchTerm, setSearchTerm] = useState(localStorage.getItem(SEARCH_VALUE_STORAGE_KEY) || '');
 
     const navigate = useNavigate();
@@ -33,8 +34,18 @@ const CharactersRoot = () => {
     return (
         <div className={classes.root}>
             <div className={classes.result}>
-                <SearchBar searchTerm={searchTerm} handleInput={handleInput} />
-                <ListCharacters searchTerm={searchTerm} onToggle={onToggle} />
+                <SearchBar
+                    searchTerm={searchTerm}
+                    handleInput={handleInput}
+                    searchParams={searchParams}
+                    setSearchParams={setSearchParams}
+                />
+                <ListCharacters
+                    searchTerm={searchTerm}
+                    onToggle={onToggle}
+                    searchParams={searchParams}
+                    setSearchParams={setSearchParams}
+                />
             </div>
             <div className={outletClass}>
                 <Outlet context={{ onToggle } satisfies OutletContext} />

@@ -11,10 +11,10 @@ type PaginationProps = {
 const Pagination = ({ page, totalPages, prevPage, nextPage }: PaginationProps) => {
     return (
         <nav className={classes.pagination} aria-label="page navigation">
-            <button disabled={page === 1} className={clsx('button', classes.paginationBtn)} onClick={prevPage}>
+            <button disabled={page <= 1} className={clsx('button', classes.paginationBtn)} onClick={prevPage}>
                 Prev
             </button>
-            <button disabled={page === totalPages} className={clsx('button', classes.paginationBtn)} onClick={nextPage}>
+            <button disabled={page >= totalPages} className={clsx('button', classes.paginationBtn)} onClick={nextPage}>
                 Next
             </button>
         </nav>
