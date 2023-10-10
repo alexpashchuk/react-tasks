@@ -1,29 +1,27 @@
 import { useCallback, useState } from 'react';
-import { Outlet, useNavigate, useParams, useSearchParams } from 'react-router-dom';
+import { Outlet, useNavigate, useParams } from 'react-router-dom';
 
 import SearchBar from '../SearchBar/SearchBar.tsx';
 import ListCharacters from '../ListCharacters/ListCharacters.tsx';
 import classes from './charactersRoot.module.css';
-import { SEARCH_VALUE_STORAGE_KEY } from '~constants/constants.ts';
 
 export type OutletContext = {
-    onToggle: (to: string) => void;
+    onToggle: (t: number | string) => void;
 };
 
 const CharactersRoot = () => {
-    const [searchParams, setSearchParams] = useSearchParams();
-    const [searchTerm, setSearchTerm] = useState(localStorage.getItem(SEARCH_VALUE_STORAGE_KEY) || '');
-
+    const [skip, setSkip] = useState(false);
     const navigate = useNavigate();
     const params = useParams();
 
-    const handleInput = (input: string) => {
-        setSearchTerm(input);
-    };
-
     const onToggle = useCallback(
-        (to: string) => {
-            navigate(to);
+        (toOrDelta: string | number) => {
+            setSkip(true);
+            if (typeof toOrDelta === 'string') {
+                navigate(toOrDelta);
+            } else {
+                navigate(toOrDelta);
+            }
         },
         [navigate]
     );
@@ -34,23 +32,13 @@ const CharactersRoot = () => {
     return (
         <div className={classes.root}>
             <div className={classes.result}>
-                <SearchBar
-                    searchTerm={searchTerm}
-                    handleInput={handleInput}
-                    searchParams={searchParams}
-                    setSearchParams={setSearchParams}
-                />
-                <ListCharacters
-                    searchTerm={searchTerm}
-                    onToggle={onToggle}
-                    searchParams={searchParams}
-                    setSearchParams={setSearchParams}
-                />
+                <SearchBar setSkip={setSkip} />
+                <ListCharacters skip={skip} onToggle={onToggle} setSkip={setSkip} />
             </div>
             <div className={outletClass}>
                 <Outlet context={{ onToggle } satisfies OutletContext} />
             </div>
-            <div className={maskClass} onClick={() => onToggle('/characters')}></div>
+            <div className={maskClass} onClick={() => onToggle(-1)}></div>
         </div>
     );
 };

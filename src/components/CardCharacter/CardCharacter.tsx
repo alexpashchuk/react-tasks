@@ -1,12 +1,13 @@
 import { Character } from '~types/types.ts';
 import placeholder from '~assets/images/placeholder.jpg';
-import classes from './CardCharacter.module.css';
 import Spinner from '~components/Spinner/Spinner.tsx';
+
+import classes from './CardCharacter.module.css';
 
 type ItemProps = {
     character: Character;
-    onToggle: (to: string) => void;
     setIsLoadingImage: (b: boolean) => void;
+    onToggle: (s: string | number) => void;
     isLoadingImage: boolean;
 };
 

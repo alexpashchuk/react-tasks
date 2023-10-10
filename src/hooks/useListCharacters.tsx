@@ -1,50 +1,54 @@
-import { useCallback, useEffect, useState } from 'react';
-import { SetURLSearchParams, useSearchParams } from 'react-router-dom';
+import { useEffect, useMemo, useState } from 'react';
+import { useLocation, useSearchParams } from 'react-router-dom';
 
 import { API } from '~constants/constants.ts';
 import { Character } from '~types/types.ts';
+import { ListCharactersProps } from '~components/ListCharacters/ListCharacters.tsx';
 
-type Params = {
-    search?: string;
-    page?: string;
-};
-
-export const useListCharacters = (props: {
-    searchTerm: string;
-    searchParams: URLSearchParams;
-    setSearchParams: SetURLSearchParams;
-}) => {
-    const { searchTerm, searchParams, setSearchParams } = props;
-    // const [searchParams, setSearchParams] = useSearchParams();
-    const pageQuery = Number(searchParams.get('page') || '1');
+export const useListCharacters = (props: ListCharactersProps) => {
+    const { skip, setSkip } = props;
+    const [searchParams, setSearchParams] = useSearchParams();
+    const location = useLocation();
+    const pageQuery = parseInt(searchParams.get('page') || '1');
+    const isPage = searchParams.get('page') || '';
     const searchQuery = searchParams.get('search') || '';
     const [isLoadingData, setIsLoadingData] = useState(false);
     const [isLoadingImage, setIsLoadingImage] = useState(false);
     const [error, setError] = useState(false);
     const [characters, setCharacters] = useState<Character[]>([]);
-    const [totalPages, setTotalPages] = useState(1);
-    const [page, setPage] = useState(pageQuery <= 0 || isNaN(pageQuery) ? 1 : pageQuery);
+    const [totalPages, setTotalPages] = useState(42);
+    const initialPage = pageQuery <= 0 || pageQuery > totalPages || isNaN(pageQuery);
+    const [page, setPage] = useState(initialPage ? 1 : pageQuery);
     // const [params, setParams] = useState<Params>({ search: searchQuery, page: pageQuery });
 
-    useEffect(() => {
-        searchParams.set('page', '1');
-        setSearchParams(searchParams, {
-            replace: true,
-        });
-    }, [pageQuery, searchParams, searchQuery, setSearchParams]);
+    const currentPage = useMemo(() => {
+        if (isPage) {
+            setPage(pageQuery);
+            return pageQuery;
+        } else {
+            return page;
+        }
+    }, [isPage, page, pageQuery]);
 
     useEffect(() => {
-        const params: Params = {};
-        if (searchTerm) params.search = searchTerm;
-        if (page) params.page = page.toString();
-        setSearchParams(params);
-    }, [page, searchTerm, setSearchParams]);
+        if (location.pathname === '/characters' && !location.search) {
+            searchParams.set('page', '1');
+            setSearchParams(searchParams);
+        }
+    }, [location.pathname, location.search, searchParams, setSearchParams]);
 
     useEffect(() => {
-        setIsLoadingData(true);
-        (async () => {
+        if (initialPage) {
+            searchParams.set('page', '1');
+            setSearchParams(searchParams);
+        }
+    }, [initialPage, searchParams, setSearchParams]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            setIsLoadingData(true);
             try {
-                const url = `${API}?page=${page}&name=${searchTerm.trim().toLowerCase()}`;
+                const url = `${API}?page=${pageQuery}&name=${searchQuery.trim().toLowerCase()}`;
                 const response = await fetch(url);
                 const data = await response.json();
                 if (data.error) {
@@ -61,11 +65,22 @@ export const useListCharacters = (props: {
             } finally {
                 setIsLoadingData(false);
             }
-        })();
-    }, [page, searchTerm]);
+        };
+        if (!skip) {
+            fetchData();
+        }
+    }, [skip, pageQuery, searchQuery, setTotalPages]);
 
     const handlePageChange = (page: number): void => {
-        setPage((prevPage: number) => prevPage + page);
+        setSkip(false);
+        searchParams.set('page', `${page}`);
+        setSearchParams(searchParams);
+    };
+
+    const changePage = (page: number): void => {
+        setSkip(false);
+        searchParams.set('page', `${page}`);
+        setSearchParams(searchParams);
     };
 
     return {
@@ -75,7 +90,9 @@ export const useListCharacters = (props: {
         setIsLoadingImage,
         isLoadingImage,
         totalPages,
-        page,
         handlePageChange,
+        changePage,
+        pageQuery,
+        currentPage,
     };
 };

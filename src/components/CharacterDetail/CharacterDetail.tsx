@@ -62,7 +62,7 @@ const CharacterDetail = () => {
                         {type}
                     </div>
                 )}
-                <button className={clsx('button', classes.closeBtn)} onClick={() => onToggle('/characters')}>
+                <button className={clsx('button', classes.closeBtn)} onClick={() => onToggle(-1)}>
                     Close
                 </button>
             </div>

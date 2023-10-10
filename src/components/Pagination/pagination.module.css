@@ -1,5 +1,6 @@
 .pagination {
     display: flex;
+    flex-wrap: wrap;
     margin: 1rem auto;
     align-items: center;
     justify-content: center;
@@ -9,6 +10,35 @@
 }
 
 .paginationBtn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--color-dark);
+    text-transform: uppercase;
+    transition: all 0.3s;
+    border: 1px solid var(--color-accent);
+    cursor: pointer;
+    min-height: 32px;
+    line-height: normal;
+    max-width: 7rem;
     padding: 0.5rem 1rem;
     border-radius: 0.5rem;
+}
+
+.paginationBtn:hover {
+    border: 1px solid var(--color-hover);
+    background: var(--color-hover);
+    color: var(--color-light);
+}
+
+.page {
+    composes: paginationBtn;
+    width: 1rem;
+}
+
+.pageCurrent {
+    background: var(--color-hover);
+    color: var(--color-light);
 }

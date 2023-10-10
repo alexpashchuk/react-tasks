@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 
-import LogoRss from '../../assets/images/rss.svg';
-import LogoGitHub from '../../assets/images/github.svg';
+import LogoRss from '~assets/images/rss.svg';
+import LogoGitHub from '~assets/images/github.svg';
 
 import classes from './footer.module.css';
 

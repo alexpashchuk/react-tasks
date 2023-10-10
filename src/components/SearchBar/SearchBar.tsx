@@ -1,22 +1,19 @@
 import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import clsx from 'clsx';
 
 import LogoSearch from '~assets/images/search.svg';
 import { SEARCH_VALUE_STORAGE_KEY } from '~constants/constants.ts';
 
 import classes from './searchBar.module.css';
-import { SetURLSearchParams, useSearchParams } from 'react-router-dom';
 
 type SearchBarProps = {
-    handleInput: (input: string) => void;
-    searchTerm: string;
-    searchParams: URLSearchParams;
-    setSearchParams: SetURLSearchParams;
+    setSkip: (s: boolean) => void;
 };
-
-const SearchBar = (props: SearchBarProps) => {
-    const { handleInput, searchTerm, searchParams, setSearchParams } = props;
-    const [searchValue, setSearchValue] = useState(searchTerm);
+const SearchBar = ({ setSkip }: SearchBarProps) => {
+    const [searchParams, setSearchParams] = useSearchParams();
+    const searchQuery = searchParams.get('search') || '';
+    const [searchValue, setSearchValue] = useState(searchQuery);
     const [isActiveLabel, setIsActiveLabel] = useState(false);
 
     const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -25,12 +22,15 @@ const SearchBar = (props: SearchBarProps) => {
     };
 
     const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
+        setSkip(false);
         e.preventDefault();
-        handleInput(searchValue);
+        searchParams.set('search', `${searchValue}`);
         searchParams.set('page', '1');
-        setSearchParams(searchParams, {
-            replace: true,
-        });
+        if (!searchValue.length) {
+            searchParams.delete('search');
+            setSearchParams(searchParams);
+        }
+        setSearchParams(searchParams);
     };
 
     useEffect(() => {

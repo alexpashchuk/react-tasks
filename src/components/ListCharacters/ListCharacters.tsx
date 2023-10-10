@@ -5,19 +5,26 @@ import Pagination from '~components/Pagination/Pagination.tsx';
 import CardCharacter from '../CardCharacter/CardCharacter.tsx';
 import Spinner from '../Spinner/Spinner.tsx';
 import classes from './itemList.module.css';
-import { SetURLSearchParams } from 'react-router-dom';
 
-type ListCharactersProps = {
-    searchTerm: string;
-    onToggle: (to: string) => void;
-    searchParams: URLSearchParams;
-    setSearchParams: SetURLSearchParams;
+export type ListCharactersProps = {
+    onToggle: (t: string | number) => void;
+    setSkip: (s: boolean) => void;
+    skip: boolean;
 };
-
 const ListCharacters = (props: ListCharactersProps) => {
     const { onToggle } = props;
-    const { isLoading, error, characters, setIsLoadingImage, isLoadingImage, totalPages, page, handlePageChange } =
-        useListCharacters(props);
+    const {
+        isLoading,
+        error,
+        characters,
+        setIsLoadingImage,
+        isLoadingImage,
+        handlePageChange,
+        totalPages,
+        pageQuery,
+        currentPage,
+        changePage,
+    } = useListCharacters(props);
 
     if (isLoading) {
         return <Spinner />;
@@ -35,9 +42,7 @@ const ListCharacters = (props: ListCharactersProps) => {
         <>
             {characters && characters.length > 0 ? (
                 <>
-                    <p className={classes.page}>
-                        Page {page} of {totalPages}
-                    </p>
+                    <p className={classes.page}>{`Page ${currentPage} of ${totalPages}`}</p>
                     <div data-testid="item" className={classes.wrapper}>
                         {characters.map((character) => (
                             <CardCharacter
@@ -49,10 +54,11 @@ const ListCharacters = (props: ListCharactersProps) => {
                             />
                         ))}
                         <Pagination
-                            page={page}
+                            page={currentPage}
                             totalPages={totalPages}
-                            prevPage={() => handlePageChange(-1)}
-                            nextPage={() => handlePageChange(1)}
+                            changePage={changePage}
+                            prevPage={() => handlePageChange(pageQuery - 1)}
+                            nextPage={() => handlePageChange(pageQuery + 1)}
                         />
                     </div>
                 </>
