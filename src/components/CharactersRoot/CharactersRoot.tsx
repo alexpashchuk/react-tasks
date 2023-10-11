@@ -33,7 +33,7 @@ const CharactersRoot = () => {
         <div className={classes.root}>
             <div className={classes.result}>
                 <SearchBar setSkip={setSkip} />
-                <ListCharacters skip={skip} onToggle={onToggle} setSkip={setSkip} />
+                <ListCharacters skip={skip} setSkip={setSkip} onToggle={onToggle} />
             </div>
             <div className={outletClass}>
                 <Outlet context={{ onToggle } satisfies OutletContext} />
