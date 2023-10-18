@@ -3,7 +3,7 @@ import clsx from 'clsx';
 
 import { useCharacterDetail } from '~hooks/useCharacterDetail.tsx';
 import { OutletContext } from '~components/CharactersRoot/CharactersRoot.tsx';
-import placeholder from '~assets/images/placeholder.jpg';
+import placeholder from '~assets/icons/placeholder.jpg';
 
 import Spinner from '../Spinner/Spinner.tsx';
 import classes from './CharacterDetail.module.css';

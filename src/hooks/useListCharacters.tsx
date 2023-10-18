@@ -5,8 +5,7 @@ import { API } from '~constants/constants.ts';
 import { Character } from '~types/types.ts';
 import { ListCharactersProps } from '~components/ListCharacters/ListCharacters.tsx';
 
-export const useListCharacters = (props: ListCharactersProps) => {
-    const { skip, setSkip } = props;
+export const useListCharacters = ({ skip }: ListCharactersProps) => {
     const [searchParams, setSearchParams] = useSearchParams();
     const location = useLocation();
     const pageQuery = parseInt(searchParams.get('page') || '1');
@@ -21,6 +20,7 @@ export const useListCharacters = (props: ListCharactersProps) => {
     const [page, setPage] = useState(initialPage ? 1 : pageQuery);
     // const [params, setParams] = useState<Params>({ search: searchQuery, page: pageQuery });
 
+    // display correct page
     const currentPage = useMemo(() => {
         if (isPage) {
             setPage(pageQuery);
@@ -30,6 +30,7 @@ export const useListCharacters = (props: ListCharactersProps) => {
         }
     }, [isPage, page, pageQuery]);
 
+    // set /characters?page=1 by default
     useEffect(() => {
         if (location.pathname === '/characters' && !location.search) {
             searchParams.set('page', '1');
@@ -37,6 +38,7 @@ export const useListCharacters = (props: ListCharactersProps) => {
         }
     }, [location.pathname, location.search, searchParams, setSearchParams]);
 
+    // correct behavior when changing pages in query param
     useEffect(() => {
         if (initialPage) {
             searchParams.set('page', '1');
@@ -71,18 +73,6 @@ export const useListCharacters = (props: ListCharactersProps) => {
         }
     }, [skip, pageQuery, searchQuery, setTotalPages]);
 
-    const handlePageChange = (page: number): void => {
-        setSkip(false);
-        searchParams.set('page', `${page}`);
-        setSearchParams(searchParams);
-    };
-
-    const changePage = (page: number): void => {
-        setSkip(false);
-        searchParams.set('page', `${page}`);
-        setSearchParams(searchParams);
-    };
-
     return {
         isLoading: isLoadingData,
         error,
@@ -90,8 +80,6 @@ export const useListCharacters = (props: ListCharactersProps) => {
         setIsLoadingImage,
         isLoadingImage,
         totalPages,
-        handlePageChange,
-        changePage,
         pageQuery,
         currentPage,
     };

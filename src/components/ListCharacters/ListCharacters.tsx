@@ -12,19 +12,9 @@ export type ListCharactersProps = {
     skip: boolean;
 };
 const ListCharacters = (props: ListCharactersProps) => {
-    const { onToggle } = props;
-    const {
-        isLoading,
-        error,
-        characters,
-        setIsLoadingImage,
-        isLoadingImage,
-        handlePageChange,
-        totalPages,
-        pageQuery,
-        currentPage,
-        changePage,
-    } = useListCharacters(props);
+    const { onToggle, setSkip } = props;
+    const { isLoading, error, characters, setIsLoadingImage, isLoadingImage, totalPages, currentPage } =
+        useListCharacters(props);
 
     if (isLoading) {
         return <Spinner />;
@@ -53,13 +43,7 @@ const ListCharacters = (props: ListCharactersProps) => {
                                 onToggle={onToggle}
                             />
                         ))}
-                        <Pagination
-                            page={currentPage}
-                            totalPages={totalPages}
-                            changePage={changePage}
-                            prevPage={() => handlePageChange(pageQuery - 1)}
-                            nextPage={() => handlePageChange(pageQuery + 1)}
-                        />
+                        <Pagination page={currentPage} totalPages={totalPages} setSkip={setSkip} />
                     </div>
                 </>
             ) : (

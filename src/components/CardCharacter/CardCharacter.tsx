@@ -1,5 +1,5 @@
 import { Character } from '~types/types.ts';
-import placeholder from '~assets/images/placeholder.jpg';
+import placeholder from '~assets/icons/placeholder.jpg';
 import Spinner from '~components/Spinner/Spinner.tsx';
 
 import classes from './CardCharacter.module.css';
