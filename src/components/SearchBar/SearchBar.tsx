@@ -1,7 +1,6 @@
 import { ChangeEvent, Component, FormEvent } from 'react';
 
 import LogoSearch from '../../assets/images/search.svg';
-// import CloseIcon from '../../assets/images/close.svg';
 import { SEARCH_VALUE_STORAGE_KEY } from '../../constants/constants.ts';
 
 import classes from './searchBar.module.css';
@@ -70,20 +69,16 @@ export default class SearchBar extends Component<SearchBarProps, SearchBarState>
                 <input
                     className={classes.input}
                     type="search"
-                    required={true}
                     autoComplete="off"
+                    placeholder="Search"
                     value={this.state.searchValue}
                     onChange={(e) => {
                         this.handleSearchChange(e);
                     }}
                 />
-                <label className={classes.label}>Search</label>
                 <button className={classes.button} type="submit">
                     <LogoSearch className={classes.logo} />
                 </button>
-                {/*<button onClick={this.resetInputField} type="reset" className={classes.reset}>*/}
-                {/*    <CloseIcon className={classes.logo} />*/}
-                {/*</button>*/}
             </form>
         );
     }
