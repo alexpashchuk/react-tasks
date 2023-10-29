@@ -19,21 +19,20 @@ export default class App extends Component {
     };
 
     handleRefresh = () => {
-        localStorage.setItem(SEARCH_TERM_STORAGE_KEY, this.state.search);
-    };
-
-    componentDidMount(): void {
         const initialValue = localStorage.getItem(SEARCH_VALUE_STORAGE_KEY)
             ? localStorage.getItem(SEARCH_TERM_STORAGE_KEY)
             : API;
         if (initialValue) {
             this.setState({ search: initialValue });
+            localStorage.setItem(SEARCH_TERM_STORAGE_KEY, initialValue);
         }
+    };
+
+    componentDidMount(): void {
         window.addEventListener('beforeunload', this.handleRefresh);
     }
 
     componentWillUnmount(): void {
-        localStorage.setItem(SEARCH_TERM_STORAGE_KEY, this.state.search);
         window.removeEventListener('beforeunload', this.handleRefresh);
     }
 
