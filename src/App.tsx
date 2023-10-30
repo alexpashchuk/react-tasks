@@ -13,6 +13,7 @@ export default class App extends Component {
     };
 
     handleInput = (input: string) => {
+        let test = '';
         const searchTerm = `${API}?search=${input.trim().toLowerCase()}`;
         localStorage.setItem(SEARCH_TERM_STORAGE_KEY, searchTerm);
         this.setState({ search: searchTerm });
