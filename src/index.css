@@ -1,57 +1,57 @@
 :root {
-    --color-light: #fafafa;
+  --color-light: #fafafa;
 
-    --color-gray-s: #cdcdcd;
-    --color-gray-m: #64748b;
+  --color-gray-s: #cdcdcd;
+  --color-gray-m: #64748b;
 
-    --color-dark: #2a2d3d;
+  --color-dark: #2a2d3d;
 
-    --color-accent: #2d8ba8;
-    --color-hover-text: #dbf2fb;
-    --color-hover: #008ac2;
-    --color-main: #845ec2;
+  --color-accent: #2d8ba8;
+  --color-hover-text: #dbf2fb;
+  --color-hover: #008ac2;
+  --color-main: #845ec2;
 
-    --dark-border: 2px solid var(--color-dark);
-    --light-border: 2px solid var(--color-light);
+  --dark-border: 2px solid var(--color-dark);
+  --light-border: 2px solid var(--color-light);
 }
 
 @font-face {
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 400;
-    src:
-        local(''),
-        url('../src/assets/fonts/Roboto-Regular.ttf') format('truetype');
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src:
+    local(''),
+    url('../src/assets/fonts/Roboto-Regular.ttf') format('truetype');
 }
 
 @font-face {
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 500;
-    src:
-        local(''),
-        url('../src/assets/fonts/Roboto-Medium.ttf') format('truetype');
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  src:
+    local(''),
+    url('../src/assets/fonts/Roboto-Medium.ttf') format('truetype');
 }
 
 @font-face {
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 600;
-    src:
-        local(''),
-        url('../src/assets/fonts/Roboto-Bold.ttf') format('truetype');
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 600;
+  src:
+    local(''),
+    url('../src/assets/fonts/Roboto-Bold.ttf') format('truetype');
 }
 
 * {
-    padding: 0;
-    margin: 0;
-    border: 0;
+  padding: 0;
+  margin: 0;
+  border: 0;
 }
 
 *,
 *::before,
 *::after {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 h1,
@@ -60,153 +60,153 @@ h3,
 h4,
 h5,
 h6 {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 h1 {
-    font-size: 30px;
+  font-size: 30px;
 }
 
 h2 {
-    font-size: 24px;
+  font-size: 24px;
 }
 
 h3 {
-    font-size: 16px;
+  font-size: 16px;
 }
 
 :focus,
 :active {
-    outline: none;
+  outline: none;
 }
 
 a {
-    text-decoration: none;
-    color: inherit;
+  text-decoration: none;
+  color: inherit;
 }
 
 ul li {
-    list-style: none;
+  list-style: none;
 }
 
 img {
-    vertical-align: top;
-    max-width: 100%;
-    display: block;
+  vertical-align: top;
+  max-width: 100%;
+  display: block;
 }
 
 input,
 button,
 textarea {
-    font-family: 'Roboto', sans-serif;
-    font-size: inherit;
+  font-family: 'Roboto', sans-serif;
+  font-size: inherit;
 }
 
 button {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    outline: none;
-    color: inherit;
-    background-color: inherit;
-    cursor: pointer;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: none;
+  color: inherit;
+  background-color: inherit;
+  cursor: pointer;
 }
 
 button::-moz-focus-inner {
-    padding: 0;
-    border: 0;
+  padding: 0;
+  border: 0;
 }
 
 ::-webkit-scrollbar {
-    width: 5px;
+  width: 5px;
 }
 
 ::-webkit-scrollbar-track {
-    background: var(--color-dark);
+  background: var(--color-dark);
 }
 
 ::-webkit-scrollbar-thumb {
-    background: var(--color-gray-s);
-    border-radius: 5px;
+  background: var(--color-gray-s);
+  border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: var(--color-light);
+  background: var(--color-light);
 }
 
 button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 14px;
-    font-weight: 700;
-    color: var(--color-dark);
-    padding: 5px 15px;
-    text-transform: uppercase;
-    border-radius: 5px;
-    transition: all 0.3s;
-    background: var(--color-accent);
-    border: var(--color-accent);
-    cursor: pointer;
-    min-height: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-dark);
+  padding: 5px 15px;
+  text-transform: uppercase;
+  border-radius: 5px;
+  transition: all 0.3s;
+  background: var(--color-accent);
+  border: var(--color-accent);
+  cursor: pointer;
+  min-height: 32px;
 }
 
 button:hover {
-    background: var(--color-hover);
-    color: var(--color-hover-text);
+  background: var(--color-hover);
+  color: var(--color-hover-text);
 }
 
 button:active:not(:disabled) {
-    scale: 0.98;
+  scale: 0.98;
 }
 
 input:disabled,
 button:disabled {
-    color: var(--color-dark);
-    background: var(--color-gray-s);
-    opacity: 0.5;
-    cursor: default;
-    pointer-events: none;
+  color: var(--color-dark);
+  background: var(--color-gray-s);
+  opacity: 0.5;
+  cursor: default;
+  pointer-events: none;
 }
 
 html {
-    scroll-behavior: smooth;
-    max-width: 100%;
-    font-family: 'Roboto', sans-serif;
-    font-size: 16px;
-    line-height: 1.5;
-    -ms-text-size-adjust: 100%;
-    -moz-text-size-adjust: 100%;
-    -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  max-width: 100%;
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
 }
 
 html,
 body {
-    height: 100%;
-    min-width: 320px;
-    background-color: var(--color-light);
+  height: 100%;
+  min-width: 320px;
+  background-color: var(--color-light);
 }
 
 #root {
-    min-height: 100%;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 
 #root > main {
-    flex: 1 1 auto;
+  flex: 1 1 auto;
 }
 
 .container {
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 10px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 10px;
 }
 
 .active {
-    color: #fff;
-    text-decoration: underline;
+  color: #fff;
+  text-decoration: underline;
 }
