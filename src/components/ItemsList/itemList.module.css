@@ -1,0 +1,15 @@
+.wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+}
+
+.notFound {
+  font-size: 2rem;
+  margin: 1rem;
+  color: var(--color-accent);
+  text-align: center;
+}

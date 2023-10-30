@@ -1,0 +1,6 @@
+.buttonError {
+  background-color: red;
+  max-width: 10rem;
+  align-self: center;
+  margin-top: 1rem;
+}
