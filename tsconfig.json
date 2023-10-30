@@ -1,6 +1,6 @@
 {
     "compilerOptions": {
-//        "types": ["node", "jest", "@testing-library/jest-dom"],
+        //        "types": ["node", "jest", "@testing-library/jest-dom"],
         "target": "ESNext",
         "baseUrl": "./src",
         "lib": ["DOM", "DOM.Iterable", "ESNext"],
@@ -19,9 +19,9 @@
         "strict": true,
         "noUnusedLocals": true,
         "noUnusedParameters": true,
-        "noFallthroughCasesInSwitch": true,
+        "noFallthroughCasesInSwitch": true
     },
-    "include": ["./src/**/*", "vite.config.ts" , "vitest.config.ts", "./src/test/setupTests.ts", ".eslintrc"],
+    "include": ["./src/**/*", "vite.config.ts", "vitest.config.ts", "./src/test/setupTests.ts", ".eslintrc"],
     "exclude": ["node_modules", "dist", "svg.d.ts"],
     "references": [{ "path": "./tsconfig.node.json" }]
 }
