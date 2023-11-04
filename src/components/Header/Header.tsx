@@ -1,7 +1,6 @@
 import classes from './header.module.css';
 
 const Header = () => {
-  let a = 'test';
   return (
     <header className={classes.header}>
       <div className="container">
