@@ -1,23 +1,23 @@
 .header {
-    background-color: var(--color-main);
+  background-color: var(--color-main);
 }
 
 .link {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: all 0.3s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s;
 }
 
 .link:hover {
-    color: var(--color-hover);
+  color: var(--color-hover);
 }
 
 .link:active {
-    scale: 0.95;
+  scale: 0.95;
 }
 
 .nav {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }

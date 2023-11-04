@@ -1,39 +1,39 @@
 .pagination {
-    display: flex;
-    flex-wrap: wrap;
-    margin: 1rem auto;
-    align-items: center;
-    justify-content: center;
-    gap: 0.3rem;
-    position: relative;
-    width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 1rem auto;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  position: relative;
+  width: 100%;
 }
 
 .page {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 14px;
-    font-weight: 700;
-    color: var(--color-dark);
-    text-transform: uppercase;
-    transition: all 0.3s;
-    border: 1px solid var(--color-accent);
-    cursor: pointer;
-    min-height: 2rem;
-    line-height: normal;
-    border-radius: 0.5rem;
-    width: 2rem;
-    height: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-dark);
+  text-transform: uppercase;
+  transition: all 0.3s;
+  border: 1px solid var(--color-accent);
+  cursor: pointer;
+  min-height: 2rem;
+  line-height: normal;
+  border-radius: 0.5rem;
+  width: 2rem;
+  height: 2rem;
 }
 
 .page:hover {
-    border: 1px solid var(--color-hover);
-    background: var(--color-hover);
-    color: var(--color-light);
+  border: 1px solid var(--color-hover);
+  background: var(--color-hover);
+  color: var(--color-light);
 }
 
 .pageCurrent {
-    background: var(--color-hover);
-    color: var(--color-light);
+  background: var(--color-hover);
+  color: var(--color-light);
 }
