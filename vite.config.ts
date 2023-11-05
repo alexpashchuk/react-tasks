@@ -20,6 +20,7 @@ export default defineConfig({
     alias: {
       '~assets': 'src/assets',
       '~components': 'src/components',
+      '~routes': 'src/routes',
       '~constants': 'src/constants',
       '~utils': 'src/utils',
       '~hooks': 'src/hooks',
