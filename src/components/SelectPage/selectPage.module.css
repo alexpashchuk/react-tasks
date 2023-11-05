@@ -1,0 +1,26 @@
+.root {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.select {
+  appearance: none;
+  outline: none;
+  border: 2px solid var(--color-accent);
+  box-shadow: none;
+  padding: 0 1em;
+  color: var(--color-dark);
+  cursor: pointer;
+  background: var(--color-light) url('../../assets/icons/chevron-down.svg') no-repeat right 1rem center;
+  position: relative;
+  display: flex;
+  width: 20em;
+  height: 3em;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.select::-ms-expand {
+  display: none;
+}
