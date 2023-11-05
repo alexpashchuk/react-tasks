@@ -4,6 +4,7 @@ import { Outlet, useNavigate, useParams } from 'react-router-dom';
 import SearchBar from '../SearchBar/SearchBar.tsx';
 import ListCharacters from '../ListCharacters/ListCharacters.tsx';
 import classes from './charactersRoot.module.css';
+import SelectPage from '~components/SelectPage/SelectPage.tsx';
 
 export type OutletContext = {
   onToggle: (t: number | string) => void;
@@ -33,6 +34,7 @@ const CharactersRoot = () => {
     <div className={classes.root}>
       <div className={classes.result}>
         <SearchBar setSkip={setSkip} />
+        <SelectPage setSkip={setSkip} />
         <ListCharacters skip={skip} setSkip={setSkip} onToggle={onToggle} />
       </div>
       <div className={outletClass}>

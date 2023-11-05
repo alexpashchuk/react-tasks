@@ -13,14 +13,14 @@ type ItemProps = {
 
 const CardCharacter = (props: ItemProps) => {
   const { character, onToggle, setIsLoadingImage, isLoadingImage } = props;
-  const { name, image, id } = character;
+  const { title, images, mal_id } = character;
 
   return (
-    <button className={classes.card} onClick={() => onToggle(`details/${id}`)}>
+    <button className={classes.card} onClick={() => onToggle(`details/${mal_id}`)}>
       {!isLoadingImage && <Spinner />}
       <img
-        src={image || placeholder}
-        alt={`Character ${name}`}
+        src={images.jpg.large_image_url || placeholder}
+        alt={`Title ${title}`}
         className={classes.image}
         draggable={false}
         onLoad={() => {
@@ -28,8 +28,8 @@ const CardCharacter = (props: ItemProps) => {
         }}
         style={!isLoadingImage ? { opacity: 0 } : { opacity: 1 }}
       />
-      <h3 title={name} className={classes.name}>
-        {name}
+      <h3 title={title} className={classes.name}>
+        {title}
       </h3>
     </button>
   );

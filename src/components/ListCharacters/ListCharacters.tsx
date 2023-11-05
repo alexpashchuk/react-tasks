@@ -36,7 +36,7 @@ const ListCharacters = (props: ListCharactersProps) => {
           <div data-testid="item" className={classes.wrapper}>
             {characters.map((character) => (
               <CardCharacter
-                key={character.id}
+                key={character.mal_id}
                 character={character}
                 setIsLoadingImage={setIsLoadingImage}
                 isLoadingImage={isLoadingImage}

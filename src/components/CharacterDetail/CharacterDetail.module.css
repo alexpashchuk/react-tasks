@@ -49,18 +49,7 @@
   border-radius: 5px;
   margin-bottom: 1rem;
   border: none !important;
-}
-
-.dead {
-  background-color: #d91e1e;
-}
-
-.alive {
   background-color: #30b33d;
-}
-
-.unknown {
-  background-color: darkgray;
 }
 
 .closeBtn {

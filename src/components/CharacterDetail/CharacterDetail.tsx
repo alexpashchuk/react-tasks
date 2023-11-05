@@ -10,11 +10,9 @@ import classes from './CharacterDetail.module.css';
 
 const CharacterDetail = () => {
   const { isLoading, error, character, setIsLoadingImage, isLoadingImage } = useCharacterDetail();
-  const { name, image, gender, status, type, origin, species, location: lastLocation } = character || {};
+  const { images, title, status, rank, year, episodes, source, season, rating, duration } = character || {};
 
   const { onToggle } = useOutletContext<OutletContext>();
-
-  const statusClass = status === 'Dead' ? classes.dead : status === 'Alive' ? classes.alive : classes.unknown;
 
   if (error) {
     return (
@@ -28,8 +26,8 @@ const CharacterDetail = () => {
     <div className={classes.detail}>
       {isLoading && <Spinner />}
       <img
-        src={image || placeholder}
-        alt={`Character ${name}`}
+        src={images?.jpg.large_image_url || placeholder}
+        alt={`Title ${title}`}
         className={classes.image}
         draggable={false}
         onLoad={() => {
@@ -38,30 +36,38 @@ const CharacterDetail = () => {
         style={!isLoadingImage ? { opacity: 0 } : { opacity: 1 }}
       />
       <div className={classes.info}>
-        <h2 className={classes.name}>{name}</h2>
-        <p className={clsx(classes.status, statusClass)}>{status}</p>
+        <h2 className={classes.name}>{title}</h2>
+        <p className={classes.status}>{status}</p>
         <div className={classes.text}>
-          <p>species:</p>
-          {species}
+          <p>Rank:</p>
+          {rank}
         </div>
-        <div className={classes.text}>
-          <p>gender:</p>
-          {gender}
-        </div>
-        <div className={classes.text}>
-          <p>location:</p>
-          {lastLocation?.name}
-        </div>
-        <div className={classes.text}>
-          <p>planet:</p>
-          {origin?.name}
-        </div>
-        {type && (
+        {year && (
           <div className={classes.text}>
-            <p>type:</p>
-            {type}
+            <p>Year:</p>
+            {year}
           </div>
         )}
+        <div className={classes.text}>
+          <p>Episodes:</p>
+          {episodes}
+        </div>
+        <div className={classes.text}>
+          <p>Source:</p>
+          {source}
+        </div>
+        <div className={classes.text}>
+          <p>Season:</p>
+          {season}
+        </div>
+        <div className={classes.text}>
+          <p>Rating:</p>
+          {rating}
+        </div>
+        <div className={classes.text}>
+          <p>Duration:</p>
+          {duration}
+        </div>
         <button className={clsx('button', classes.closeBtn)} onClick={() => onToggle(-1)}>
           Close
         </button>

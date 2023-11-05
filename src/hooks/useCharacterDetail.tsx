@@ -17,7 +17,7 @@ export const useCharacterDetail = () => {
         const url = `${BASE_URL}/${id}`;
         const response = await fetch(url);
         const data = await response.json();
-        setCharacter(data);
+        setCharacter(data.data);
       } catch {
         setError(true);
       } finally {

@@ -11,11 +11,12 @@ export const useListCharacters = ({ skip }: ListCharactersProps) => {
   const pageQuery = parseInt(searchParams.get('page') || '1');
   const isPage = searchParams.get('page') || '';
   const searchQuery = searchParams.get('search') || '';
+  const perPageQuery = searchParams.get('per_page') || '20';
   const [isLoadingData, setIsLoadingData] = useState(false);
   const [isLoadingImage, setIsLoadingImage] = useState(false);
   const [error, setError] = useState(false);
   const [characters, setCharacters] = useState<Character[]>([]);
-  const [totalPages, setTotalPages] = useState(42);
+  const [totalPages, setTotalPages] = useState(2554);
   const initialPage = pageQuery <= 0 || pageQuery > totalPages || isNaN(pageQuery);
   const [page, setPage] = useState(initialPage ? 1 : pageQuery);
   // const [params, setParams] = useState<Params>({ search: searchQuery, page: pageQuery });
@@ -34,6 +35,7 @@ export const useListCharacters = ({ skip }: ListCharactersProps) => {
   useEffect(() => {
     if (location.pathname === '/characters' && !location.search) {
       searchParams.set('page', '1');
+      searchParams.set('per_page', '20');
       setSearchParams(searchParams);
     }
   }, [location.pathname, location.search, searchParams, setSearchParams]);
@@ -50,15 +52,15 @@ export const useListCharacters = ({ skip }: ListCharactersProps) => {
     const fetchData = async () => {
       setIsLoadingData(true);
       try {
-        const url = `${BASE_URL}?page=${pageQuery}&name=${searchQuery.trim().toLowerCase()}`;
+        const url = `${BASE_URL}?page=${pageQuery}&q=${searchQuery.trim().toLowerCase()}&limit=${perPageQuery}`;
         const response = await fetch(url);
         const data = await response.json();
         if (data.error) {
           setTotalPages(1);
           setCharacters([]);
         } else {
-          setTotalPages(data.info.pages);
-          setCharacters([...data.results]);
+          setTotalPages(data.pagination.last_visible_page);
+          setCharacters([...data.data]);
         }
       } catch {
         setError(true);
@@ -71,7 +73,7 @@ export const useListCharacters = ({ skip }: ListCharactersProps) => {
     if (!skip) {
       fetchData();
     }
-  }, [skip, pageQuery, searchQuery, setTotalPages]);
+  }, [skip, pageQuery, searchQuery, setTotalPages, perPageQuery]);
 
   return {
     isLoading: isLoadingData,

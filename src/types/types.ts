@@ -1,30 +1,37 @@
 export type Character = {
-  id: number;
-  name: string;
-  status: 'Alive' | 'Dead' | 'unknown';
-  species: string;
+  rank: number;
+  studios: [{ name: string }];
+  year: number;
+  mal_id: number;
   type: string;
-  gender: 'Female' | 'Male' | 'Genderless' | 'unknown';
-  origin: {
-    name: string;
-    url: string;
+  score: number;
+  title: string;
+  source: string;
+  season: string;
+  rating: string;
+  duration: string;
+  images: {
+    jpg: { large_image_url: string };
+    webp: { large_image_url: string };
   };
-  location: {
-    name: string;
-    url: string;
-  };
-  image: string;
-  episode: string[];
-  url: string;
-  created: string;
+  trailer: { embed_url: string };
+  synopsis: string;
+  episodes: number;
+  demographics: animeDemographics[];
+  status: string;
+  genres: genres[];
 };
 
-export type Characters = {
-  info: {
-    count: number;
-    pages: number;
-    next: string;
-    prev: string | null;
-  };
-  results: Character[];
+type animeDemographics = {
+  mal_id: number;
+  type: string;
+  name: string;
+  url: string;
+};
+
+type genres = {
+  mal_id: number;
+  type: string;
+  name: string;
+  url: string;
 };
