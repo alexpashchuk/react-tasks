@@ -22,8 +22,8 @@ const SearchBar = ({ setSkip }: SearchBarProps) => {
   };
 
   const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
-    setSkip(false);
     e.preventDefault();
+    setSkip(false);
     // If the user changes items on the page, make a new API call and display the results from the first page.
     searchParams.set('search', `${searchValue}`);
     searchParams.set('page', '1');

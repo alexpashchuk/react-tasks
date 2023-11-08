@@ -4,17 +4,17 @@ import Pagination from '~components/Pagination/pagination.tsx';
 
 import AnimeCard from '~components/AnimeCard/animeCard.tsx';
 import Spinner from '../Spinner/spinner.tsx';
-import classes from './itemList.module.css';
+import classes from './animeList.module.css';
+import PageSize from '~components/PageSize/pageSize.tsx';
 
 export type ListCharactersProps = {
   onToggle: (t: string | number) => void;
   setSkip: (s: boolean) => void;
   skip: boolean;
 };
-const ListCharacters = (props: ListCharactersProps) => {
+const AnimeList = (props: ListCharactersProps) => {
   const { onToggle, setSkip } = props;
-  const { isLoading, error, characters, setIsLoadingImage, isLoadingImage, totalPages, currentPage } =
-    useAnimeList(props);
+  const { isLoading, error, data, setIsLoadingImage, isLoadingImage, totalPages, currentPage } = useAnimeList(props);
 
   if (isLoading) {
     return <Spinner />;
@@ -30,14 +30,17 @@ const ListCharacters = (props: ListCharactersProps) => {
 
   return (
     <>
-      {characters && characters.length > 0 ? (
+      {data && data.length > 0 ? (
         <>
-          <p className={classes.page}>{`Page ${currentPage} of ${totalPages}`}</p>
+          <div className={classes.pageInfo}>
+            <p className={classes.page}>{`Page ${currentPage} of ${totalPages}`}</p>
+            <PageSize setSkip={setSkip} />
+          </div>
           <div data-testid="item" className={classes.wrapper}>
-            {characters.map((character) => (
+            {data.map((item) => (
               <AnimeCard
-                key={character.mal_id}
-                character={character}
+                key={item.mal_id}
+                anime={item}
                 setIsLoadingImage={setIsLoadingImage}
                 isLoadingImage={isLoadingImage}
                 onToggle={onToggle}
@@ -48,11 +51,11 @@ const ListCharacters = (props: ListCharactersProps) => {
         </>
       ) : (
         <div data-testid="item">
-          <p className={classes.notFound}>Characters Not Found 🙄</p>
+          <p className={classes.notFound}>Items Not Found 🙄</p>
         </div>
       )}
     </>
   );
 };
 
-export default ListCharacters;
+export default AnimeList;

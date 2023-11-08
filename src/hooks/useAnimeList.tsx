@@ -2,8 +2,8 @@ import { useEffect, useMemo, useState } from 'react';
 import { useLocation, useSearchParams } from 'react-router-dom';
 
 import { BASE_URL } from '~constants/constants.ts';
-import { Character } from '~types/types.ts';
-import { ListCharactersProps } from '~components/ListCharacters/ListCharacters.tsx';
+import { Anime } from '~types/types.ts';
+import { ListCharactersProps } from '~components/AnimeList/animeList.tsx';
 
 export const useAnimeList = ({ skip }: ListCharactersProps) => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -15,11 +15,16 @@ export const useAnimeList = ({ skip }: ListCharactersProps) => {
   const [isLoadingData, setIsLoadingData] = useState(false);
   const [isLoadingImage, setIsLoadingImage] = useState(false);
   const [error, setError] = useState(false);
-  const [characters, setCharacters] = useState<Character[]>([]);
+  const [data, setData] = useState<Anime[]>([]);
   const [totalPages, setTotalPages] = useState(2554);
   const initialPage = pageQuery <= 0 || pageQuery > totalPages || isNaN(pageQuery);
+  const initialPageSize =
+    perPageQuery === '20' ||
+    perPageQuery === '20' ||
+    perPageQuery === '15' ||
+    perPageQuery === '10' ||
+    perPageQuery === '5';
   const [page, setPage] = useState(initialPage ? 1 : pageQuery);
-  // const [params, setParams] = useState<Params>({ search: searchQuery, page: pageQuery });
 
   // display correct page
   const currentPage = useMemo(() => {
@@ -31,9 +36,9 @@ export const useAnimeList = ({ skip }: ListCharactersProps) => {
     }
   }, [isPage, page, pageQuery]);
 
-  // set /characters?page=1 by default
+  // set /?page=1 by default
   useEffect(() => {
-    if (location.pathname === '/characters' && !location.search) {
+    if (location.pathname === '/' && !location.search) {
       searchParams.set('page', '1');
       searchParams.set('per_page', '20');
       setSearchParams(searchParams);
@@ -48,28 +53,37 @@ export const useAnimeList = ({ skip }: ListCharactersProps) => {
     }
   }, [initialPage, searchParams, setSearchParams]);
 
+  // correct behavior when changing per_page in query param
+  useEffect(() => {
+    if (!initialPageSize) {
+      searchParams.set('per_page', '20');
+      setSearchParams(searchParams);
+    }
+  }, [initialPageSize, searchParams, setSearchParams]);
+
   useEffect(() => {
     const fetchData = async () => {
       setIsLoadingData(true);
       try {
         const url = `${BASE_URL}?page=${pageQuery}&q=${searchQuery.trim().toLowerCase()}&limit=${perPageQuery}`;
         const response = await fetch(url);
-        const data = await response.json();
-        if (data.error) {
+        const dataResponse = await response.json();
+        if (dataResponse.error) {
           setTotalPages(1);
-          setCharacters([]);
+          setData([]);
         } else {
-          setTotalPages(data.pagination.last_visible_page);
-          setCharacters([...data.data]);
+          setTotalPages(dataResponse.pagination.last_visible_page);
+          setData(dataResponse.data);
         }
       } catch {
         setError(true);
         setTotalPages(1);
-        setCharacters([]);
+        setData([]);
       } finally {
         setIsLoadingData(false);
       }
     };
+    // skip new API call when open detail page.
     if (!skip) {
       fetchData();
     }
@@ -78,7 +92,7 @@ export const useAnimeList = ({ skip }: ListCharactersProps) => {
   return {
     isLoading: isLoadingData,
     error,
-    characters,
+    data,
     setIsLoadingImage,
     isLoadingImage,
     totalPages,

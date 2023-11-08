@@ -1,16 +1,16 @@
 import { useOutletContext } from 'react-router-dom';
 import clsx from 'clsx';
 
+import placeholder from '~assets/icons/placeholder.jpg';
 import { useAnimeDetail } from '~hooks/useAnimeDetail.tsx';
 import { OutletContext } from '~components/AnimeRoot/animeRoot.tsx';
-import placeholder from '~assets/icons/placeholder.jpg';
-
 import Spinner from '../Spinner/spinner.tsx';
+
 import classes from './animeDetail.module.css';
 
 const AnimeDetail = () => {
-  const { isLoading, error, character, setIsLoadingImage, isLoadingImage } = useAnimeDetail();
-  const { images, title, status, rank, year, episodes, source, season, rating, duration } = character || {};
+  const { isLoading, error, data, setIsLoadingImage, isLoadingImage } = useAnimeDetail();
+  const { images, title, status, rank, year, episodes, source, season, rating, duration, airing } = data || {};
 
   const { onToggle } = useOutletContext<OutletContext>();
 
@@ -21,6 +21,8 @@ const AnimeDetail = () => {
       </div>
     );
   }
+
+  const statusClass = airing ? classes.airing : classes.completed;
 
   return (
     <div className={classes.detail}>
@@ -37,37 +39,49 @@ const AnimeDetail = () => {
       />
       <div className={classes.info}>
         <h2 className={classes.name}>{title}</h2>
-        <p className={classes.status}>{status}</p>
-        <div className={classes.text}>
-          <p>Rank:</p>
-          {rank}
-        </div>
+        <p className={clsx(classes.status, statusClass)}>{status}</p>
+        {rank && (
+          <div className={classes.text}>
+            <p>Rank:</p>
+            {rank}
+          </div>
+        )}
         {year && (
           <div className={classes.text}>
             <p>Year:</p>
             {year}
           </div>
         )}
-        <div className={classes.text}>
-          <p>Episodes:</p>
-          {episodes}
-        </div>
-        <div className={classes.text}>
-          <p>Source:</p>
-          {source}
-        </div>
-        <div className={classes.text}>
-          <p>Season:</p>
-          {season}
-        </div>
-        <div className={classes.text}>
-          <p>Rating:</p>
-          {rating}
-        </div>
-        <div className={classes.text}>
-          <p>Duration:</p>
-          {duration}
-        </div>
+        {episodes && (
+          <div className={classes.text}>
+            <p>Episodes:</p>
+            {episodes}
+          </div>
+        )}
+        {source && (
+          <div className={classes.text}>
+            <p>Source:</p>
+            {source}
+          </div>
+        )}
+        {season && (
+          <div className={classes.text}>
+            <p>Season:</p>
+            {season}
+          </div>
+        )}
+        {rating && (
+          <div className={classes.text}>
+            <p>Rating:</p>
+            {rating}
+          </div>
+        )}
+        {duration && (
+          <div className={classes.text}>
+            <p>Duration:</p>
+            {duration}
+          </div>
+        )}
         <button className={clsx('button', classes.closeBtn)} onClick={() => onToggle(-1)}>
           Close
         </button>

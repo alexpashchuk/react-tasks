@@ -2,9 +2,8 @@ import { useCallback, useState } from 'react';
 import { Outlet, useNavigate, useParams } from 'react-router-dom';
 
 import SearchBar from '../SearchBar/searchBar.tsx';
-import ListCharacters from '../ListCharacters/ListCharacters.tsx';
+import AnimeList from '~components/AnimeList/animeList.tsx';
 import classes from './animeRoot.module.css';
-import PageSize from '~components/PageSize/pageSize.tsx';
 
 export type OutletContext = {
   onToggle: (t: number | string) => void;
@@ -31,17 +30,16 @@ const AnimeRoot = () => {
   const maskClass = params?.id ? classes.mask_open : classes.mask_close;
 
   return (
-    <div className={classes.root}>
+    <main className={classes.root}>
       <div className={classes.result}>
         <SearchBar setSkip={setSkip} />
-        <PageSize setSkip={setSkip} />
-        <ListCharacters skip={skip} setSkip={setSkip} onToggle={onToggle} />
+        <AnimeList skip={skip} setSkip={setSkip} onToggle={onToggle} />
       </div>
       <div className={outletClass}>
         <Outlet context={{ onToggle } satisfies OutletContext} />
       </div>
       <div className={maskClass} onClick={() => onToggle(-1)}></div>
-    </div>
+    </main>
   );
 };
 

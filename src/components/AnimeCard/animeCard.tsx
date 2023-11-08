@@ -1,19 +1,19 @@
-import { Character } from '~types/types.ts';
+import { Anime } from '~types/types.ts';
 import placeholder from '~assets/icons/placeholder.jpg';
 import Spinner from '~components/Spinner/spinner.tsx';
 
 import classes from './animeCard.module.css';
 
 type ItemProps = {
-  character: Character;
+  anime: Anime;
   setIsLoadingImage: (b: boolean) => void;
   onToggle: (s: string | number) => void;
   isLoadingImage: boolean;
 };
 
 const AnimeCard = (props: ItemProps) => {
-  const { character, onToggle, setIsLoadingImage, isLoadingImage } = props;
-  const { title, images, mal_id } = character;
+  const { anime, onToggle, setIsLoadingImage, isLoadingImage } = props;
+  const { title, images, mal_id } = anime;
 
   return (
     <button className={classes.card} onClick={() => onToggle(`details/${mal_id}`)}>

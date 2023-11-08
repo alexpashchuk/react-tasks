@@ -11,10 +11,10 @@ const PageSize = ({ setSkip }: SelectPageProps) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const perPageQuery = searchParams.get('per_page') || '20';
   const options = [
-    { value: '20', label: '20 cards' },
-    { value: '15', label: '15 cards' },
-    { value: '10', label: '10 cards' },
-    { value: '5', label: '5 cards' },
+    { value: '5', label: '5' },
+    { value: '10', label: '10' },
+    { value: '15', label: '15' },
+    { value: '20', label: '20' },
   ];
 
   const [selected, setSelected] = useState<string>(perPageQuery || options[0].value);
@@ -31,6 +31,7 @@ const PageSize = ({ setSkip }: SelectPageProps) => {
 
   return (
     <div className={classes.root}>
+      <p>Page Size</p>
       <select className={classes.select} value={selected} onChange={handleChange}>
         {options.map((option) => (
           <option className={classes.option} key={option.value} value={option.value}>
