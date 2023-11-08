@@ -1,8 +1,8 @@
 import { Character } from '~types/types.ts';
 import placeholder from '~assets/icons/placeholder.jpg';
-import Spinner from '~components/Spinner/Spinner.tsx';
+import Spinner from '~components/Spinner/spinner.tsx';
 
-import classes from './CardCharacter.module.css';
+import classes from './animeCard.module.css';
 
 type ItemProps = {
   character: Character;
@@ -11,7 +11,7 @@ type ItemProps = {
   isLoadingImage: boolean;
 };
 
-const CardCharacter = (props: ItemProps) => {
+const AnimeCard = (props: ItemProps) => {
   const { character, onToggle, setIsLoadingImage, isLoadingImage } = props;
   const { title, images, mal_id } = character;
 
@@ -35,4 +35,4 @@ const CardCharacter = (props: ItemProps) => {
   );
 };
 
-export default CardCharacter;
+export default AnimeCard;

@@ -5,7 +5,7 @@ import { BASE_URL } from '~constants/constants.ts';
 import { Character } from '~types/types.ts';
 import { ListCharactersProps } from '~components/ListCharacters/ListCharacters.tsx';
 
-export const useListCharacters = ({ skip }: ListCharactersProps) => {
+export const useAnimeList = ({ skip }: ListCharactersProps) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const location = useLocation();
   const pageQuery = parseInt(searchParams.get('page') || '1');

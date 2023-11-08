@@ -1,13 +1,13 @@
 import { ChangeEvent, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
-import classes from './selectPage.module.css';
+import classes from './pageSize.module.css';
 
 type SelectPageProps = {
   setSkip: (s: boolean) => void;
 };
 
-const SelectPage = ({ setSkip }: SelectPageProps) => {
+const PageSize = ({ setSkip }: SelectPageProps) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const perPageQuery = searchParams.get('per_page') || '20';
   const options = [
@@ -42,4 +42,4 @@ const SelectPage = ({ setSkip }: SelectPageProps) => {
   );
 };
 
-export default SelectPage;
+export default PageSize;

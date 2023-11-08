@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 import { describe, it } from 'vitest';
-import Spinner from './Spinner.tsx';
+import Spinner from './spinner.tsx';
 
 describe('Spinner tests', () => {
   it('renders Spinner', () => {

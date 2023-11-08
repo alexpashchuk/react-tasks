@@ -1,9 +1,9 @@
-import { useListCharacters } from '~hooks/useListCharacters.tsx';
+import { useAnimeList } from '~hooks/useAnimeList.tsx';
 
-import Pagination from '~components/Pagination/Pagination.tsx';
+import Pagination from '~components/Pagination/pagination.tsx';
 
-import CardCharacter from '../CardCharacter/CardCharacter.tsx';
-import Spinner from '../Spinner/Spinner.tsx';
+import AnimeCard from '~components/AnimeCard/animeCard.tsx';
+import Spinner from '../Spinner/spinner.tsx';
 import classes from './itemList.module.css';
 
 export type ListCharactersProps = {
@@ -14,7 +14,7 @@ export type ListCharactersProps = {
 const ListCharacters = (props: ListCharactersProps) => {
   const { onToggle, setSkip } = props;
   const { isLoading, error, characters, setIsLoadingImage, isLoadingImage, totalPages, currentPage } =
-    useListCharacters(props);
+    useAnimeList(props);
 
   if (isLoading) {
     return <Spinner />;
@@ -35,7 +35,7 @@ const ListCharacters = (props: ListCharactersProps) => {
           <p className={classes.page}>{`Page ${currentPage} of ${totalPages}`}</p>
           <div data-testid="item" className={classes.wrapper}>
             {characters.map((character) => (
-              <CardCharacter
+              <AnimeCard
                 key={character.mal_id}
                 character={character}
                 setIsLoadingImage={setIsLoadingImage}

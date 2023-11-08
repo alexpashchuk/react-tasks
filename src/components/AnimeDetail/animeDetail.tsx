@@ -1,15 +1,15 @@
 import { useOutletContext } from 'react-router-dom';
 import clsx from 'clsx';
 
-import { useCharacterDetail } from '~hooks/useCharacterDetail.tsx';
-import { OutletContext } from '~components/CharactersRoot/CharactersRoot.tsx';
+import { useAnimeDetail } from '~hooks/useAnimeDetail.tsx';
+import { OutletContext } from '~components/AnimeRoot/animeRoot.tsx';
 import placeholder from '~assets/icons/placeholder.jpg';
 
-import Spinner from '../Spinner/Spinner.tsx';
-import classes from './CharacterDetail.module.css';
+import Spinner from '../Spinner/spinner.tsx';
+import classes from './animeDetail.module.css';
 
-const CharacterDetail = () => {
-  const { isLoading, error, character, setIsLoadingImage, isLoadingImage } = useCharacterDetail();
+const AnimeDetail = () => {
+  const { isLoading, error, character, setIsLoadingImage, isLoadingImage } = useAnimeDetail();
   const { images, title, status, rank, year, episodes, source, season, rating, duration } = character || {};
 
   const { onToggle } = useOutletContext<OutletContext>();
@@ -76,4 +76,4 @@ const CharacterDetail = () => {
   );
 };
 
-export default CharacterDetail;
+export default AnimeDetail;

@@ -3,7 +3,7 @@ import { BASE_URL } from '~constants/constants.ts';
 import { Character } from '~types/types.ts';
 import { useParams } from 'react-router-dom';
 
-export const useCharacterDetail = () => {
+export const useAnimeDetail = () => {
   const [isLoadingData, setIsLoadingData] = useState(false);
   const [isLoadingImage, setIsLoadingImage] = useState(false);
   const [error, setError] = useState(false);

@@ -1,16 +1,16 @@
 import { useCallback, useState } from 'react';
 import { Outlet, useNavigate, useParams } from 'react-router-dom';
 
-import SearchBar from '../SearchBar/SearchBar.tsx';
+import SearchBar from '../SearchBar/searchBar.tsx';
 import ListCharacters from '../ListCharacters/ListCharacters.tsx';
-import classes from './charactersRoot.module.css';
-import SelectPage from '~components/SelectPage/SelectPage.tsx';
+import classes from './animeRoot.module.css';
+import PageSize from '~components/PageSize/pageSize.tsx';
 
 export type OutletContext = {
   onToggle: (t: number | string) => void;
 };
 
-const CharactersRoot = () => {
+const AnimeRoot = () => {
   const [skip, setSkip] = useState(false);
   const navigate = useNavigate();
   const params = useParams();
@@ -34,7 +34,7 @@ const CharactersRoot = () => {
     <div className={classes.root}>
       <div className={classes.result}>
         <SearchBar setSkip={setSkip} />
-        <SelectPage setSkip={setSkip} />
+        <PageSize setSkip={setSkip} />
         <ListCharacters skip={skip} setSkip={setSkip} onToggle={onToggle} />
       </div>
       <div className={outletClass}>
@@ -45,4 +45,4 @@ const CharactersRoot = () => {
   );
 };
 
-export default CharactersRoot;
+export default AnimeRoot;

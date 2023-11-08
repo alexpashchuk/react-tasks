@@ -1,10 +1,10 @@
 import { createBrowserRouter, Navigate } from 'react-router-dom';
 
 import { MainLayout } from '~components/MainLayout/MainLayout.tsx';
-import NotFoundPage from '~components/NotFound/NotFoundPage.tsx';
-import CharactersRoot from '~components/CharactersRoot/CharactersRoot.tsx';
-import CharacterDetail from '~components/CharacterDetail/CharacterDetail.tsx';
-import { ErrorBoundary } from '~components/ErrorBoundary/ErrorBoundary.tsx';
+import NotFoundPage from '~components/NotFound/notFoundPage.tsx';
+import AnimeRoot from '~components/AnimeRoot/animeRoot.tsx';
+import AnimeDetail from '~components/AnimeDetail/animeDetail.tsx';
+import { ErrorBoundary } from '~components/ErrorBoundary/errorBoundary.tsx';
 
 export const router = createBrowserRouter([
   {
@@ -17,7 +17,7 @@ export const router = createBrowserRouter([
     element: (
       <ErrorBoundary>
         <MainLayout>
-          <CharactersRoot />
+          <AnimeRoot />
         </MainLayout>
       </ErrorBoundary>
     ),
@@ -25,7 +25,7 @@ export const router = createBrowserRouter([
     children: [
       {
         path: 'details/:id',
-        element: <CharacterDetail />,
+        element: <AnimeDetail />,
       },
     ],
   },
