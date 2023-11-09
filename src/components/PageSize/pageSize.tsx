@@ -3,11 +3,7 @@ import { useSearchParams } from 'react-router-dom';
 
 import classes from './pageSize.module.css';
 
-type SelectPageProps = {
-  setSkip: (s: boolean) => void;
-};
-
-const PageSize = ({ setSkip }: SelectPageProps) => {
+const PageSize = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const perPageQuery = searchParams.get('per_page') || '20';
   const options = [
@@ -20,7 +16,6 @@ const PageSize = ({ setSkip }: SelectPageProps) => {
   const [selected, setSelected] = useState<string>(perPageQuery || options[0].value);
 
   const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    setSkip(false);
     const value = e.target.value;
     setSelected(value);
     // If the user changes items on the page, make a new API call and display the results from the first page.

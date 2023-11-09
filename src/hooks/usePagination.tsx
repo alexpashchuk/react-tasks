@@ -3,7 +3,7 @@ import { useSearchParams } from 'react-router-dom';
 
 import { PaginationProps } from '~components/Pagination/pagination.tsx';
 
-export const usePagination = ({ page, totalPages, setSkip }: PaginationProps) => {
+export const usePagination = ({ page, totalPages }: PaginationProps) => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const pagesArray = useMemo(() => {
@@ -34,7 +34,6 @@ export const usePagination = ({ page, totalPages, setSkip }: PaginationProps) =>
   const nextFivePages = page + 5 > totalPages ? totalPages : page + 5;
 
   const handlePageChange = (page: number): void => {
-    setSkip(false);
     searchParams.set('page', `${page}`);
     setSearchParams(searchParams);
   };

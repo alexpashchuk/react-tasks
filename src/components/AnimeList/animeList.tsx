@@ -1,20 +1,14 @@
 import { useAnimeList } from '~hooks/useAnimeList.tsx';
 
 import Pagination from '~components/Pagination/pagination.tsx';
-
 import AnimeCard from '~components/AnimeCard/animeCard.tsx';
-import Spinner from '../Spinner/spinner.tsx';
-import classes from './animeList.module.css';
 import PageSize from '~components/PageSize/pageSize.tsx';
+import Spinner from '~components/Spinner/spinner.tsx';
 
-export type ListCharactersProps = {
-  onToggle: (t: string | number) => void;
-  setSkip: (s: boolean) => void;
-  skip: boolean;
-};
-const AnimeList = (props: ListCharactersProps) => {
-  const { onToggle, setSkip } = props;
-  const { isLoading, error, data, setIsLoadingImage, isLoadingImage, totalPages, currentPage } = useAnimeList(props);
+import classes from './animeList.module.css';
+
+const AnimeList = () => {
+  const { isLoading, error, data, setIsLoadingImage, isLoadingImage, totalPages, pageQuery } = useAnimeList();
 
   if (isLoading) {
     return <Spinner />;
@@ -23,7 +17,7 @@ const AnimeList = (props: ListCharactersProps) => {
   if (error) {
     return (
       <div>
-        <p className={classes.notFound}>Fetch Error 🥺</p>
+        <p className={classes.notFound}>{error} 🥺</p>
       </div>
     );
   }
@@ -33,8 +27,8 @@ const AnimeList = (props: ListCharactersProps) => {
       {data && data.length > 0 ? (
         <>
           <div className={classes.pageInfo}>
-            <p className={classes.page}>{`Page ${currentPage} of ${totalPages}`}</p>
-            <PageSize setSkip={setSkip} />
+            <p className={classes.page}>{`Page ${pageQuery} of ${totalPages}`}</p>
+            <PageSize />
           </div>
           <div data-testid="item" className={classes.wrapper}>
             {data.map((item) => (
@@ -43,10 +37,9 @@ const AnimeList = (props: ListCharactersProps) => {
                 anime={item}
                 setIsLoadingImage={setIsLoadingImage}
                 isLoadingImage={isLoadingImage}
-                onToggle={onToggle}
               />
             ))}
-            <Pagination page={currentPage} totalPages={totalPages} setSkip={setSkip} />
+            <Pagination page={pageQuery} totalPages={totalPages} />
           </div>
         </>
       ) : (

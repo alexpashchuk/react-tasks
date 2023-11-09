@@ -1,22 +1,31 @@
-import { Anime } from '~types/types.ts';
+import { useSearchParams } from 'react-router-dom';
+
 import placeholder from '~assets/icons/placeholder.jpg';
 import Spinner from '~components/Spinner/spinner.tsx';
+import { Anime } from '~types/types.ts';
 
 import classes from './animeCard.module.css';
 
-type ItemProps = {
+type AnimeCardProps = {
   anime: Anime;
   setIsLoadingImage: (b: boolean) => void;
-  onToggle: (s: string | number) => void;
   isLoadingImage: boolean;
 };
 
-const AnimeCard = (props: ItemProps) => {
-  const { anime, onToggle, setIsLoadingImage, isLoadingImage } = props;
+const AnimeCard = (props: AnimeCardProps) => {
+  const { anime, setIsLoadingImage, isLoadingImage } = props;
   const { title, images, mal_id } = anime;
+  const [, setSearchParams] = useSearchParams();
+
+  const handleOpenDetails = () => {
+    setSearchParams((searchParams) => {
+      searchParams.set('details', mal_id.toString());
+      return searchParams;
+    });
+  };
 
   return (
-    <button className={classes.card} onClick={() => onToggle(`details/${mal_id}`)}>
+    <button className={classes.card} onClick={handleOpenDetails}>
       {!isLoadingImage && <Spinner />}
       <img
         src={images.jpg.large_image_url || placeholder}

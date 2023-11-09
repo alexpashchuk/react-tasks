@@ -11,7 +11,6 @@ import classes from './pagination.module.css';
 export type PaginationProps = {
   page: number;
   totalPages: number;
-  setSkip: (s: boolean) => void;
 };
 
 const Pagination = (props: PaginationProps) => {

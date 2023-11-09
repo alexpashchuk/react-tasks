@@ -7,10 +7,7 @@ import { SEARCH_VALUE_STORAGE_KEY } from '~constants/constants.ts';
 
 import classes from './searchBar.module.css';
 
-type SearchBarProps = {
-  setSkip: (s: boolean) => void;
-};
-const SearchBar = ({ setSkip }: SearchBarProps) => {
+const SearchBar = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const searchQuery = searchParams.get('search') || '';
   const [searchValue, setSearchValue] = useState(searchQuery);
@@ -23,7 +20,6 @@ const SearchBar = ({ setSkip }: SearchBarProps) => {
 
   const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setSkip(false);
     // If the user changes items on the page, make a new API call and display the results from the first page.
     searchParams.set('search', `${searchValue}`);
     searchParams.set('page', '1');

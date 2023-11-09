@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import placeholder from '~assets/icons/placeholder.jpg';
 import { useAnimeDetail } from '~hooks/useAnimeDetail.tsx';
 import { OutletContext } from '~components/AnimeRoot/animeRoot.tsx';
-import Spinner from '../Spinner/spinner.tsx';
+import Spinner from '~components/Spinner/spinner.tsx';
 
 import classes from './animeDetail.module.css';
 
@@ -12,12 +12,12 @@ const AnimeDetail = () => {
   const { isLoading, error, data, setIsLoadingImage, isLoadingImage } = useAnimeDetail();
   const { images, title, status, rank, year, episodes, source, season, rating, duration, airing } = data || {};
 
-  const { onToggle } = useOutletContext<OutletContext>();
+  const { handleCloseDetails } = useOutletContext<OutletContext>();
 
   if (error) {
     return (
       <div className={classes.detail}>
-        <p className={classes.notFound}>Fetch Error 🥺</p>
+        <p className={classes.notFound}>{error} 🥺</p>
       </div>
     );
   }
@@ -82,7 +82,7 @@ const AnimeDetail = () => {
             {duration}
           </div>
         )}
-        <button className={clsx('button', classes.closeBtn)} onClick={() => onToggle(-1)}>
+        <button className={clsx('button', classes.closeBtn)} onClick={handleCloseDetails}>
           Close
         </button>
       </div>

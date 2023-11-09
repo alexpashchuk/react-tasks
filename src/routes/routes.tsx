@@ -12,7 +12,7 @@ export const router = createBrowserRouter([
     errorElement: <FallbackError />,
     children: [
       {
-        path: 'details/:id',
+        path: '',
         element: <AnimeDetail />,
       },
     ],

@@ -1,44 +1,36 @@
-import { useCallback, useState } from 'react';
-import { Outlet, useNavigate, useParams } from 'react-router-dom';
+import { Outlet, useSearchParams } from 'react-router-dom';
 
-import SearchBar from '../SearchBar/searchBar.tsx';
 import AnimeList from '~components/AnimeList/animeList.tsx';
+import SearchBar from '~components/SearchBar/searchBar.tsx';
+
 import classes from './animeRoot.module.css';
 
 export type OutletContext = {
-  onToggle: (t: number | string) => void;
+  handleCloseDetails: () => void;
 };
 
 const AnimeRoot = () => {
-  const [skip, setSkip] = useState(false);
-  const navigate = useNavigate();
-  const params = useParams();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const id = searchParams.get('details');
 
-  const onToggle = useCallback(
-    (toOrDelta: string | number) => {
-      setSkip(true);
-      if (typeof toOrDelta === 'string') {
-        navigate(toOrDelta);
-      } else {
-        navigate(toOrDelta);
-      }
-    },
-    [navigate]
-  );
+  const handleCloseDetails = () => {
+    setSearchParams((searchParams) => {
+      searchParams.delete('details');
+      return searchParams;
+    });
+  };
 
-  const outletClass = params?.id ? classes.outlet_open : classes.outlet_close;
-  const maskClass = params?.id ? classes.mask_open : classes.mask_close;
+  const outletClass = id ? classes.outlet_open : classes.outlet_close;
+  const maskClass = id ? classes.mask_open : classes.mask_close;
 
   return (
     <main className={classes.root}>
       <div className={classes.result}>
-        <SearchBar setSkip={setSkip} />
-        <AnimeList skip={skip} setSkip={setSkip} onToggle={onToggle} />
+        <SearchBar />
+        <AnimeList />
       </div>
-      <div className={outletClass}>
-        <Outlet context={{ onToggle } satisfies OutletContext} />
-      </div>
-      <div className={maskClass} onClick={() => onToggle(-1)}></div>
+      <div className={outletClass}>{id ? <Outlet context={{ handleCloseDetails } satisfies OutletContext} /> : ''}</div>
+      <div className={maskClass} onClick={handleCloseDetails}></div>
     </main>
   );
 };
