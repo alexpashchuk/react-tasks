@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useLocation, useSearchParams } from 'react-router-dom';
 
 import { BASE_URL } from '~constants/constants.ts';
-import { Anime } from '~types/types.ts';
+import { useAnimeContext } from '~context/animeContext.tsx';
 
 export const useAnimeList = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -13,8 +13,8 @@ export const useAnimeList = () => {
   const [isLoadingData, setIsLoadingData] = useState(false);
   const [isLoadingImage, setIsLoadingImage] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [data, setData] = useState<Anime[]>([]);
-  const [totalPages, setTotalPages] = useState(2554);
+  const { data, setData } = useAnimeContext();
+  const [totalPages, setTotalPages] = useState(1);
   const initialPageSize =
     perPageQuery === '20' ||
     perPageQuery === '20' ||
@@ -70,7 +70,7 @@ export const useAnimeList = () => {
       }
     };
     fetchData();
-  }, [initialPageSize, pageQuery, perPageQuery, searchQuery]);
+  }, [initialPageSize, pageQuery, perPageQuery, searchQuery, setData]);
 
   return {
     isLoading: isLoadingData,

@@ -4,14 +4,14 @@ import clsx from 'clsx';
 
 import LogoSearch from '~assets/icons/search.svg';
 import { SEARCH_VALUE_STORAGE_KEY } from '~constants/constants.ts';
+import { useAnimeContext } from '~context/animeContext.tsx';
 
 import classes from './searchBar.module.css';
 
 const SearchBar = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const searchQuery = searchParams.get('search') || '';
-  const [searchValue, setSearchValue] = useState(searchQuery);
   const [isActiveLabel, setIsActiveLabel] = useState(false);
+  const { searchValue, setSearchValue } = useAnimeContext();
 
   const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
