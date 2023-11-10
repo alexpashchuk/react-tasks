@@ -1,5 +1,3 @@
-import { Link } from 'react-router-dom';
-
 import classes from './notFoundPage.module.css';
 
 const NotFoundPage = () => {
@@ -7,9 +5,9 @@ const NotFoundPage = () => {
     <section className={classes.root}>
       <h1 className={classes.heading}>404</h1>
       <p className={classes.text}>Page Not Found</p>
-      <Link className={classes.backHome} to="/">
+      <a className={classes.backHome} href="/">
         Back Home
-      </Link>
+      </a>
     </section>
   );
 };
