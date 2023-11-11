@@ -2,10 +2,11 @@ import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { describe, it } from 'vitest';
 import { createMemoryRouter, RouterProvider } from 'react-router-dom';
+
 import { routesConfig } from '~routes/routesConfig.tsx';
 
 describe('NotFoundPage tests', () => {
-  it('should render the component correctly', () => {
+  it('the 404 page is displayed when navigating to an invalid route', () => {
     const router = createMemoryRouter(routesConfig, {
       initialEntries: ['/404'],
     });

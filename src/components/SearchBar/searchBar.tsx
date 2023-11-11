@@ -20,6 +20,7 @@ const SearchBar = () => {
 
   const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    localStorage.setItem(SEARCH_VALUE_STORAGE_KEY, searchValue);
     // If the user changes items on the page, make a new API call and display the results from the first page.
     searchParams.set('search', `${searchValue}`);
     searchParams.set('page', '1');
@@ -36,10 +37,6 @@ const SearchBar = () => {
     } else {
       setIsActiveLabel(false);
     }
-  }, [searchValue]);
-
-  useEffect(() => {
-    localStorage.setItem(SEARCH_VALUE_STORAGE_KEY, searchValue);
   }, [searchValue]);
 
   return (
