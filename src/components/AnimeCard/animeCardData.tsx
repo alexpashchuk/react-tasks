@@ -27,7 +27,7 @@ export const animeCardData = [
     mal_id: 5,
     type: 'TV',
     score: 8.75,
-    title: 'Cowboy Bebop: Tengoku no Tobira',
+    title: 'Tengoku no Tobira',
     source: 'Original',
     season: 'spring',
     rating: 'R - 17+ (violence & profanity)',

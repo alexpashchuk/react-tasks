@@ -1,7 +1,6 @@
 import { useSearchParams } from 'react-router-dom';
 
 import placeholder from '~assets/icons/placeholder.jpg';
-import Spinner from '~components/Spinner/spinner.tsx';
 import { Anime } from '~types/types.ts';
 
 import classes from './animeCard.module.css';
@@ -26,7 +25,6 @@ const AnimeCard = (props: AnimeCardProps) => {
 
   return (
     <button data-testid={`card${mal_id}`} className={classes.card} onClick={handleOpenDetails}>
-      {!isLoadingImage && <Spinner />}
       <img
         src={images.jpg.large_image_url || placeholder}
         alt={`Title ${title}`}

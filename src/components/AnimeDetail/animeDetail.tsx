@@ -26,7 +26,11 @@ const AnimeDetail = () => {
 
   return (
     <div data-testid={`details${mal_id}`} className={classes.detail}>
-      {isLoading && <Spinner />}
+      {isLoading && (
+        <div data-testid="spinner">
+          <Spinner dataTest="spinner" />
+        </div>
+      )}
       <img
         src={images?.jpg.large_image_url || placeholder}
         alt={`Title ${title}`}
@@ -82,7 +86,7 @@ const AnimeDetail = () => {
             {duration}
           </div>
         )}
-        <button className={clsx('button', classes.closeBtn)} onClick={handleCloseDetails}>
+        <button data-testid="close" className={clsx('button', classes.closeBtn)} onClick={handleCloseDetails}>
           Close
         </button>
       </div>
