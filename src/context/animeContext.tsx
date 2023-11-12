@@ -11,7 +11,7 @@ type AnimeContext = {
   setData: React.Dispatch<React.SetStateAction<Anime[]>>;
 };
 
-const AnimeContext = createContext<AnimeContext>({
+export const AnimeContext = createContext<AnimeContext>({
   searchValue: '',
   setSearchValue: () => {},
   data: [],

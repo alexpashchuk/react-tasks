@@ -25,7 +25,7 @@ const AnimeDetail = () => {
   const statusClass = airing ? classes.airing : classes.completed;
 
   return (
-    <div className={classes.detail}>
+    <div data-testid="details" className={classes.detail}>
       {isLoading && <Spinner />}
       <img
         src={images?.jpg.large_image_url || placeholder}

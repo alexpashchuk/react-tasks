@@ -30,7 +30,7 @@ const AnimeList = () => {
             <p className={classes.page}>{`Page ${pageQuery} of ${totalPages}`}</p>
             <PageSize />
           </div>
-          <div data-testid="item" className={classes.wrapper}>
+          <div className={classes.wrapper}>
             {data.map((item) => (
               <AnimeCard
                 key={item.mal_id}
@@ -43,7 +43,7 @@ const AnimeList = () => {
           </div>
         </>
       ) : (
-        <div data-testid="item">
+        <div>
           <p className={classes.notFound}>Items Not Found 🙄</p>
         </div>
       )}
