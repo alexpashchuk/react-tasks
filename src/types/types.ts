@@ -19,3 +19,25 @@ export type Anime = {
   episodes: number;
   status: string;
 };
+
+type Pagination = {
+  items: {
+    count: number;
+    per_page: number;
+    total: number;
+  };
+};
+
+export type AnimeData = {
+  data: Anime[];
+  pagination: Pagination;
+};
+
+export type AnimeDataDetails = {
+  data: Anime;
+  pagination: Pagination;
+  error?: null;
+  message?: string | null;
+  status?: number | string;
+  type?: string;
+};

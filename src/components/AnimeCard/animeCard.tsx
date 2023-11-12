@@ -25,7 +25,7 @@ const AnimeCard = (props: AnimeCardProps) => {
   };
 
   return (
-    <button data-testid="card" className={classes.card} onClick={handleOpenDetails}>
+    <button data-testid={`card${mal_id}`} className={classes.card} onClick={handleOpenDetails}>
       {!isLoadingImage && <Spinner />}
       <img
         src={images.jpg.large_image_url || placeholder}

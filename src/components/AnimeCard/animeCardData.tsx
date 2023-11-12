@@ -48,3 +48,11 @@ export const animeCardData = [
     status: 'Finished Airing',
   },
 ];
+
+export const paginationData = {
+  items: {
+    count: 10,
+    per_page: 20,
+    total: 100,
+  },
+};

@@ -10,7 +10,7 @@ import classes from './animeDetail.module.css';
 
 const AnimeDetail = () => {
   const { isLoading, error, data, setIsLoadingImage, isLoadingImage } = useAnimeDetail();
-  const { images, title, status, rank, year, episodes, source, season, rating, duration, airing } = data || {};
+  const { images, title, status, rank, year, episodes, source, season, rating, duration, airing, mal_id } = data || {};
 
   const { handleCloseDetails } = useOutletContext<OutletContext>();
 
@@ -25,7 +25,7 @@ const AnimeDetail = () => {
   const statusClass = airing ? classes.airing : classes.completed;
 
   return (
-    <div data-testid="details" className={classes.detail}>
+    <div data-testid={`details${mal_id}`} className={classes.detail}>
       {isLoading && <Spinner />}
       <img
         src={images?.jpg.large_image_url || placeholder}
