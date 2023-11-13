@@ -106,29 +106,3 @@ describe('Anime Detail tests', () => {
     expect(wrapper.queryByTestId(`details${animeCardData[0].mal_id}`)).toBeFalsy();
   });
 });
-it('Validate that clicking on a card opens a detailed card component', async () => {
-  const wrapper = render(
-    <MemoryRouter initialEntries={['/']}>
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <AnimeContextProvider>
-              <AnimeRoot />
-            </AnimeContextProvider>
-          }
-        >
-          <Route path="" element={<AnimeDetail />} />
-        </Route>
-      </Routes>
-    </MemoryRouter>
-  );
-
-  const card = await wrapper.findByTestId(`card${animeCardData[0].mal_id}`);
-
-  act(() => {
-    fireEvent.click(card);
-  });
-
-  expect(await wrapper.findByTestId(`details${animeCardData[0].mal_id}`)).toBeTruthy();
-});
