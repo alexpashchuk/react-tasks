@@ -1,6 +1,6 @@
-import { cleanup, render } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import React, { useContext } from 'react';
+import { render, waitFor } from '@testing-library/react';
 import { vi } from 'vitest';
 
 import AnimeList from '~components/AnimeList/animeList.tsx';
@@ -12,11 +12,16 @@ vi.mock('react', async () => ({
 }));
 
 describe('Anime list tests', () => {
-  afterEach(cleanup);
-  test('Verify that the component renders the specified number of cards', async () => {
+  afterEach(() => {
+    vi.mocked(useContext).mockReturnValue({
+      data: [],
+      setData: vi.fn(),
+    });
+  });
+  it('Verify that the component renders the specified number of cards', async () => {
     vi.mocked(useContext).mockReturnValue({
       data: animeCardData,
-      setData: () => {},
+      setData: vi.fn(),
     });
     const wrapper = render(
       <MemoryRouter>
@@ -27,17 +32,20 @@ describe('Anime list tests', () => {
     expect(items.length).toBe(animeCardData.length);
   });
 
-  test('Check that an appropriate message is displayed if no cards are present', async () => {
+  it('Check that an appropriate message is displayed if no cards are present', async () => {
     vi.mocked(useContext).mockReturnValue({
       data: [],
-      setData: () => {},
+      setData: vi.fn(),
     });
     const wrapper = render(
       <MemoryRouter>
         <AnimeList />
       </MemoryRouter>
     );
-    const notFoundMessage = await wrapper.findByText(/Items Not Found 🙄/i);
-    expect(notFoundMessage).not.toBeFalsy();
+
+    await waitFor(() => {
+      const notFoundMessage = wrapper.getByText(/Items Not Found 🙄/i);
+      expect(notFoundMessage).not.toBeFalsy();
+    });
   });
 });
