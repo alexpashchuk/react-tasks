@@ -3,6 +3,7 @@ import { useLocation, useSearchParams } from 'react-router-dom';
 
 import { BASE_URL } from '~constants/constants.ts';
 import { useAnimeContext } from '~context/animeContext.tsx';
+import { fetchData } from '../api/api.tsx';
 
 export const useAnimeList = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -40,14 +41,13 @@ export const useAnimeList = () => {
   }, [initialPageSize, searchParams, setSearchParams]);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchAnime = async () => {
       setIsLoadingData(true);
       try {
         const url = `${BASE_URL}?page=${pageQuery}&q=${searchQuery.trim().toLowerCase()}&limit=${
           initialPageSize ? perPageQuery : '20'
         }`;
-        const response = await fetch(url);
-        const dataResponse = await response.json();
+        const dataResponse = await fetchData(url);
         if (dataResponse.error) {
           setTotalPages(1);
           setData([]);
@@ -69,7 +69,7 @@ export const useAnimeList = () => {
         setIsLoadingData(false);
       }
     };
-    fetchData();
+    fetchAnime();
   }, [initialPageSize, pageQuery, perPageQuery, searchQuery, setData]);
 
   return {

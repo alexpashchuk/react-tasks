@@ -1,4 +1,4 @@
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { fireEvent, render, waitFor, act } from '@testing-library/react';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { vi } from 'vitest';
 
@@ -7,7 +7,6 @@ import AnimeDetail from '~components/AnimeDetail/animeDetail.tsx';
 import { AnimeContextProvider } from '~context/animeContext.tsx';
 import AnimeRoot from '~components/AnimeRoot/animeRoot.tsx';
 import React from 'react';
-import { act } from 'react-dom/test-utils';
 
 vi.mock('../../api/api', () => {
   return {
@@ -39,12 +38,14 @@ describe('Anime Detail tests', () => {
     );
 
     await waitFor(() => {
-      const item = wrapper.getByTestId(/details/i);
-      const title = screen.getByText(/Cowboy Bebop/i);
-      const season = screen.getByText(/spring/i);
-      expect(item).toBeInTheDocument();
+      const title = wrapper.getByText(/Cowboy Bebop/i);
+      const season = wrapper.getByText(/spring/i);
+      const rank = wrapper.getByText(/rank/i);
+      const year = wrapper.getByText(/year/i);
       expect(title).toBeInTheDocument();
       expect(season).toBeInTheDocument();
+      expect(rank).toBeInTheDocument();
+      expect(year).toBeInTheDocument();
     });
   });
   it('Check that a loading indicator is displayed while fetching data;', async () => {
@@ -65,12 +66,12 @@ describe('Anime Detail tests', () => {
       </MemoryRouter>
     );
 
-    //   const card = await wrapper.findByTestId(`card${animeCardData[0].mal_id}`);
-    //
-    //   fireEvent.click(card);
-    //
-    //   const loader = await wrapper.findByText('spinner');
-    //   expect(loader).toBeInTheDocument();
+    const card = await wrapper.findByTestId(`card${animeCardData[0].mal_id}`);
+
+    fireEvent.click(card);
+
+    const loader = await wrapper.findByTestId('spinner');
+    expect(loader).toBeInTheDocument();
   });
   it('Ensure that clicking the close button hides the component', async () => {
     const wrapper = render(
@@ -90,44 +91,44 @@ describe('Anime Detail tests', () => {
       </MemoryRouter>
     );
 
-    // const card = await wrapper.findByTestId(`card${animeCardData[0].mal_id}`);
-    //
-    // act(() => {
-    //   fireEvent.click(card);
-    // });
-    //
-    // const closeButton = await wrapper.findByTestId('close');
-    //
-    // act(() => {
-    //   fireEvent.click(closeButton);
-    // });
-    //
-    // expect(wrapper.queryByTestId(`details${animeCardData[0].mal_id}`)).toBeFalsy();
-  });
-  test('Validate that clicking on a card opens a detailed card component', async () => {
-    const wrapper = render(
-      <MemoryRouter initialEntries={['/']}>
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <AnimeContextProvider>
-                <AnimeRoot />
-              </AnimeContextProvider>
-            }
-          >
-            <Route path="" element={<AnimeDetail />} />
-          </Route>
-        </Routes>
-      </MemoryRouter>
-    );
+    const card = await wrapper.findByTestId(`card${animeCardData[0].mal_id}`);
 
-    // const card = await wrapper.findByTestId(`card${animeCardData[0].mal_id}`);
-    //
-    // act(() => {
-    //   fireEvent.click(card);
-    // });
-    //
-    // expect(await wrapper.findByTestId(`details${animeCardData[0].mal_id}`)).toBeTruthy();
+    act(() => {
+      fireEvent.click(card);
+    });
+
+    const closeButton = await wrapper.findByTestId('close');
+
+    act(() => {
+      fireEvent.click(closeButton);
+    });
+
+    expect(wrapper.queryByTestId(`details${animeCardData[0].mal_id}`)).toBeFalsy();
   });
+});
+it('Validate that clicking on a card opens a detailed card component', async () => {
+  const wrapper = render(
+    <MemoryRouter initialEntries={['/']}>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <AnimeContextProvider>
+              <AnimeRoot />
+            </AnimeContextProvider>
+          }
+        >
+          <Route path="" element={<AnimeDetail />} />
+        </Route>
+      </Routes>
+    </MemoryRouter>
+  );
+
+  const card = await wrapper.findByTestId(`card${animeCardData[0].mal_id}`);
+
+  act(() => {
+    fireEvent.click(card);
+  });
+
+  expect(await wrapper.findByTestId(`details${animeCardData[0].mal_id}`)).toBeTruthy();
 });

@@ -26,11 +26,16 @@ type Pagination = {
     per_page: number;
     total: number;
   };
+  last_visible_page: number;
 };
 
 export type AnimeData = {
   data: Anime[];
   pagination: Pagination;
+  error?: null;
+  message?: string | null;
+  status?: number | string;
+  type?: string;
 };
 
 export type AnimeDataDetails = {

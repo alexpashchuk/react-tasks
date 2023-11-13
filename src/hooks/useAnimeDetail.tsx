@@ -14,7 +14,7 @@ export const useAnimeDetail = () => {
 
   useEffect(() => {
     setIsLoadingData(true);
-    const fetchDataDetails = async () => {
+    const fetchAnimeDetails = async () => {
       try {
         const dataResponse = await fetchDataId(id);
         if (dataResponse?.status === '429' || dataResponse?.status === 404) {
@@ -35,7 +35,7 @@ export const useAnimeDetail = () => {
         setIsLoadingData(false);
       }
     };
-    fetchDataDetails();
+    fetchAnimeDetails();
   }, [id]);
 
   return {

@@ -26,11 +26,7 @@ const AnimeDetail = () => {
 
   return (
     <div data-testid={`details${mal_id}`} className={classes.detail}>
-      {isLoading && (
-        <div data-testid="spinner">
-          <Spinner dataTest="spinner" />
-        </div>
-      )}
+      {isLoading && <Spinner dataTest="spinner" />}
       <img
         src={images?.jpg.large_image_url || placeholder}
         alt={`Title ${title}`}
