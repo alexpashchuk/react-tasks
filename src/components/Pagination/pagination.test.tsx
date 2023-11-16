@@ -1,7 +1,8 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
 
-import { AnimeContextProvider } from '~context/animeContext.tsx';
+import store from '~redux/store.tsx';
 import Pagination from './pagination.tsx';
 
 const PAGE = 6;
@@ -10,9 +11,9 @@ const CLICK_PAGE = 4;
 
 const renderPagination = () => {
   render(
-    <AnimeContextProvider>
+    <Provider store={store}>
       <Pagination page={PAGE} totalPages={TOTAL_PAGE} />
-    </AnimeContextProvider>,
+    </Provider>,
     { wrapper: BrowserRouter }
   );
 };

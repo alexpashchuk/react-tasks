@@ -1,13 +1,19 @@
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
+import { Provider } from 'react-redux';
 import { fireEvent, render, act, waitFor } from '@testing-library/react';
 import { vi } from 'vitest';
+// import * as reduxHooks from 'react-redux';
 
 import AnimeRoot from '~components/AnimeRoot/animeRoot.tsx';
 import AnimeDetail from '~components/AnimeDetail/animeDetail.tsx';
 import AnimeList from '~components/AnimeList/animeList.tsx';
-import { AnimeContextProvider } from '~context/animeContext.tsx';
 import { fetchDataId } from '../../api/api.tsx';
 import { animeCardData, paginationData } from './animeCardData.tsx';
+import store from '~redux/store.tsx';
+
+// vi.mock('react-redux');
+// const mockDispatch = vi.spyOn(reduxHooks, 'useDispatch');
+// mockDispatch.mockReturnValue(vi.fn());
 
 vi.mock('../../api/api', () => {
   return {
@@ -20,11 +26,12 @@ describe('Anime card tests', () => {
   it('Ensure that the card component renders the relevant card data', async () => {
     const wrapper = render(
       <MemoryRouter>
-        <AnimeContextProvider>
+        <Provider store={store}>
           <AnimeList />
-        </AnimeContextProvider>
+        </Provider>
       </MemoryRouter>
     );
+
     const title = await wrapper.findByText(animeCardData[0].title);
     expect(title).toBeInTheDocument();
   });
@@ -36,9 +43,9 @@ describe('Anime card tests', () => {
           <Route
             path="/"
             element={
-              <AnimeContextProvider>
+              <Provider store={store}>
                 <AnimeRoot />
-              </AnimeContextProvider>
+              </Provider>
             }
           >
             <Route path="" element={<AnimeDetail />} />
@@ -62,9 +69,9 @@ describe('Anime card tests', () => {
           <Route
             path="/"
             element={
-              <AnimeContextProvider>
+              <Provider store={store}>
                 <AnimeRoot />
-              </AnimeContextProvider>
+              </Provider>
             }
           >
             <Route path="" element={<AnimeDetail />} />

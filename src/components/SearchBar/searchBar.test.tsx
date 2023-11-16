@@ -1,8 +1,9 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
 
 import { SEARCH_VALUE_STORAGE_KEY } from '~constants/constants.ts';
-import { AnimeContextProvider } from '~context/animeContext.tsx';
+import store from '~redux/store.tsx';
 import SearchBar from './searchBar.tsx';
 
 const VALUE = 'test';
@@ -10,9 +11,9 @@ const EMPTY_VALUE = '';
 
 const renderSearchBar = () => {
   render(
-    <AnimeContextProvider>
+    <Provider store={store}>
       <SearchBar />
-    </AnimeContextProvider>,
+    </Provider>,
     { wrapper: BrowserRouter }
   );
 };

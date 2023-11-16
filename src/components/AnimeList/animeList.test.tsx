@@ -1,10 +1,12 @@
 import { MemoryRouter } from 'react-router-dom';
-import React, { useContext } from 'react';
+import { useContext } from 'react';
+import { Provider } from 'react-redux';
 import { render, waitFor } from '@testing-library/react';
 import { vi } from 'vitest';
 
 import AnimeList from '~components/AnimeList/animeList.tsx';
 import { animeCardData } from '~components/AnimeCard/animeCardData.tsx';
+import store from '~redux/store.tsx';
 
 vi.mock('react', async () => ({
   ...(await vi.importActual<typeof import('react')>('react')),
@@ -25,7 +27,9 @@ describe('Anime list tests', () => {
     });
     const wrapper = render(
       <MemoryRouter>
-        <AnimeList />
+        <Provider store={store}>
+          <AnimeList />
+        </Provider>
       </MemoryRouter>
     );
     const items = await wrapper.findAllByTestId(/card/i);
@@ -39,7 +43,9 @@ describe('Anime list tests', () => {
     });
     const wrapper = render(
       <MemoryRouter>
-        <AnimeList />
+        <Provider store={store}>
+          <AnimeList />
+        </Provider>
       </MemoryRouter>
     );
 

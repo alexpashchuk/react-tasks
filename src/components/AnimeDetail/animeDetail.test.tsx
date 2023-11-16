@@ -1,12 +1,12 @@
-import { fireEvent, render, waitFor, act } from '@testing-library/react';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { fireEvent, render, waitFor, act } from '@testing-library/react';
 import { vi } from 'vitest';
 
 import { animeCardData, paginationData } from '~components/AnimeCard/animeCardData.tsx';
 import AnimeDetail from '~components/AnimeDetail/animeDetail.tsx';
-import { AnimeContextProvider } from '~context/animeContext.tsx';
 import AnimeRoot from '~components/AnimeRoot/animeRoot.tsx';
-import React from 'react';
+import store from '~redux/store.tsx';
 
 vi.mock('../../api/api', () => {
   return {
@@ -32,11 +32,16 @@ vi.mock('react-router-dom', async () => ({
 describe('Anime Detail tests', () => {
   it('Make sure the detailed card component correctly displays the detailed card data', async () => {
     const wrapper = render(
-      <MemoryRouter>
-        <AnimeDetail />
+      <MemoryRouter initialEntries={['/']}>
+        <Provider store={store}>
+          <Routes>
+            <Route path="/" element={<AnimeRoot />}>
+              <Route path="" element={<AnimeDetail />} />
+            </Route>
+          </Routes>
+        </Provider>
       </MemoryRouter>
     );
-
     await waitFor(() => {
       const title = wrapper.getByText(/Cowboy Bebop/i);
       const season = wrapper.getByText(/spring/i);
@@ -51,18 +56,13 @@ describe('Anime Detail tests', () => {
   it('Check that a loading indicator is displayed while fetching data;', async () => {
     const wrapper = render(
       <MemoryRouter initialEntries={['/']}>
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <AnimeContextProvider>
-                <AnimeRoot />
-              </AnimeContextProvider>
-            }
-          >
-            <Route path="" element={<AnimeDetail />} />
-          </Route>
-        </Routes>
+        <Provider store={store}>
+          <Routes>
+            <Route path="/" element={<AnimeRoot />}>
+              <Route path="" element={<AnimeDetail />} />
+            </Route>
+          </Routes>
+        </Provider>
       </MemoryRouter>
     );
 
@@ -76,18 +76,13 @@ describe('Anime Detail tests', () => {
   it('Ensure that clicking the close button hides the component', async () => {
     const wrapper = render(
       <MemoryRouter initialEntries={['/']}>
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <AnimeContextProvider>
-                <AnimeRoot />
-              </AnimeContextProvider>
-            }
-          >
-            <Route path="" element={<AnimeDetail />} />
-          </Route>
-        </Routes>
+        <Provider store={store}>
+          <Routes>
+            <Route path="/" element={<AnimeRoot />}>
+              <Route path="" element={<AnimeDetail />} />
+            </Route>
+          </Routes>
+        </Provider>
       </MemoryRouter>
     );
 

@@ -1,8 +1,8 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
 
-import { AnimeContextProvider } from '~context/animeContext.tsx';
-import AnimeRoot from '~components/AnimeRoot/animeRoot.tsx';
+import store from '~redux/store.tsx';
 import PageSize from './pageSize.tsx';
 
 const PER_PAGE = 20;
@@ -10,10 +10,9 @@ const SELECT_PER_PAGE = 10;
 
 const renderPageSize = () => {
   render(
-    <AnimeContextProvider>
-      <AnimeRoot />
+    <Provider store={store}>
       <PageSize />
-    </AnimeContextProvider>,
+    </Provider>,
     { wrapper: BrowserRouter }
   );
 };
