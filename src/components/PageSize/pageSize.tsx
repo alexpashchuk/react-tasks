@@ -1,14 +1,15 @@
 import { ChangeEvent, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
-import classes from './pageSize.module.css';
-import { useDispatch } from 'react-redux';
 import { setPerPage } from '~redux/slices/perPageSlice.tsx';
+import { useAppDispatch } from '~redux/hooks/hooks.ts';
+
+import classes from './pageSize.module.css';
 
 const PageSize = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const perPageQuery = searchParams.get('per_page') || '20';
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const options = [
     { value: '5', label: '5' },
     { value: '10', label: '10' },

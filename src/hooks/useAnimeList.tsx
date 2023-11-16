@@ -2,9 +2,12 @@ import { useEffect } from 'react';
 import { useLocation, useSearchParams } from 'react-router-dom';
 
 import { useGetAnimeListQuery } from '~redux/services/animeService.tsx';
+import { useAppDispatch } from '~redux/hooks/hooks.ts';
+import { setLoadingRoot } from '~redux/slices/loadingRootSlice.tsx';
 
 export const useAnimeList = () => {
   const [searchParams, setSearchParams] = useSearchParams();
+  const dispatch = useAppDispatch();
   const location = useLocation();
   const pageQuery = parseInt(searchParams.get('page') || '1');
   const searchQuery = searchParams.get('search') || '';
@@ -39,6 +42,10 @@ export const useAnimeList = () => {
     perPageQuery,
     initialPageSize,
   });
+
+  useEffect(() => {
+    dispatch(setLoadingRoot(isLoading));
+  }, [dispatch, isLoading]);
 
   return {
     isLoading,

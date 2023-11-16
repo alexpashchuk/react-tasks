@@ -38,3 +38,10 @@ export type IAnimeDataDetails = {
   data: IAnime;
   pagination: Pagination;
 };
+
+export type IAnimeListApi = {
+  pageQuery: number;
+  searchQuery: string;
+  perPageQuery: string;
+  initialPageSize: boolean;
+};

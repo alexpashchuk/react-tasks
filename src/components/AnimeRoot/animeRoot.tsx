@@ -4,6 +4,9 @@ import AnimeList from '~components/AnimeList/animeList.tsx';
 import SearchBar from '~components/SearchBar/searchBar.tsx';
 
 import classes from './animeRoot.module.css';
+import { useEffect } from 'react';
+import { useAppDispatch } from '~redux/hooks/hooks.ts';
+import { setViewMode } from '~redux/slices/viewModeSlice.tsx';
 
 export type OutletContext = {
   handleCloseDetails: () => void;
@@ -11,6 +14,7 @@ export type OutletContext = {
 
 const AnimeRoot = () => {
   const [searchParams, setSearchParams] = useSearchParams();
+  const dispatch = useAppDispatch();
   const id = searchParams.get('details');
 
   const handleCloseDetails = () => {
@@ -19,6 +23,14 @@ const AnimeRoot = () => {
       return searchParams;
     });
   };
+
+  useEffect(() => {
+    if (id) {
+      dispatch(setViewMode('details'));
+    } else {
+      dispatch(setViewMode('root'));
+    }
+  }, [dispatch, id]);
 
   const outletClass = id ? classes.outlet_open : classes.outlet_close;
   const maskClass = id ? classes.mask_open : classes.mask_close;

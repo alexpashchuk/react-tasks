@@ -1,14 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 import { BASE_URL } from '~constants/constants.ts';
-import { IAnimeData, IAnimeDataDetails } from '~types/types.ts';
-
-type IAnimeListApi = {
-  pageQuery: number;
-  searchQuery: string;
-  perPageQuery: string;
-  initialPageSize: boolean;
-};
+import { IAnimeData, IAnimeDataDetails, IAnimeListApi } from '~types/types.ts';
 
 export const animeApi = createApi({
   reducerPath: 'animeApi',

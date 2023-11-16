@@ -2,13 +2,13 @@ import { createContext, ReactNode, useContext, useEffect, useMemo, useState } fr
 import { useSearchParams } from 'react-router-dom';
 
 import { SEARCH_VALUE_STORAGE_KEY } from '~constants/constants.ts';
-import { Anime } from '~types/types.ts';
+import { IAnime } from '~types/types.ts';
 
 type AnimeContext = {
   searchValue: string;
   setSearchValue: React.Dispatch<React.SetStateAction<string>>;
-  data: Anime[];
-  setData: React.Dispatch<React.SetStateAction<Anime[]>>;
+  data: IAnime[];
+  setData: React.Dispatch<React.SetStateAction<IAnime[]>>;
 };
 
 export const AnimeContext = createContext<AnimeContext>({
@@ -22,7 +22,7 @@ export const AnimeContextProvider = ({ children }: { children?: ReactNode }) => 
   const [searchParams] = useSearchParams();
   const searchQuery = searchParams.get('search') || '';
   const [searchValue, setSearchValue] = useState(localStorage.getItem(SEARCH_VALUE_STORAGE_KEY) || '');
-  const [data, setData] = useState<Anime[]>([]);
+  const [data, setData] = useState<IAnime[]>([]);
 
   const value = useMemo(() => ({ searchValue, setSearchValue, data, setData }), [data, searchValue]);
 
