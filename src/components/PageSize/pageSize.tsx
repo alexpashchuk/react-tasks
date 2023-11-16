@@ -2,10 +2,13 @@ import { ChangeEvent, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 import classes from './pageSize.module.css';
+import { useDispatch } from 'react-redux';
+import { setPerPage } from '~redux/slices/perPageSlice.tsx';
 
 const PageSize = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const perPageQuery = searchParams.get('per_page') || '20';
+  const dispatch = useDispatch();
   const options = [
     { value: '5', label: '5' },
     { value: '10', label: '10' },
@@ -18,7 +21,7 @@ const PageSize = () => {
   const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
     const value = e.target.value;
     setSelected(value);
-    // If the user changes items on the page, make a new API call and display the results from the first page.
+    dispatch(setPerPage(value));
     searchParams.set('page', '1');
     searchParams.set('per_page', `${value}`);
     setSearchParams(searchParams);

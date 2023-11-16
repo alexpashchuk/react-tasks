@@ -21,6 +21,7 @@ export default defineConfig({
       '~assets': 'src/assets',
       '~components': 'src/components',
       '~routes': 'src/routes',
+      '~redux': 'src/redux',
       '~constants': 'src/constants',
       '~utils': 'src/utils',
       '~hooks': 'src/hooks',

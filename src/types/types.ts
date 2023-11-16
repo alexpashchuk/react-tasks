@@ -1,4 +1,4 @@
-export type Anime = {
+export type IAnime = {
   rank: number;
   year: number;
   mal_id: number;
@@ -29,20 +29,12 @@ type Pagination = {
   last_visible_page: number;
 };
 
-export type AnimeData = {
-  data: Anime[];
+export type IAnimeData = {
+  data: IAnime[];
   pagination: Pagination;
-  error?: null;
-  message?: string | null;
-  status?: number | string;
-  type?: string;
 };
 
-export type AnimeDataDetails = {
-  data: Anime;
+export type IAnimeDataDetails = {
+  data: IAnime;
   pagination: Pagination;
-  error?: null;
-  message?: string | null;
-  status?: number | string;
-  type?: string;
 };

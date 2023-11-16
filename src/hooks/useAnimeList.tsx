@@ -1,9 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useLocation, useSearchParams } from 'react-router-dom';
 
-import { BASE_URL } from '~constants/constants.ts';
-import { useAnimeContext } from '~context/animeContext.tsx';
-import { fetchData } from '../api/api.tsx';
+import { useGetAnimeListQuery } from '~redux/services/animeService.tsx';
 
 export const useAnimeList = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -11,11 +9,6 @@ export const useAnimeList = () => {
   const pageQuery = parseInt(searchParams.get('page') || '1');
   const searchQuery = searchParams.get('search') || '';
   const perPageQuery = searchParams.get('per_page') || '20';
-  const [isLoadingData, setIsLoadingData] = useState(false);
-  const [isLoadingImage, setIsLoadingImage] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const { data, setData } = useAnimeContext();
-  const [totalPages, setTotalPages] = useState(1);
   const initialPageSize =
     perPageQuery === '20' ||
     perPageQuery === '20' ||
@@ -40,45 +33,18 @@ export const useAnimeList = () => {
     }
   }, [initialPageSize, searchParams, setSearchParams]);
 
-  useEffect(() => {
-    const fetchAnime = async () => {
-      setIsLoadingData(true);
-      try {
-        const url = `${BASE_URL}?page=${pageQuery}&q=${searchQuery.trim().toLowerCase()}&limit=${
-          initialPageSize ? perPageQuery : '20'
-        }`;
-        const dataResponse = await fetchData(url);
-        if (dataResponse.error) {
-          setTotalPages(1);
-          setData([]);
-          setError(dataResponse.error);
-        } else {
-          setError(null);
-          setTotalPages(dataResponse.pagination.last_visible_page);
-          setData(dataResponse.data);
-        }
-      } catch (error) {
-        setTotalPages(1);
-        setData([]);
-        if (typeof error === 'string') {
-          setError(error);
-        } else if (error instanceof Error) {
-          setError(error.message);
-        }
-      } finally {
-        setIsLoadingData(false);
-      }
-    };
-    fetchAnime();
-  }, [initialPageSize, pageQuery, perPageQuery, searchQuery, setData]);
+  const { data, isLoading, isError } = useGetAnimeListQuery({
+    pageQuery,
+    searchQuery,
+    perPageQuery,
+    initialPageSize,
+  });
 
   return {
-    isLoading: isLoadingData,
-    error,
-    data,
-    setIsLoadingImage,
-    isLoadingImage,
-    totalPages,
+    isLoading,
+    isError,
+    data: data?.data || [],
+    totalPages: data?.pagination.last_visible_page || 1,
     pageQuery,
   };
 };

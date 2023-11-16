@@ -9,15 +9,15 @@ import Spinner from '~components/Spinner/spinner.tsx';
 import classes from './animeDetail.module.css';
 
 const AnimeDetail = () => {
-  const { isLoading, error, data, setIsLoadingImage, isLoadingImage } = useAnimeDetail();
+  const { isLoading, isError, data, setIsLoadingImage, isLoadingImage } = useAnimeDetail();
   const { images, title, status, rank, year, episodes, source, season, rating, duration, airing, mal_id } = data || {};
 
   const { handleCloseDetails } = useOutletContext<OutletContext>();
 
-  if (error) {
+  if (isError) {
     return (
       <div className={classes.detail}>
-        <p className={classes.notFound}>{error} 🥺</p>
+        <p className={classes.notFound}>Failed to fetch 🥺</p>
       </div>
     );
   }
@@ -28,7 +28,7 @@ const AnimeDetail = () => {
     <div data-testid={`details${mal_id}`} className={classes.detail}>
       {isLoading && <Spinner dataTest="spinner" />}
       <img
-        src={images?.jpg.large_image_url || placeholder}
+        src={images?.webp.large_image_url || placeholder}
         alt={`Title ${title}`}
         className={classes.image}
         draggable={false}

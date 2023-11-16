@@ -8,16 +8,16 @@ import Spinner from '~components/Spinner/spinner.tsx';
 import classes from './animeList.module.css';
 
 const AnimeList = () => {
-  const { isLoading, error, data, setIsLoadingImage, isLoadingImage, totalPages, pageQuery } = useAnimeList();
+  const { isLoading, isError, data, totalPages, pageQuery } = useAnimeList();
 
   if (isLoading) {
     return <Spinner />;
   }
 
-  if (error) {
+  if (isError) {
     return (
       <div>
-        <p className={classes.notFound}>{error} 🥺</p>
+        <p className={classes.notFound}>Failed to fetch 🥺</p>
       </div>
     );
   }
@@ -32,12 +32,7 @@ const AnimeList = () => {
           </div>
           <div className={classes.wrapper}>
             {data.map((item) => (
-              <AnimeCard
-                key={item.mal_id}
-                anime={item}
-                setIsLoadingImage={setIsLoadingImage}
-                isLoadingImage={isLoadingImage}
-              />
+              <AnimeCard key={item.mal_id} anime={item} />
             ))}
             <Pagination page={pageQuery} totalPages={totalPages} />
           </div>
