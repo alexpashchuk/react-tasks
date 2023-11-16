@@ -1,12 +1,12 @@
 import { useSearchParams } from 'react-router-dom';
 
 import placeholder from '~assets/icons/placeholder.jpg';
-import { Anime } from '~types/types.ts';
+import { IAnime } from '~types/types.ts';
 
 import classes from './animeCard.module.css';
 
 type AnimeCardProps = {
-  anime: Anime;
+  anime: IAnime;
 };
 
 const AnimeCard = (props: AnimeCardProps) => {
