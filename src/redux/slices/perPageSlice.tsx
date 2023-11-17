@@ -1,7 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { RootState } from '~redux/store.tsx';
-
 const initialState = {
   perPage: '20',
 };
@@ -17,6 +15,4 @@ export const perpPageSlice = createSlice({
 });
 
 export const { setPerPage } = perpPageSlice.actions;
-export const selectSearchValue = (state: RootState) => state.perPage.perPage;
-
 export default perpPageSlice.reducer;

@@ -3,7 +3,7 @@ import { useLocation, useSearchParams } from 'react-router-dom';
 
 import { useGetAnimeListQuery } from '~redux/services/animeService.tsx';
 import { useAppDispatch } from '~redux/hooks/hooks.ts';
-import { setLoadingRoot } from '~redux/slices/loadingRootSlice.tsx';
+import { setLoadingRoot } from '~redux/slices/loadingSlice.tsx';
 
 export const useAnimeList = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -36,7 +36,7 @@ export const useAnimeList = () => {
     }
   }, [initialPageSize, searchParams, setSearchParams]);
 
-  const { data, isLoading, isError } = useGetAnimeListQuery({
+  const { data, isLoading, isFetching, isError } = useGetAnimeListQuery({
     pageQuery,
     searchQuery,
     perPageQuery,
@@ -48,7 +48,7 @@ export const useAnimeList = () => {
   }, [dispatch, isLoading]);
 
   return {
-    isLoading,
+    isLoading: isLoading || isFetching,
     isError,
     data: data?.data || [],
     totalPages: data?.pagination.last_visible_page || 1,

@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from '~redux/store.tsx';
 
 const initialState = {
-  viewMode: 'main',
+  viewMode: 'root',
 };
 
 export const viewModeSlice = createSlice({

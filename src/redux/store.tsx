@@ -1,16 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit';
 import searchReducer from './slices/searchSlice.tsx';
 import perPageReducer from './slices/perPageSlice.tsx';
-import loadingDetailsReducer from './slices/loadingDetailsSlice.tsx';
-import loadingRootReducer from './slices/loadingRootSlice.tsx';
+import loadingReducer from './slices/loadingSlice.tsx';
 import viewModeReducer from './slices/viewModeSlice.tsx';
 import { animeApi } from '~redux/services/animeService.tsx';
 
 // const rootReducer = combineReducers({
 //   search: searchReducer,
 //   perPage: perPageReducer,
-//   loadingDetails: loadingDetailsReducer,
-//   loadingRoot: loadingRootReducer,
+//   loading: loadingReducer,
 //   viewMode: viewModeReducer,
 //   [animeApi.reducerPath]: animeApi.reducer,
 // });
@@ -32,8 +30,7 @@ const store = configureStore({
   reducer: {
     search: searchReducer,
     perPage: perPageReducer,
-    loadingDetails: loadingDetailsReducer,
-    loadingRoot: loadingRootReducer,
+    loading: loadingReducer,
     viewMode: viewModeReducer,
     [animeApi.reducerPath]: animeApi.reducer,
   },
