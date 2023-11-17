@@ -25,8 +25,8 @@ export default defineConfig({
       '~constants': 'src/constants',
       '~utils': 'src/utils',
       '~hooks': 'src/hooks',
-      '~context': 'src/context',
       '~types': 'src/types',
+      '~test': 'src/test',
     },
   },
 });

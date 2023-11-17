@@ -28,8 +28,8 @@
       "~constants/*": ["src/constants/*"],
       "~utils/*": ["src/utils/*"],
       "~hooks/*": ["src/hooks/*"],
-      "~context/*": ["src/context/*"],
-      "~types/*": ["src/types/*"]
+      "~types/*": ["src/types/*"],
+      "~test/*": ["src/test/*"]
     }
   },
   "include": ["./src/**/*", "vite.config.ts", "vitest.config.ts", "./src/test/setupTests.ts", ".eslintrc", "svg.d.ts"],

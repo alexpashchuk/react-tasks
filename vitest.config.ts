@@ -16,13 +16,7 @@ export default mergeConfig(
         enabled: true,
         reporter: ['text'],
         include: ['src/**/*'],
-        exclude: [
-          'src/const/*',
-          'src/main.tsx',
-          'src/api/*',
-          '**/*/@(index|config).@(tsx|ts)',
-          '**/*/*.@(icon|asset).@(tsx|ts)',
-        ],
+        exclude: ['src/const/*', 'src/main.tsx', '**/*/@(index|config).@(tsx|ts)', '**/*/*.@(icon|asset).@(tsx|ts)'],
       },
     },
   })
