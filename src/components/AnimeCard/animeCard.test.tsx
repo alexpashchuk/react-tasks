@@ -1,14 +1,20 @@
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { fireEvent, render, act, waitFor } from '@testing-library/react';
+import { vi } from 'vitest';
 
 import AnimeRoot from '~components/AnimeRoot/animeRoot.tsx';
 import AnimeDetail from '~components/AnimeDetail/animeDetail.tsx';
 import AnimeList from '~components/AnimeList/animeList.tsx';
 import { animeCardData } from '~test/animeCardData.tsx';
 import store from '~redux/store.tsx';
+import { server } from '~test/msw/server.ts';
+import { BASE_URL } from '~constants/constants.ts';
 
 describe('Anime card tests', () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
   it('Ensure that the card component renders the relevant card data', async () => {
     const wrapper = render(
       <MemoryRouter>
@@ -25,42 +31,38 @@ describe('Anime card tests', () => {
   it('Check that clicking triggers an additional API call to fetch detailed information', async () => {
     const wrapper = render(
       <MemoryRouter initialEntries={['/']}>
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <Provider store={store}>
-                <AnimeRoot />
-              </Provider>
-            }
-          >
-            <Route path="" element={<AnimeDetail />} />
-          </Route>
-        </Routes>
+        <Provider store={store}>
+          <Routes>
+            <Route path="/" element={<AnimeRoot />}>
+              <Route path="" element={<AnimeDetail />} />
+            </Route>
+          </Routes>
+        </Provider>
       </MemoryRouter>
     );
+
+    const requestMock = vi.fn();
+    server.events.on('request:start', ({ request }) => {
+      requestMock(request.url);
+    });
     const card = await wrapper.findByTestId(`card${animeCardData[0].mal_id}`);
 
     await waitFor(() => {
       fireEvent.click(card);
+      expect(requestMock).toHaveBeenCalledWith(`${BASE_URL}/${animeCardData[0].mal_id}`);
     });
   });
 
   it('Validate that clicking on a card opens a detailed card component', async () => {
     const wrapper = render(
       <MemoryRouter initialEntries={['/']}>
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <Provider store={store}>
-                <AnimeRoot />
-              </Provider>
-            }
-          >
-            <Route path="" element={<AnimeDetail />} />
-          </Route>
-        </Routes>
+        <Provider store={store}>
+          <Routes>
+            <Route path="/" element={<AnimeRoot />}>
+              <Route path="" element={<AnimeDetail />} />
+            </Route>
+          </Routes>
+        </Provider>
       </MemoryRouter>
     );
     const card = await wrapper.findByTestId(`card${animeCardData[0].mal_id}`);

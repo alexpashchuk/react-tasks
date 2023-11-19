@@ -51,8 +51,9 @@ export const animeCardData = [
 
 export const paginationData = {
   items: {
-    count: 2,
-    per_page: 5,
-    total: 100,
+    count: 20,
+    per_page: 20,
+    total: 25636,
   },
+  last_visible_page: 1282,
 };

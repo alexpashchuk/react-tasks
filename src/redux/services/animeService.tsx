@@ -6,13 +6,13 @@ import { IAnimeData, IAnimeDataDetails, IAnimeListApi } from '~types/types.ts';
 export const animeApi = createApi({
   reducerPath: 'animeApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: `${BASE_URL}`,
+    baseUrl: BASE_URL,
   }),
   endpoints: (build) => ({
     getAnimeList: build.query<IAnimeData, IAnimeListApi>({
       query: ({ pageQuery, searchQuery, perPageQuery, initialPageSize }) => {
         return {
-          url: `/anime?page=${pageQuery}&q=${searchQuery.trim().toLowerCase()}&limit=${
+          url: `?page=${pageQuery}&q=${searchQuery.trim().toLowerCase()}&limit=${
             initialPageSize ? perPageQuery : '20'
           }`,
         };
@@ -21,7 +21,7 @@ export const animeApi = createApi({
     getAnimeDetail: build.query<IAnimeDataDetails, string>({
       query: (id) => {
         return {
-          url: `/anime/${id}`,
+          url: `${id}`,
         };
       },
     }),

@@ -10,7 +10,7 @@ import store from '~redux/store.tsx';
 describe('Anime Detail tests', () => {
   it('Make sure the detailed card component correctly displays the detailed card data', async () => {
     const wrapper = render(
-      <MemoryRouter initialEntries={['/']}>
+      <MemoryRouter initialEntries={['/?details=1']}>
         <Provider store={store}>
           <Routes>
             <Route path="/" element={<AnimeRoot />}>
@@ -22,14 +22,14 @@ describe('Anime Detail tests', () => {
     );
 
     await waitFor(() => {
-      const title = wrapper.getAllByText(/Cowboy Bebop/i);
-      // const season = wrapper.getAllByText(/spring/i);
-      // const rank = wrapper.getAllByText(/rank/i);
-      // const year = wrapper.getAllByText(/year/i);
-      expect(title[0]).toBeInTheDocument();
-      // expect(season[0]).toBeInTheDocument();
-      // expect(rank[0]).toBeInTheDocument();
-      // expect(year[0]).toBeInTheDocument();
+      const title = wrapper.getByText(/Cowboy Bebop/i);
+      const season = wrapper.getByText(/spring/i);
+      const rank = wrapper.getByText(/rank/i);
+      const year = wrapper.getByText(/year/i);
+      expect(title).toBeInTheDocument();
+      expect(season).toBeInTheDocument();
+      expect(rank).toBeInTheDocument();
+      expect(year).toBeInTheDocument();
     });
   });
   it('Check that a loading indicator is displayed while fetching data;', async () => {
