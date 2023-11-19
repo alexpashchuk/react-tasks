@@ -1,0 +1,21 @@
+import NotFoundPage from '~components/NotFound/notFoundPage.tsx';
+import AnimeRoot from '~components/AnimeRoot/animeRoot.tsx';
+import AnimeDetail from '~components/AnimeDetail/animeDetail.tsx';
+import FallbackError from '~components/FallbackError/fallbackError.tsx';
+export const routesConfig = [
+  {
+    path: '/',
+    element: <AnimeRoot />,
+    errorElement: <FallbackError />,
+    children: [
+      {
+        path: '',
+        element: <AnimeDetail />,
+      },
+    ],
+  },
+  {
+    path: '*',
+    element: <NotFoundPage />,
+  },
+];
