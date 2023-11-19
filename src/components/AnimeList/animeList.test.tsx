@@ -7,7 +7,7 @@ import { http, HttpResponse } from 'msw';
 import AnimeList from '~components/AnimeList/animeList.tsx';
 import store from '~redux/store.tsx';
 import { BASE_URL } from '~constants/constants.ts';
-import { animeCardData } from '~test/animeCardData.tsx';
+import { animeCardData, paginationData } from '~test/animeCardData.tsx';
 import { server } from '~test/msw/server.ts';
 
 const RenderAnimeList = () => {
@@ -36,10 +36,15 @@ describe('Anime list tests', () => {
 
   it('Check that an appropriate message is displayed if no cards are present', () => {
     server.use(
-      http.post(`${BASE_URL}*`, () =>
-        HttpResponse.json({
-          data: [],
-        })
+      http.get(
+        `${BASE_URL}*`,
+        () => {
+          return HttpResponse.json({
+            data: [],
+            pagination: paginationData,
+          });
+        },
+        { once: true }
       )
     );
 
