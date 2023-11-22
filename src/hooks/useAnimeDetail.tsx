@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
-import { useGetAnimeDetailQuery } from '~redux/services/animeService.tsx';
-import { setLoadingDetails } from '~redux/slices/loadingSlice.tsx';
-import { useAppDispatch } from '~redux/hooks/hooks.ts';
+import { setLoadingDetails } from '@/redux/slices/loadingSlice';
+import { useAppDispatch } from '@/redux/hooks/hooks';
+import { useGetAnimeDetailQuery } from '@/redux/services/animeService';
 
 export const useAnimeDetail = () => {
   const [isLoadingImage, setIsLoadingImage] = useState(false);

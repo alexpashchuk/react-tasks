@@ -2,9 +2,9 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
-import { SEARCH_VALUE_STORAGE_KEY } from '~constants/constants.ts';
-import store from '~redux/store.tsx';
-import SearchBar from './searchBar.tsx';
+import { SEARCH_VALUE_STORAGE_KEY } from '@/constants/constants';
+import store from '@/redux/store';
+import SearchBar from './searchBar';
 
 const VALUE = 'test';
 const EMPTY_VALUE = '';

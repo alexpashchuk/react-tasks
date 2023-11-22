@@ -1,9 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
-import searchReducer from './slices/searchSlice.tsx';
-import perPageReducer from './slices/perPageSlice.tsx';
-import loadingReducer from './slices/loadingSlice.tsx';
-import viewModeReducer from './slices/viewModeSlice.tsx';
-import { animeApi } from '~redux/services/animeService.tsx';
+import searchReducer from './slices/searchSlice';
+import perPageReducer from './slices/perPageSlice';
+import loadingReducer from './slices/loadingSlice';
+import viewModeReducer from './slices/viewModeSlice';
+import { animeApi } from '@/redux/services/animeService';
 
 const store = configureStore({
   reducer: {

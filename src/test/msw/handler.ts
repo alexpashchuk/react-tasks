@@ -1,7 +1,7 @@
 import { HttpResponse, http } from 'msw';
 
-import { BASE_URL } from '~constants/constants.ts';
-import { animeCardData, paginationData } from '~test/animeCardData.tsx';
+import { animeCardData, paginationData } from '@/test/animeCardData';
+import { BASE_URL } from '@/constants/constants';
 
 export const handlers = [
   http.get(`${BASE_URL}/1`, () => {

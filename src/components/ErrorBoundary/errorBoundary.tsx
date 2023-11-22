@@ -1,6 +1,5 @@
 import { Component, ErrorInfo, ReactNode } from 'react';
-
-import FallbackError from '~components/FallbackError/fallbackError.tsx';
+import FallbackError from '@/components/FallbackError/fallbackError';
 
 type ErrorBoundaryProps = {
   children: ReactNode;

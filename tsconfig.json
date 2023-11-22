@@ -1,38 +1,22 @@
 {
   "compilerOptions": {
-    //        "types": ["node", "jest", "@testing-library/jest-dom"],
-    "target": "ESNext",
-    "lib": ["DOM", "DOM.Iterable", "ESNext"],
-    "useDefineForClassFields": true,
-    "allowJs": false,
-    "module": "ESNext",
-    "moduleResolution": "Node",
+    "target": "es5",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
     "skipLibCheck": true,
-    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "noEmit": true,
     "esModuleInterop": true,
-    "allowImportingTsExtensions": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "react-jsx",
-    "strict": true,
-    "noUnusedLocals": false,
-    "noUnusedParameters": false,
-    "noFallthroughCasesInSwitch": true,
-    "baseUrl": ".",
+    "jsx": "preserve",
+    "incremental": true,
     "paths": {
-      "~assets/*": ["src/assets/*"],
-      "~components/*": ["src/components/*"],
-      "~routes/*": ["src/routes/*"],
-      "~redux/*": ["src/redux/*"],
-      "~constants/*": ["src/constants/*"],
-      "~utils/*": ["src/utils/*"],
-      "~hooks/*": ["src/hooks/*"],
-      "~types/*": ["src/types/*"],
-      "~test/*": ["src/test/*"]
+      "@/*": ["./src/*"]
     }
   },
-  "include": ["./src/**/*", "vite.config.ts", "vitest.config.ts", "./src/test/setupTests.ts", ".eslintrc", "svg.d.ts"],
-  "exclude": ["node_modules", "dist"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "vitest.config.ts", "./src/test/setupTests.ts", ".eslintrc"],
+  "exclude": ["node_modules"]
 }

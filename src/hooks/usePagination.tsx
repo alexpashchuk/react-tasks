@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
-import { PaginationProps } from '~components/Pagination/pagination.tsx';
+import { PaginationProps } from '@/components/Pagination/pagination';
 
 export const usePagination = ({ page, totalPages }: PaginationProps) => {
   const [searchParams, setSearchParams] = useSearchParams();

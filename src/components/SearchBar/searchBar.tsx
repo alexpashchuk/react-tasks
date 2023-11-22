@@ -2,13 +2,13 @@ import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import clsx from 'clsx';
 
-import { selectSearchValue, setSearch } from '~redux/slices/searchSlice.tsx';
-import { useAppDispatch, useAppSelector } from '~redux/hooks/hooks.ts';
+import { selectSearchValue, setSearch } from '@/redux/slices/searchSlice';
+import { useAppDispatch, useAppSelector } from '@/redux/hooks/hooks';
 
 import LogoSearch from '~assets/icons/search.svg';
-import { SEARCH_VALUE_STORAGE_KEY } from '~constants/constants.ts';
 
 import classes from './searchBar.module.css';
+import { SEARCH_VALUE_STORAGE_KEY } from '@/constants/constants';
 
 const SearchBar = () => {
   const [searchParams, setSearchParams] = useSearchParams();

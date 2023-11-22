@@ -1,12 +1,12 @@
 import { Outlet, useSearchParams } from 'react-router-dom';
 
-import AnimeList from '~components/AnimeList/animeList.tsx';
-import SearchBar from '~components/SearchBar/searchBar.tsx';
+import AnimeList from '@/components/AnimeList/animeList';
+import SearchBar from '@/components/SearchBar/searchBar';
 
 import classes from './animeRoot.module.css';
 import { useEffect } from 'react';
-import { useAppDispatch } from '~redux/hooks/hooks.ts';
-import { setViewMode } from '~redux/slices/viewModeSlice.tsx';
+import { useAppDispatch } from '@/redux/hooks/hooks';
+import { setViewMode } from '@/redux/slices/viewModeSlice';
 
 export type OutletContext = {
   handleCloseDetails: () => void;

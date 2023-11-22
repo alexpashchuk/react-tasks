@@ -1,9 +1,9 @@
-import { useAnimeList } from '~hooks/useAnimeList.tsx';
+import { useAnimeList } from '@/hooks/useAnimeList';
 
-import Pagination from '~components/Pagination/pagination.tsx';
-import AnimeCard from '~components/AnimeCard/animeCard.tsx';
-import PageSize from '~components/PageSize/pageSize.tsx';
-import Spinner from '~components/Spinner/spinner.tsx';
+import Pagination from '@/components/Pagination/pagination';
+import AnimeCard from '@/components/AnimeCard/animeCard';
+import PageSize from '@/components/PageSize/pageSize';
+import Spinner from '@/components/Spinner/spinner';
 
 import classes from './animeList.module.css';
 

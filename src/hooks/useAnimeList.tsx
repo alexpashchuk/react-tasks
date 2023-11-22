@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
 import { useLocation, useSearchParams } from 'react-router-dom';
 
-import { useGetAnimeListQuery } from '~redux/services/animeService.tsx';
-import { useAppDispatch } from '~redux/hooks/hooks.ts';
-import { setLoadingRoot } from '~redux/slices/loadingSlice.tsx';
+import { useAppDispatch } from '@/redux/hooks/hooks';
+import { setLoadingRoot } from '@/redux/slices/loadingSlice';
+import { useGetAnimeListQuery } from '@/redux/services/animeService';
 
 export const useAnimeList = () => {
   const [searchParams, setSearchParams] = useSearchParams();

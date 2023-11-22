@@ -1,8 +1,8 @@
 import { ChangeEvent, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
-import { setPerPage } from '~redux/slices/perPageSlice.tsx';
-import { useAppDispatch } from '~redux/hooks/hooks.ts';
+import { setPerPage } from '@/redux/slices/perPageSlice';
+import { useAppDispatch } from '@/redux/hooks/hooks';
 
 import classes from './pageSize.module.css';
 

@@ -1,10 +1,10 @@
 import clsx from 'clsx';
 
-import LogoChevronLeft from '~assets/icons/chevron-left.svg';
-import LogoChevronDoubleLeft from '~assets/icons/chevron-double-left.svg';
-import LogoChevronRight from '~assets/icons/chevron-right.svg';
-import LogoChevronDoubleRight from '~assets/icons/chevron-double-right.svg';
-import { usePagination } from '~hooks/usePagination.tsx';
+import LogoChevronLeft from '@/icons/chevron-left.svg';
+import LogoChevronDoubleLeft from '@/icons/chevron-double-left.svg';
+import LogoChevronRight from '@/icons/chevron-right.svg';
+import LogoChevronDoubleRight from '@/icons/chevron-double-right.svg';
+import { usePagination } from '@/hooks/usePagination';
 
 import classes from './pagination.module.css';
 

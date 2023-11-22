@@ -2,8 +2,8 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
-import store from '~redux/store.tsx';
-import Pagination from './pagination.tsx';
+import store from '@/redux/store';
+import Pagination from './pagination';
 
 const PAGE = 6;
 const TOTAL_PAGE = 20;

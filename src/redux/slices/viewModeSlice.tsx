@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { RootState } from '~redux/store.tsx';
+import { RootState } from '@/redux/store';
 
 const initialState = {
   viewMode: 'root',

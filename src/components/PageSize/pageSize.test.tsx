@@ -3,7 +3,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
 import store from '~redux/store.tsx';
-import PageSize from './pageSize.tsx';
+import PageSize from './pageSize';
 
 const PER_PAGE = 20;
 const SELECT_PER_PAGE = 10;

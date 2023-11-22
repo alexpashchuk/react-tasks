@@ -1,7 +1,8 @@
 import { useSearchParams } from 'react-router-dom';
+import Image from 'next/image';
 
-import placeholder from '~assets/icons/placeholder.jpg';
-import { IAnime } from '~types/types.ts';
+import placeholder from '@/assets/icons/placeholder.jpg';
+import { IAnime } from '@/types/types';
 
 import classes from './animeCard.module.css';
 
@@ -23,7 +24,7 @@ const AnimeCard = (props: AnimeCardProps) => {
 
   return (
     <button data-testid={`card${mal_id}`} className={classes.card} onClick={handleOpenDetails}>
-      <img
+      <Image
         src={images?.webp.large_image_url || placeholder}
         alt={`Title ${title}`}
         className={classes.image}

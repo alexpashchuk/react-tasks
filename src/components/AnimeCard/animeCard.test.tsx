@@ -3,13 +3,13 @@ import { Provider } from 'react-redux';
 import { fireEvent, render, act, waitFor } from '@testing-library/react';
 import { vi } from 'vitest';
 
-import AnimeRoot from '~components/AnimeRoot/animeRoot.tsx';
-import AnimeDetail from '~components/AnimeDetail/animeDetail.tsx';
-import AnimeList from '~components/AnimeList/animeList.tsx';
-import { animeCardData } from '~test/animeCardData.tsx';
-import store from '~redux/store.tsx';
-import { server } from '~test/msw/server.ts';
-import { BASE_URL } from '~constants/constants.ts';
+import AnimeRoot from '@/components/AnimeRoot/animeRoot';
+import AnimeDetail from '@/components/AnimeDetail/animeDetail';
+import AnimeList from '@/components/AnimeList/animeList';
+import { animeCardData } from '@/test/animeCardData';
+import store from '@/redux/store';
+import { server } from '@/test/msw/server';
+import { BASE_URL } from '@/constants/constants';
 
 describe('Anime card tests', () => {
   beforeEach(() => {

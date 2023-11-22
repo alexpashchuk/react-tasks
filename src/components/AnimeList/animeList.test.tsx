@@ -4,11 +4,11 @@ import { Provider } from 'react-redux';
 import { vi } from 'vitest';
 import { http, HttpResponse } from 'msw';
 
-import AnimeList from '~components/AnimeList/animeList.tsx';
-import store from '~redux/store.tsx';
-import { BASE_URL } from '~constants/constants.ts';
-import { animeCardData, paginationData } from '~test/animeCardData.tsx';
-import { server } from '~test/msw/server.ts';
+import AnimeList from '@/components/AnimeList/animeList';
+import store from '@/redux/store';
+import { BASE_URL } from '@/constants/constants';
+import { animeCardData, paginationData } from '@/test/animeCardData';
+import { server } from '@/test/msw/server';
 
 const RenderAnimeList = () => {
   return (

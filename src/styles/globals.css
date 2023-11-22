@@ -21,7 +21,7 @@
   font-weight: 400;
   src:
     local(''),
-    url('../src/assets/fonts/Roboto-Regular.ttf') format('truetype');
+    url('../assets/fonts/Roboto-Regular.ttf') format('truetype');
 }
 
 @font-face {
@@ -30,7 +30,7 @@
   font-weight: 500;
   src:
     local(''),
-    url('../src/assets/fonts/Roboto-Medium.ttf') format('truetype');
+    url('../assets/fonts/Roboto-Medium.ttf') format('truetype');
 }
 
 @font-face {
@@ -39,7 +39,7 @@
   font-weight: 600;
   src:
     local(''),
-    url('../src/assets/fonts/Roboto-Bold.ttf') format('truetype');
+    url('../assets/fonts/Roboto-Bold.ttf') format('truetype');
 }
 
 * {

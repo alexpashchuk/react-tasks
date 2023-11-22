@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { RootState } from '~redux/store.tsx';
-import { SEARCH_VALUE_STORAGE_KEY } from '~constants/constants.ts';
+import { RootState } from '@/redux/store';
+import { SEARCH_VALUE_STORAGE_KEY } from '@/constants/constants';
 
 const initialState = {
   searchValue: localStorage.getItem(SEARCH_VALUE_STORAGE_KEY) || '',

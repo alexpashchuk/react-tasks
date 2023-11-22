@@ -1,10 +1,11 @@
 import { useOutletContext } from 'react-router-dom';
+import Image from 'next/image';
 import clsx from 'clsx';
 
 import placeholder from '~assets/icons/placeholder.jpg';
-import { useAnimeDetail } from '~hooks/useAnimeDetail.tsx';
-import { OutletContext } from '~components/AnimeRoot/animeRoot.tsx';
-import Spinner from '~components/Spinner/spinner.tsx';
+import { useAnimeDetail } from '@/hooks/useAnimeDetail';
+import { OutletContext } from '@/components/AnimeRoot/animeRoot';
+import Spinner from '@/components/Spinner/spinner';
 
 import classes from './animeDetail.module.css';
 
@@ -27,7 +28,7 @@ const AnimeDetail = () => {
   return (
     <div data-testid={`details${mal_id}`} className={classes.detail}>
       {isLoading && <Spinner dataTest="spinner" />}
-      <img
+      <Image
         src={images?.webp.large_image_url || placeholder}
         alt={`Title ${title}`}
         className={classes.image}

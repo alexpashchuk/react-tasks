@@ -2,10 +2,10 @@ import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { fireEvent, render, waitFor, act } from '@testing-library/react';
 
-import { animeCardData } from '~test/animeCardData.tsx';
-import AnimeDetail from '~components/AnimeDetail/animeDetail.tsx';
-import AnimeRoot from '~components/AnimeRoot/animeRoot.tsx';
-import store from '~redux/store.tsx';
+import { animeCardData } from '@/test/animeCardData';
+import AnimeDetail from '@/components/AnimeDetail/animeDetail';
+import AnimeRoot from '@/components/AnimeRoot/animeRoot';
+import store from '@/redux/store';
 
 describe('Anime Detail tests', () => {
   it('Make sure the detailed card component correctly displays the detailed card data', async () => {
