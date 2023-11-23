@@ -1,42 +1,44 @@
-import { useOutletContext } from 'react-router-dom';
 import Image from 'next/image';
 import clsx from 'clsx';
 
-import placeholder from '~assets/icons/placeholder.jpg';
-import { useAnimeDetail } from '@/hooks/useAnimeDetail';
-import { OutletContext } from '@/components/AnimeRoot/animeRoot';
-import Spinner from '@/components/Spinner/spinner';
+import placeholder from '@/assets/icons/placeholder.jpg';
+import { IAnime } from '@/types/types';
+import { BLUR_DATA_URL } from '@/constants/constants';
 
 import classes from './animeDetail.module.css';
 
-const AnimeDetail = () => {
-  const { isLoading, isError, data, setIsLoadingImage, isLoadingImage } = useAnimeDetail();
+type AnimeDetailProps = {
+  data: IAnime;
+  closeDetails: () => void;
+};
+
+const AnimeDetail = (props: AnimeDetailProps) => {
+  const { data, closeDetails } = props;
+
   const { images, title, status, rank, year, episodes, source, season, rating, duration, airing, mal_id } = data || {};
 
-  const { handleCloseDetails } = useOutletContext<OutletContext>();
-
-  if (isError) {
-    return (
-      <div className={classes.detail}>
-        <p className={classes.notFound}>Failed to fetch 🥺</p>
-      </div>
-    );
-  }
+  // if (isError) {
+  //   return (
+  //     <div className={classes.detail}>
+  //       <p className={classes.notFound}>Failed to fetch 🥺</p>
+  //     </div>
+  //   );
+  // }
 
   const statusClass = airing ? classes.airing : classes.completed;
 
   return (
     <div data-testid={`details${mal_id}`} className={classes.detail}>
-      {isLoading && <Spinner dataTest="spinner" />}
+      {/*{isLoading && <Spinner dataTest="spinner" />}*/}
       <Image
         src={images?.webp.large_image_url || placeholder}
         alt={`Title ${title}`}
         className={classes.image}
         draggable={false}
-        onLoad={() => {
-          setIsLoadingImage(true);
-        }}
-        style={!isLoadingImage ? { opacity: 0 } : { opacity: 1 }}
+        width={278}
+        height={278}
+        placeholder={'blur'}
+        blurDataURL={BLUR_DATA_URL}
       />
       <div className={classes.info}>
         <h2 className={classes.name}>{title}</h2>
@@ -83,7 +85,7 @@ const AnimeDetail = () => {
             {duration}
           </div>
         )}
-        <button data-testid="close" className={clsx('button', classes.closeBtn)} onClick={handleCloseDetails}>
+        <button data-testid="close" className={clsx('button', classes.closeBtn)} onClick={closeDetails}>
           Close
         </button>
       </div>

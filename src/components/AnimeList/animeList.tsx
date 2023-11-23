@@ -1,40 +1,60 @@
-import { useAnimeList } from '@/hooks/useAnimeList';
+import { useEffect } from 'react';
+import { useRouter } from 'next/router';
 
+import AnimeDetail from '@/components/AnimeDetail/animeDetail';
 import Pagination from '@/components/Pagination/pagination';
 import AnimeCard from '@/components/AnimeCard/animeCard';
 import PageSize from '@/components/PageSize/pageSize';
-import Spinner from '@/components/Spinner/spinner';
+import { IData } from '@/types/types';
 
 import classes from './animeList.module.css';
 
-const AnimeList = () => {
-  const { isLoading, isError, data, totalPages, pageQuery } = useAnimeList();
+const AnimeList = ({ data }: { data: IData }) => {
+  // if (isLoading) {
+  //   return <Spinner />;
+  // }
+  //
+  // if (isError) {
+  //   return (
+  //     <div>
+  //       <p className={classes.notFound}>Failed to fetch 🥺</p>
+  //     </div>
+  //   );
+  // }
 
-  if (isLoading) {
-    return <Spinner />;
-  }
+  const router = useRouter();
+  const { pathname, query } = router;
 
-  if (isError) {
-    return (
-      <div>
-        <p className={classes.notFound}>Failed to fetch 🥺</p>
-      </div>
-    );
-  }
+  const page = query.page || '1';
+  const id = query.details;
+
+  useEffect(() => {
+    if (!Object.keys(query).length) {
+      router.push(`?page=1&perPage=20`);
+    }
+  }, [query, router]);
+
+  const detailsClass = id ? classes.details_open : classes.details_close;
+  const maskClass = id ? classes.mask_open : classes.mask_close;
+
+  const handleCloseDetails = () => {
+    delete query.details;
+    router.push({ pathname, query: { ...query } }, undefined, { scroll: false });
+  };
 
   return (
     <>
-      {data && data.length > 0 ? (
+      {data.animeList && data.animeList.data.length > 0 ? (
         <>
           <div className={classes.pageInfo}>
-            <p className={classes.page}>{`Page ${pageQuery} of ${totalPages}`}</p>
+            <p className={classes.page}>{`Page ${page} of ${data.animeList.pagination.last_visible_page}`}</p>
             <PageSize />
           </div>
           <div className={classes.wrapper}>
-            {data.map((item) => (
+            {data.animeList.data.map((item) => (
               <AnimeCard key={item.mal_id} anime={item} />
             ))}
-            <Pagination page={pageQuery} totalPages={totalPages} />
+            <Pagination page={Number(page)} totalPages={data.animeList.pagination.last_visible_page} />
           </div>
         </>
       ) : (
@@ -42,6 +62,12 @@ const AnimeList = () => {
           <p className={classes.notFound}>Items Not Found 🙄</p>
         </div>
       )}
+      <div className={detailsClass}>
+        {id && data.animeDetails ? (
+          <AnimeDetail data={data.animeDetails.data} closeDetails={handleCloseDetails} />
+        ) : null}
+      </div>
+      <div className={maskClass} onClick={handleCloseDetails}></div>
     </>
   );
 };

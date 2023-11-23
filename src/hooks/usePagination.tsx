@@ -1,10 +1,11 @@
 import { useMemo } from 'react';
-import { useSearchParams } from 'react-router-dom';
 
 import { PaginationProps } from '@/components/Pagination/pagination';
+import { useRouter } from 'next/router';
 
 export const usePagination = ({ page, totalPages }: PaginationProps) => {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const router = useRouter();
+  const { pathname, query } = router;
 
   const pagesArray = useMemo(() => {
     const arr = [];
@@ -34,8 +35,17 @@ export const usePagination = ({ page, totalPages }: PaginationProps) => {
   const nextFivePages = page + 5 > totalPages ? totalPages : page + 5;
 
   const handlePageChange = (page: number): void => {
-    searchParams.set('page', `${page}`);
-    setSearchParams(searchParams);
+    router.push(
+      {
+        pathname,
+        query: {
+          ...query,
+          page: String(page),
+        },
+      },
+      undefined,
+      { scroll: false }
+    );
   };
 
   return {

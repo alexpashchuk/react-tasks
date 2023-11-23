@@ -1,10 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { RootState } from '@/redux/store';
+import { AppState } from '@/redux/store';
 import { SEARCH_VALUE_STORAGE_KEY } from '@/constants/constants';
 
 const initialState = {
-  searchValue: localStorage.getItem(SEARCH_VALUE_STORAGE_KEY) || '',
+  searchValue: '',
 };
 
 export const searchSlice = createSlice({
@@ -18,6 +18,6 @@ export const searchSlice = createSlice({
 });
 
 export const { setSearch } = searchSlice.actions;
-export const selectSearchValue = (state: RootState) => state.search.searchValue;
+export const selectSearchValue = (state: AppState) => state.search.searchValue;
 
 export default searchSlice.reducer;
