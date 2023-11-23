@@ -10,18 +10,6 @@ import { IData } from '@/types/types';
 import classes from './animeList.module.css';
 
 const AnimeList = ({ data }: { data: IData }) => {
-  // if (isLoading) {
-  //   return <Spinner />;
-  // }
-  //
-  // if (isError) {
-  //   return (
-  //     <div>
-  //       <p className={classes.notFound}>Failed to fetch 🥺</p>
-  //     </div>
-  //   );
-  // }
-
   const router = useRouter();
   const { pathname, query } = router;
 

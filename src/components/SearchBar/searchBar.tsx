@@ -1,21 +1,15 @@
 import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 import clsx from 'clsx';
-
-import { selectSearchValue, setSearch } from '@/redux/slices/searchSlice';
-import { useAppDispatch, useAppSelector } from '@/redux/hooks/hooks';
 
 import LogoSearch from '@/assets/icons/search.svg';
 
 import classes from './searchBar.module.css';
-import { SEARCH_VALUE_STORAGE_KEY } from '@/constants/constants';
-import { useRouter } from 'next/router';
 
 const SearchBar = () => {
-  const [isActiveLabel, setIsActiveLabel] = useState(false);
-  // const dispatch = useAppDispatch();
-  // const searchValue = useAppSelector(selectSearchValue);
   const router = useRouter();
   const { pathname, query } = router;
+  const [isActiveLabel, setIsActiveLabel] = useState(false);
   const [inputValue, setInputValue] = useState(query.search || '');
 
   const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -25,7 +19,6 @@ const SearchBar = () => {
 
   const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // dispatch(setSearch(inputValue));
     query.page = '1';
     query.search = inputValue;
 

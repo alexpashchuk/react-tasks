@@ -17,19 +17,10 @@ const AnimeDetail = (props: AnimeDetailProps) => {
 
   const { images, title, status, rank, year, episodes, source, season, rating, duration, airing, mal_id } = data || {};
 
-  // if (isError) {
-  //   return (
-  //     <div className={classes.detail}>
-  //       <p className={classes.notFound}>Failed to fetch 🥺</p>
-  //     </div>
-  //   );
-  // }
-
   const statusClass = airing ? classes.airing : classes.completed;
 
   return (
     <div data-testid={`details${mal_id}`} className={classes.detail}>
-      {/*{isLoading && <Spinner dataTest="spinner" />}*/}
       <Image
         src={images?.webp.large_image_url || placeholder}
         alt={`Title ${title}`}

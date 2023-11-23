@@ -1,11 +1,11 @@
+import { useRouter } from 'next/router';
 import Image from 'next/image';
 
 import placeholder from '@/assets/icons/placeholder.jpg';
 import { IAnime } from '@/types/types';
+import { BLUR_DATA_URL } from '@/constants/constants';
 
 import classes from './animeCard.module.css';
-import { BLUR_DATA_URL } from '@/constants/constants';
-import { useRouter } from 'next/router';
 
 type AnimeCardProps = {
   anime: IAnime;

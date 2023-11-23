@@ -2,9 +2,6 @@ import { Action, configureStore, ThunkAction } from '@reduxjs/toolkit';
 import { createWrapper } from 'next-redux-wrapper';
 
 import { animeApi } from '@/redux/services/animeService';
-import searchReducer from './slices/searchSlice';
-import perPageReducer from './slices/perPageSlice';
-import loadingReducer from './slices/loadingSlice';
 import animeDataReducer from './slices/animeDataSlice';
 
 const makeStore = () =>

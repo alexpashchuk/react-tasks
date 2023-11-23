@@ -2,7 +2,12 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ['cdn.myanimelist.net'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'cdn.myanimelist.net',
+      },
+    ],
   },
   webpack(config) {
     config.module.rules.push({
