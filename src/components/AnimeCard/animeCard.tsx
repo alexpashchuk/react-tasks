@@ -34,7 +34,7 @@ const AnimeCard = (props: AnimeCardProps) => {
   return (
     <button data-testid={`card${mal_id}`} className={classes.card} onClick={handleOpenDetails}>
       <Image
-        src={images?.webp.large_image_url || placeholder}
+        src={images?.webp.image_url || placeholder}
         alt={`Title ${title}`}
         className={classes.image}
         draggable={false}

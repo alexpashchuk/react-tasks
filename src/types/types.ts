@@ -10,18 +10,13 @@ export type IAnime = {
   duration: string;
   airing: boolean;
   images: {
-    webp: { large_image_url: string };
+    webp: { image_url: string };
   };
   episodes: number;
   status: string;
 };
 
 type Pagination = {
-  // items: {
-  //   count: number;
-  //   per_page: number;
-  //   total: number;
-  // };
   last_visible_page: number;
 };
 
@@ -38,7 +33,6 @@ export type IAnimeListApi = {
   pageQuery: string;
   searchQuery: string;
   perPageQuery: string;
-  initialPageSize: boolean;
 };
 
 export interface IData {

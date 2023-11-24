@@ -1,6 +1,9 @@
+import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vitest/config';
+import path from 'path';
 
 export default defineConfig({
+  plugins: [react()],
   test: {
     globals: true,
     environment: 'jsdom',
@@ -11,13 +14,13 @@ export default defineConfig({
       all: true,
       enabled: true,
       reporter: ['text'],
-      include: ['src/**/*'],
-      exclude: ['src/const/*', 'src/main.tsx', '**/*/@(index|config).@(tsx|ts)', '**/*/*.@(icon|asset).@(tsx|ts)'],
+      include: ['**/*.tsx'],
+      exclude: ['**/_app.tsx', '**/_document.tsx'],
     },
   },
   resolve: {
     alias: {
-      '@/*': 'src/*',
+      '@': path.resolve(__dirname, './src'),
     },
   },
 });

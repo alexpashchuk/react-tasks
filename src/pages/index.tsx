@@ -9,13 +9,10 @@ import AnimeList from '@/components/AnimeList/animeList';
 export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps((store) => async (context) => {
   const { page, search, details, perPage } = context.query;
 
-  const initialPageSize = perPage === '20' || perPage === '15' || perPage === '10' || perPage === '5';
-
   store.dispatch(
     getAnimeList.initiate({
       pageQuery: page?.toString() || '1',
       searchQuery: search?.toString() || '',
-      initialPageSize: initialPageSize,
       perPageQuery: perPage?.toString() || '20',
     })
   );

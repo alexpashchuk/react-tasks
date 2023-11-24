@@ -14,6 +14,10 @@ const PageSize = () => {
     { value: '20', label: '20' },
   ];
 
+  const perPage = query.perPage || '20';
+
+  const initialPageSize = perPage === '20' || perPage === '15' || perPage === '10' || perPage === '5';
+
   const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
     const value = e.target.value;
     router.push({ pathname, query: { ...query, perPage: value, page: '1' } }, undefined, { scroll: false });
@@ -22,7 +26,7 @@ const PageSize = () => {
   return (
     <div className={classes.root}>
       <p>Page Size</p>
-      <select className={classes.select} value={query.perPage || '20'} onChange={handleChange}>
+      <select className={classes.select} value={initialPageSize ? query.perPage : '20'} onChange={handleChange}>
         {options.map((option) => (
           <option className={classes.option} key={option.value} value={option.value}>
             {option.label}

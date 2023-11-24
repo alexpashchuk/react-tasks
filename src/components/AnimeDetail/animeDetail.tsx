@@ -22,7 +22,7 @@ const AnimeDetail = (props: AnimeDetailProps) => {
   return (
     <div data-testid={`details${mal_id}`} className={classes.detail}>
       <Image
-        src={images?.webp.large_image_url || placeholder}
+        src={images?.webp.image_url || placeholder}
         alt={`Title ${title}`}
         className={classes.image}
         draggable={false}

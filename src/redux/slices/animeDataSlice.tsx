@@ -16,7 +16,7 @@ const initialState: IData = {
       duration: '',
       airing: false,
       images: {
-        webp: { large_image_url: '' },
+        webp: { image_url: '' },
       },
       episodes: 1,
       status: '',

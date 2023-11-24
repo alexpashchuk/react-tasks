@@ -17,11 +17,9 @@ export const animeApi = createApi({
   },
   endpoints: (build) => ({
     getAnimeList: build.query<IAnimeData, IAnimeListApi>({
-      query: ({ pageQuery, searchQuery, perPageQuery, initialPageSize }) => {
+      query: ({ pageQuery, searchQuery, perPageQuery }) => {
         return {
-          url: `?page=${pageQuery}&q=${searchQuery.trim().toLowerCase()}&limit=${
-            initialPageSize ? perPageQuery : '20'
-          }`,
+          url: `?page=${pageQuery}&q=${searchQuery.trim().toLowerCase()}&limit=${perPageQuery}`,
         };
       },
       async onQueryStarted(_arg, { dispatch, queryFulfilled }) {
