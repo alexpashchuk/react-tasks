@@ -1,41 +1,39 @@
 import { fireEvent, render, screen } from '@testing-library/react';
-import { BrowserRouter } from 'react-router-dom';
-import { Provider } from 'react-redux';
+import { RouterContext } from 'next/dist/shared/lib/router-context.shared-runtime';
 
-import store from '~redux/store.tsx';
 import PageSize from './pageSize';
+import { createMockRouter } from '@/test/mockRouter';
 
 const PER_PAGE = 20;
 const SELECT_PER_PAGE = 10;
 
-const renderPageSize = () => {
-  render(
-    <Provider store={store}>
-      <PageSize />
-    </Provider>,
-    { wrapper: BrowserRouter }
-  );
-};
-
 describe('PageSize tests', () => {
-  let urlPageSize: URL;
+  const routerParamsMock = {
+    pathname: '/',
+    page: '1',
+    perPage: `${PER_PAGE}`,
+  };
+  const mockRouter = createMockRouter(routerParamsMock);
   beforeEach(() => {
-    renderPageSize();
-    urlPageSize = new URL(window.location.href);
-    urlPageSize.searchParams.set('per_page', String(PER_PAGE));
+    render(
+      <RouterContext.Provider value={mockRouter}>
+        <PageSize />
+      </RouterContext.Provider>
+    );
   });
   it('Updates URL query parameter when change per page size', () => {
-    const pageSizeValuePrev = urlPageSize.searchParams.get('per_page');
-
     const select: HTMLSelectElement = screen.getByRole('combobox');
     fireEvent.change(select, {
       target: { value: SELECT_PER_PAGE },
     });
 
-    const url = new URL(window.location.href);
-    const pageSizeValue = url.searchParams.get('per_page');
-
-    expect(pageSizeValue).toBe(String(SELECT_PER_PAGE));
-    expect(pageSizeValue).not.toBe(pageSizeValuePrev);
+    expect(mockRouter.push).toHaveBeenCalledWith(
+      {
+        pathname: '/',
+        query: { page: '1', perPage: `${SELECT_PER_PAGE}` },
+      },
+      undefined,
+      { scroll: false }
+    );
   });
 });

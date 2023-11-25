@@ -18,17 +18,13 @@ const AnimeCard = (props: AnimeCardProps) => {
   const router = useRouter();
   const { pathname, query } = router;
   const handleOpenDetails = () => {
-    router.push(
-      {
-        pathname,
-        query: {
-          ...query,
-          details: String(mal_id),
-        },
+    router.push({
+      pathname,
+      query: {
+        ...query,
+        details: String(mal_id),
       },
-      undefined,
-      { scroll: false }
-    );
+    });
   };
 
   return (

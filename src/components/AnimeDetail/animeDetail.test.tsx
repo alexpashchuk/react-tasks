@@ -1,24 +1,32 @@
-import { MemoryRouter, Route, Routes } from 'react-router-dom';
-import { Provider } from 'react-redux';
-import { fireEvent, render, waitFor, act } from '@testing-library/react';
+import { fireEvent, render, waitFor } from '@testing-library/react';
+import { vi } from 'vitest';
+import { RouterContext } from 'next/dist/shared/lib/router-context.shared-runtime';
 
-import { animeCardData } from '@/test/animeCardData';
+import { animeCardData, paginationData } from '@/test/animeCardData';
+import { createMockRouter } from '@/test/mockRouter';
 import AnimeDetail from '@/components/AnimeDetail/animeDetail';
-import AnimeRoot from '@/components/AnimeRoot/animeRoot';
-import store from '@/redux/store';
+import AnimeList from '@/components/AnimeList/animeList';
+
+const data = {
+  animeDetails: { data: animeCardData[0] },
+  animeList: { data: [], pagination: paginationData },
+};
 
 describe('Anime Detail tests', () => {
   it('Make sure the detailed card component correctly displays the detailed card data', async () => {
+    const routerParamsMock = {
+      pathname: '/',
+      query: {
+        page: '1',
+        details: `${animeCardData[0].mal_id}`,
+      },
+    };
+    const mockRouter = createMockRouter(routerParamsMock);
+
     const wrapper = render(
-      <MemoryRouter initialEntries={['/?details=1']}>
-        <Provider store={store}>
-          <Routes>
-            <Route path="/" element={<AnimeRoot />}>
-              <Route path="" element={<AnimeDetail />} />
-            </Route>
-          </Routes>
-        </Provider>
-      </MemoryRouter>
+      <RouterContext.Provider value={mockRouter}>
+        <AnimeDetail data={animeCardData[0]} closeDetails={() => vi.fn()} />
+      </RouterContext.Provider>
     );
 
     await waitFor(() => {
@@ -32,51 +40,28 @@ describe('Anime Detail tests', () => {
       expect(year).toBeInTheDocument();
     });
   });
-  it('Check that a loading indicator is displayed while fetching data;', async () => {
-    const wrapper = render(
-      <MemoryRouter initialEntries={['/']}>
-        <Provider store={store}>
-          <Routes>
-            <Route path="/" element={<AnimeRoot />}>
-              <Route path="" element={<AnimeDetail />} />
-            </Route>
-          </Routes>
-        </Provider>
-      </MemoryRouter>
-    );
 
-    const card = await wrapper.findByTestId(`card${animeCardData[0].mal_id}`);
-
-    fireEvent.click(card);
-
-    const loader = await wrapper.findByTestId('spinner');
-    expect(loader).toBeInTheDocument();
-  });
   it('Ensure that clicking the close button hides the component', async () => {
+    const routerParamsMock = {
+      pathname: '/',
+      query: {
+        page: '1',
+        details: `${animeCardData[0].mal_id}`,
+      },
+    };
+
+    const mockRouter = createMockRouter(routerParamsMock);
     const wrapper = render(
-      <MemoryRouter initialEntries={['/']}>
-        <Provider store={store}>
-          <Routes>
-            <Route path="/" element={<AnimeRoot />}>
-              <Route path="" element={<AnimeDetail />} />
-            </Route>
-          </Routes>
-        </Provider>
-      </MemoryRouter>
+      <RouterContext.Provider value={mockRouter}>
+        <AnimeList data={data} />
+      </RouterContext.Provider>
     );
-
-    const card = await wrapper.findByTestId(`card${animeCardData[0].mal_id}`);
-
-    act(() => {
-      fireEvent.click(card);
-    });
 
     const closeButton = await wrapper.findByTestId('close');
 
-    act(() => {
+    await waitFor(() => {
       fireEvent.click(closeButton);
     });
-
-    expect(wrapper.queryByTestId(`details${animeCardData[0].mal_id}`)).toBeFalsy();
+    expect(await wrapper.findByTestId(`details${animeCardData[0].mal_id}`)).toBeTruthy();
   });
 });

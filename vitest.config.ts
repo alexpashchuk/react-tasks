@@ -1,9 +1,10 @@
 import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vitest/config';
+import magicalSvg from 'vite-plugin-magical-svg';
 import path from 'path';
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(), magicalSvg({ target: 'react' })],
   test: {
     globals: true,
     environment: 'jsdom',
