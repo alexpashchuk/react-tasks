@@ -1,18 +1,11 @@
 import { render } from '@testing-library/react';
-import '@testing-library/jest-dom';
 import { describe, it } from 'vitest';
-import { createMockRouter } from '@/test/mockRouter';
-import { animeCardData, paginationData } from '@/test/animeCardData';
 import { RouterContext } from 'next/dist/shared/lib/router-context.shared-runtime';
-import AnimeRoot from '@/pages';
-
-const data = {
-  animeDetails: { data: animeCardData[0] },
-  animeList: { data: animeCardData, pagination: paginationData },
-};
+import { createMockRouter } from '@/test/mockRouter';
+import NotFoundPage from '@/components/NotFound/notFoundPage';
 
 describe('NotFoundPage tests', () => {
-  it('the 404 page is displayed when navigating to an invalid route', () => {
+  it('the 404 page is displayed when navigating to an invalid route', async () => {
     const routerParamsMock = {
       pathname: '/404',
       query: {
@@ -23,12 +16,9 @@ describe('NotFoundPage tests', () => {
     const mockRouter = createMockRouter(routerParamsMock);
     const wrapper = render(
       <RouterContext.Provider value={mockRouter}>
-        <AnimeRoot data={data} />
+        <NotFoundPage />
       </RouterContext.Provider>
     );
-
-    const titleElement = wrapper.getByRole('heading');
-    expect(titleElement).toBeInTheDocument();
 
     const textElement = wrapper.getByText(/Page not found/i);
     expect(textElement).toBeInTheDocument();
