@@ -3,6 +3,7 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import svgr from 'vite-plugin-svgr';
 import tsconfigPaths from 'vite-tsconfig-paths';
+import * as path from 'path';
 
 export default defineConfig({
   plugins: [
@@ -16,8 +17,6 @@ export default defineConfig({
     open: true,
   },
   resolve: {
-    alias: {
-      '@': 'src/*',
-    },
+    alias: [{ find: '@', replacement: path.resolve(__dirname, 'src') }],
   },
 });

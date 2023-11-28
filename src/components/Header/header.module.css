@@ -1,0 +1,21 @@
+.header {
+  background-color: var(--color-main);
+}
+
+.link {
+  font-size: 1.5rem;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+@media (max-width: 768px) {
+  .link {
+    font-size: 1rem;
+  }
+}
