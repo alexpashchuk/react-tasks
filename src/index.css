@@ -16,6 +16,7 @@
   --dark-border: 2px solid var(--color-dark);
   --light-border: 2px solid var(--color-light);
   --error-border: 2px solid var(--color-error);
+  --input-border: 2px solid var(--color-accent);
 }
 
 @font-face {
@@ -155,6 +156,9 @@ button::-moz-focus-inner {
   min-height: 32px;
   line-height: normal;
   max-width: 7rem;
+  min-width: 10rem;
+  border-radius: 5px;
+  padding: 5px 15px;
 }
 
 .link:active,
@@ -170,6 +174,12 @@ button:disabled {
   opacity: 0.5;
   cursor: default;
   pointer-events: none;
+}
+
+.button:hover {
+  background: var(--color-hover);
+  color: var(--color-light);
+  text-underline: none;
 }
 
 html {
@@ -204,9 +214,9 @@ body {
 
 .container {
   width: 100%;
-  max-width: 1200px;
+  max-width: 800px;
   margin: 0 auto;
-  padding: 10px;
+  padding: 0.5rem;
 }
 
 nav > .active {
