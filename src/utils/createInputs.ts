@@ -12,9 +12,9 @@ type createInputsProps = {
   tcRef: React.RefObject<HTMLInputElement>;
 };
 
-export const createInputs = (props: createInputsProps): InputTextProps[] => {
+export const createInputs = (props: createInputsProps | null): InputTextProps[] => {
   const { nameRef, ageRef, emailRef, passwordRef, confirmPasswordRef, imageRef, gendersRef, countriesRef, tcRef } =
-    props;
+    props || {};
   return [
     {
       id: 'name',

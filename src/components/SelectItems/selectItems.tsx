@@ -1,11 +1,11 @@
 import clsx from 'clsx';
 
-import { SelectItemsProps } from '@/types/types.ts';
+import { FormDataFields, SelectItemsProps } from '@/types/types.ts';
 
 import classes from './selectItemst.module.css';
 
 const SelectItems = (props: SelectItemsProps) => {
-  const { id, label, name, inputRef, options, error } = props;
+  const { id, label, name, inputRef, options, register, error } = props;
   return (
     <div className={classes.root}>
       <label className={classes.label} htmlFor={id}>
@@ -16,6 +16,7 @@ const SelectItems = (props: SelectItemsProps) => {
         name={name}
         id={id}
         ref={inputRef as React.RefObject<HTMLSelectElement>}
+        {...(register ? register(name as FormDataFields) : null)}
       >
         {options.map(({ value, text }, i) => (
           <option value={value} key={i}>

@@ -2,13 +2,13 @@ import clsx from 'clsx';
 import { useState } from 'react';
 
 import useClassesMerge from '@/hooks/useClassesMerge.tsx';
-import { InputTextProps } from '@/types/types.ts';
+import { FormDataFields, InputTextProps } from '@/types/types.ts';
 import { countries } from '@/data/countriesData.ts';
-
-import defaultClasses from './inputText.module.css';
 import LogoEye from '@/assets/icons/eye.svg';
 import LogoEyeSlash from '@/assets/icons/eye-slash.svg';
 import LogoClose from '@/assets/icons/close.svg';
+
+import defaultClasses from './inputText.module.css';
 
 const InputText = (props: InputTextProps) => {
   const {
@@ -21,8 +21,8 @@ const InputText = (props: InputTextProps) => {
     list,
     inputRef,
     error,
+    register,
     classes: propClasses = {},
-    ...rest
   } = props;
 
   const [showPassword, setShowPassword] = useState(false);
@@ -51,7 +51,7 @@ const InputText = (props: InputTextProps) => {
           ref={inputRef as React.RefObject<HTMLInputElement>}
           placeholder={placeholder}
           list={list}
-          {...rest}
+          {...(register ? register(name as FormDataFields) : null)}
         />
         {type === 'password' ? (
           <div

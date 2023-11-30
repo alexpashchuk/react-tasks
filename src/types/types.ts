@@ -1,3 +1,5 @@
+import { UseFormRegisterReturn } from 'react-hook-form';
+
 export type Classes = Record<string, string | undefined>;
 
 export type InputTextProps = {
@@ -11,6 +13,7 @@ export type InputTextProps = {
   inputRef?: React.RefObject<HTMLInputElement | HTMLElement>;
   error?: string;
   classes?: Classes;
+  register?: (name: FormDataFields) => UseFormRegisterReturn<FormDataFields>;
 };
 
 type SelectOptions = {
@@ -29,9 +32,33 @@ export type FormData = {
     email: string;
     password: string;
     confirmPassword: string;
-    gender: string;
-    tc: boolean;
     image: string;
+    gender: string;
     country: string;
+    tc: boolean;
   };
 };
+
+export type FormDataHook = {
+  name: string;
+  age: number;
+  email: string;
+  password: string;
+  confirmPassword: string;
+  image: FileList;
+  gender: string;
+  country: string;
+  tc?: boolean | undefined;
+};
+
+export enum FormDataFields {
+  name = 'name',
+  age = 'age',
+  email = 'email',
+  password = 'password',
+  confirmPassword = 'confirmPassword',
+  image = 'image',
+  gender = 'gender',
+  country = 'country',
+  tc = 'tc',
+}
