@@ -6,9 +6,9 @@ import { createInputs } from '@/utils/createInputs.ts';
 import { toBase64 } from '@/utils/base64Converter.ts';
 import { formValidationSchema } from '@/utils/createValidationSchema.ts';
 import { genders } from '@/data/genderData.ts';
-import { FormDataFields, FormDataHook } from '@/types/types.ts';
+import { FormDataFields, FormData } from '@/types/types.ts';
 import { useAppDispatch } from '@/hooks/redux.ts';
-import { setReactHookFormData } from '@/store/slices/reactHookFormSlice.tsx';
+import { setFormData } from '@/store/slices/formDataSlice.tsx';
 import SelectItems from '@/components/SelectItems/selectItems.tsx';
 import InputText from '@/components/InputText/inputText.tsx';
 
@@ -24,14 +24,14 @@ const ReactHookFormPage = () => {
     register,
     handleSubmit,
     formState: { errors, isValid },
-  } = useForm<FormDataHook>({
+  } = useForm<FormData<FileList>>({
     mode: 'onChange',
     resolver: yupResolver(formValidationSchema),
   });
 
   const onSubmit = handleSubmit(async (data) => {
-    const imageData = await toBase64(data.image?.[0]);
-    dispatch(setReactHookFormData({ ...data, image: imageData }));
+    const imageData: string | null = await toBase64(data.image?.[0] as File | undefined);
+    dispatch(setFormData({ ...data, image: imageData }));
     navigate('/');
   });
 

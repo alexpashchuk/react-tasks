@@ -1,38 +1,23 @@
 import clsx from 'clsx';
 import { useState } from 'react';
 
-import useClassesMerge from '@/hooks/useClassesMerge.tsx';
 import { FormDataFields, InputTextProps } from '@/types/types.ts';
 import { countries } from '@/data/countriesData.ts';
 import LogoEye from '@/assets/icons/eye.svg';
 import LogoEyeSlash from '@/assets/icons/eye-slash.svg';
 import LogoClose from '@/assets/icons/close.svg';
 
-import defaultClasses from './inputText.module.css';
+import classes from './inputText.module.css';
 
 const InputText = (props: InputTextProps) => {
-  const {
-    id,
-    label,
-    type = 'text',
-    name,
-    autocomplete = 'on',
-    placeholder,
-    list,
-    inputRef,
-    error,
-    register,
-    classes: propClasses = {},
-  } = props;
+  const { id, label, type = 'text', name, autocomplete = 'on', placeholder, list, inputRef, error, register } = props;
 
   const [showPassword, setShowPassword] = useState(false);
 
-  const classes = useClassesMerge(defaultClasses, propClasses);
-
   const resetFile = () => {
-    const input = inputRef?.current as HTMLInputElement;
-    if (input) {
-      input.value = '';
+    const inputImage = inputRef?.current as HTMLInputElement;
+    if (inputImage) {
+      inputImage.value = '';
     }
   };
 

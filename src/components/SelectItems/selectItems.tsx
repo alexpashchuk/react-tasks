@@ -6,6 +6,7 @@ import classes from './selectItemst.module.css';
 
 const SelectItems = (props: SelectItemsProps) => {
   const { id, label, name, inputRef, options, register, error } = props;
+
   return (
     <div className={classes.root}>
       <label className={classes.label} htmlFor={id}>

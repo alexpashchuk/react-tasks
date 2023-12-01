@@ -6,7 +6,7 @@ import { formValidationSchema } from '@/utils/createValidationSchema.ts';
 import { getValidationMessages, isValidationError } from '@/utils/validationUtils.ts';
 import { toBase64 } from '@/utils/base64Converter.ts';
 import { useAppDispatch } from '@/hooks/redux.ts';
-import { setUncontrolledFormData } from '@/store/slices/uncontrolledFormSlice.tsx';
+import { setFormData } from '@/store/slices/formDataSlice.tsx';
 import { genders } from '@/data/genderData.ts';
 import InputText from '@/components/InputText/inputText.tsx';
 import SelectItems from '@/components/SelectItems/selectItems.tsx';
@@ -57,11 +57,11 @@ const UncontrolledFormPage = () => {
       gender: gendersRef.current?.value,
       tc: tcRef.current?.checked,
     };
-    const imageData = await toBase64(formData.image?.[0]);
+    const imageData: string | null = await toBase64(formData.image?.[0] as File | undefined);
 
     try {
       formValidationSchema.validateSync(formData, { abortEarly: false });
-      dispatch(setUncontrolledFormData({ ...formData, image: imageData }));
+      dispatch(setFormData({ ...formData, image: imageData }));
       navigate('/');
       setFormError({});
     } catch (e) {
