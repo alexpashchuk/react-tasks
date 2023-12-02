@@ -2,10 +2,11 @@ import clsx from 'clsx';
 import { useState } from 'react';
 
 import { FormDataFields, InputTextProps } from '@/types/types.ts';
-import { countries } from '@/data/countriesData.ts';
 import LogoEye from '@/assets/icons/eye.svg';
 import LogoEyeSlash from '@/assets/icons/eye-slash.svg';
 import LogoClose from '@/assets/icons/close.svg';
+import { useAppSelector } from '@/hooks/redux.ts';
+import { selectCountriesData } from '@/store/slices/countriesDataSlice.tsx';
 
 import classes from './inputText.module.css';
 
@@ -13,6 +14,8 @@ const InputText = (props: InputTextProps) => {
   const { id, label, type = 'text', name, autocomplete = 'on', placeholder, list, inputRef, error, register } = props;
 
   const [showPassword, setShowPassword] = useState(false);
+
+  const countriesData = useAppSelector(selectCountriesData);
 
   const resetFile = () => {
     const inputImage = inputRef?.current as HTMLInputElement;
@@ -55,7 +58,7 @@ const InputText = (props: InputTextProps) => {
         ) : null}
         {list && (
           <datalist id={list}>
-            {countries.map((country, i) => (
+            {countriesData.map((country, i) => (
               <option key={i} value={country}>
                 {country}
               </option>
