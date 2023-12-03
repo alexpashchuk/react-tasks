@@ -11,6 +11,8 @@ export type InputTextProps = {
   inputRef?: React.RefObject<HTMLInputElement | HTMLElement>;
   error?: string;
   register?: (name: FormDataFields) => UseFormRegisterReturn<FormDataFields>;
+  passwordValue?: string;
+  resetField?: (image: FormDataFields.image, p: { keepError: boolean }) => void;
 };
 
 type SelectOptions = {
@@ -18,7 +20,7 @@ type SelectOptions = {
   text: string;
 };
 
-export type SelectItemsProps = Omit<InputTextProps, 'type' | 'list' | 'placeholder'> & {
+export type SelectItemsProps = Omit<InputTextProps, 'type' | 'list' | 'placeholder' | 'passwordValue'> & {
   options: SelectOptions[];
 };
 

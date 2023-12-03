@@ -1,13 +1,13 @@
 import * as yup from 'yup';
-
-const REGEX_NAME = /^[A-ZА-ЯЁ]/;
-const REGEX_EMAIL =
-  /^(([^<>()[\]\\.,;:\s@"]+(.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@(([[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}])|(([a-zA-Z-0-9]+.)+[a-zA-Z]{2,}))$/;
-const REGEX_PASSWORD_LOWER = /[a-z]/;
-const REGEX_PASSWORD_UPPER = /[A-Z]/;
-const REGEX_PASSWORD_NUMERIC = /[0-9]/;
-const REGEX_PASSWORD_CHARACTER = /[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/;
-const IMAGE_SIZE = 2097152;
+import {
+  IMAGE_SIZE,
+  REGEX_EMAIL,
+  REGEX_NAME,
+  REGEX_PASSWORD_CHARACTER,
+  REGEX_PASSWORD_LOWER,
+  REGEX_PASSWORD_NUMERIC,
+  REGEX_PASSWORD_UPPER,
+} from '@/constants/constants.ts';
 
 export const formValidationSchema = yup.object({
   name: yup.string().trim().required('Field is required').matches(REGEX_NAME, 'The first letter must be uppercase'),

@@ -13,8 +13,6 @@ export const getValidationMessages = (errors: ValidationError): Record<string, s
   errors.inner.forEach((error) => {
     const { path, message } = error;
 
-    if (message.startsWith('no-unknown-keys:') && !path) validationErrors['unknown-fields'] = message;
-
     if (path) validationErrors[path] = message;
   });
 

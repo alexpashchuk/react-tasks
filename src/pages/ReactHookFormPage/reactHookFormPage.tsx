@@ -23,11 +23,15 @@ const ReactHookFormPage = () => {
   const {
     register,
     handleSubmit,
+    watch,
+    resetField,
     formState: { errors, isValid },
   } = useForm<FormData<FileList>>({
     mode: 'onChange',
     resolver: yupResolver(formValidationSchema),
   });
+
+  const passwordValue = watch('password');
 
   const onSubmit = handleSubmit(async (data) => {
     const imageData: string | null = await toBase64(data.image?.[0] as File | undefined);
@@ -63,6 +67,8 @@ const ReactHookFormPage = () => {
               list={list}
               register={register}
               error={errors[name as FormDataFields]?.message}
+              passwordValue={passwordValue}
+              resetField={resetField}
             />
           );
         })}
