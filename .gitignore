@@ -1,4 +1,25 @@
-# Logs
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+.yarn/install-state.gz
+
+# testing
+/coverage
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+dist
+dist-ssr
+
+# misc
+*.pem
+
+# debug
 logs
 *.log
 npm-debug.log*
@@ -7,13 +28,14 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-coverage
-node_modules
-dist
-dist-ssr
-*.local
+# local env files
+.env*.local
+next-env.d.ts
 
-# Editor directories and files
+# vercel
+.vercel
+
+# editor directories and files
 .vscode/*
 !.vscode/extensions.json
 .idea
@@ -23,3 +45,12 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# optional eslint cache
+.eslintcache
+
+# typeScript cache
+*.tsbuildinfo
+
+# optional npm cache directory
+.npm
