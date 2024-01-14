@@ -1,8 +1,9 @@
 ## Anime App
+Anime application with fetching data from api, search, pagination using NextJS
 
 ### Deployment
 
-- [Anime](https://anime-project-nextjs.vercel.app/)
+- https://anime-project-nextjs.vercel.app/
 
 
 ### Install instructions:
